@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Coffee, Settings, Eye } from 'lucide-react';
+import React, { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Coffee, Settings, Eye } from "lucide-react";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login, isLoading } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    
+    setError("");
+
     const success = await login(username, password);
     if (!success) {
-      setError('Invalid credentials. Try: tech1/password or admin1/password');
+      setError("Invalid credentials. Try: tech1/password or admin1/password");
     }
   };
 
@@ -30,8 +36,12 @@ export default function Login() {
           <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center">
             <Coffee className="w-8 h-8 text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-bold text-coffee-brown">Coffee Manager</h1>
-          <p className="text-muted-foreground">Vending Machine Management System</p>
+          <h1 className="text-3xl font-bold text-coffee-brown">
+            Coffee Manager
+          </h1>
+          <p className="text-muted-foreground">
+            Vending Machine Management System
+          </p>
         </div>
 
         <Card className="shadow-xl border-0">
@@ -74,8 +84,12 @@ export default function Login() {
                 </Alert>
               )}
 
-              <Button type="submit" className="w-full h-11" disabled={isLoading}>
-                {isLoading ? 'Signing in...' : 'Sign In'}
+              <Button
+                type="submit"
+                className="w-full h-11"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
 
