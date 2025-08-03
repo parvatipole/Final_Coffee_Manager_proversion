@@ -138,6 +138,37 @@ export default function Dashboard() {
 
   const allStepsCompleted = steps.every((step) => step.completed);
 
+  const handleStepBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      // Clear subsequent selections
+      switch (currentStep - 1) {
+        case 0:
+          setSelectedOffice('');
+          setSelectedFloor('');
+          setSelectedMachine('');
+          break;
+        case 1:
+          setSelectedFloor('');
+          setSelectedMachine('');
+          break;
+        case 2:
+          setSelectedMachine('');
+          break;
+      }
+    }
+  };
+
+  const handleStepReset = () => {
+    setCurrentStep(0);
+    setSelectedLocation('');
+    setSelectedOffice('');
+    setSelectedFloor('');
+    setSelectedMachine('');
+  };
+
+  const stepLabels = steps.map(step => step.title);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-coffee-light/30 to-background">
       <header className="border-b bg-white/80 backdrop-blur-sm">
