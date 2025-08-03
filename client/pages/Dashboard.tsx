@@ -20,6 +20,8 @@ import {
   ChevronRight,
   Eye,
   Edit3,
+  ArrowLeft,
+  Home,
 } from "lucide-react";
 
 interface NavigationStep {
