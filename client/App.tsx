@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import MachineManagement from "./pages/MachineManagement";
 import NotFound from "./pages/NotFound";
+import FloatingNavigation, { QuickBackFab } from "./components/FloatingNavigation";
 
 const queryClient = new QueryClient();
 
