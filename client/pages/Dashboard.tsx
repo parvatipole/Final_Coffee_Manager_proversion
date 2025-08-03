@@ -234,10 +234,12 @@ export default function Dashboard() {
                   <p className="text-muted-foreground">
                     You can now {user?.role === 'technician' ? 'edit and manage' : 'view'} the selected coffee machine data.
                   </p>
-                  <Button size="lg" className="w-full sm:w-auto">
-                    <Settings className="w-4 h-4 mr-2" />
-                    {user?.role === 'technician' ? 'Manage Machine' : 'View Machine Data'}
-                  </Button>
+                  <Link to="/machine">
+                    <Button size="lg" className="w-full sm:w-auto">
+                      <Settings className="w-4 h-4 mr-2" />
+                      {user?.role === 'technician' ? 'Manage Machine' : 'View Machine Data'}
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
