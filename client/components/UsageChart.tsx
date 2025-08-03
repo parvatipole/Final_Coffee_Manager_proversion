@@ -186,14 +186,20 @@ export default function UsageChart({ className }: UsageChartProps) {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis 
-                    dataKey="name" 
+                  <XAxis
+                    dataKey="name"
                     fontSize={12}
                     tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    axisLine={true}
+                    tickLine={true}
+                    type="category"
                   />
-                  <YAxis 
+                  <YAxis
                     fontSize={12}
                     tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    axisLine={true}
+                    tickLine={true}
+                    type="number"
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
@@ -209,14 +215,20 @@ export default function UsageChart({ className }: UsageChartProps) {
               ) : (
                 <BarChart data={data}>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis 
-                    dataKey="name" 
+                  <XAxis
+                    dataKey="name"
                     fontSize={12}
                     tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    axisLine={true}
+                    tickLine={true}
+                    type="category"
                   />
-                  <YAxis 
+                  <YAxis
                     fontSize={12}
                     tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    axisLine={true}
+                    tickLine={true}
+                    type="number"
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar 
