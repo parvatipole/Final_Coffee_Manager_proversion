@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Home, 
-  ArrowLeft, 
-  ChevronRight, 
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Home,
+  ArrowLeft,
+  ChevronRight,
   Coffee,
   Settings,
-  LayoutDashboard
-} from 'lucide-react';
+  LayoutDashboard,
+} from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
@@ -26,26 +26,30 @@ interface InteractiveBreadcrumbProps {
   className?: string;
 }
 
-export default function InteractiveBreadcrumb({ 
-  items, 
-  showBackButton = true, 
+export default function InteractiveBreadcrumb({
+  items,
+  showBackButton = true,
   backUrl,
   onBack,
-  className = ""
+  className = "",
 }: InteractiveBreadcrumbProps) {
   const location = useLocation();
 
   // Auto-generate breadcrumbs based on current path if not provided
   const defaultItems = React.useMemo(() => {
     const pathItems: BreadcrumbItem[] = [
-      { label: 'Dashboard', href: '/dashboard', icon: <LayoutDashboard className="w-4 h-4" /> }
+      {
+        label: "Dashboard",
+        href: "/dashboard",
+        icon: <LayoutDashboard className="w-4 h-4" />,
+      },
     ];
 
-    if (location.pathname === '/machine') {
+    if (location.pathname === "/machine") {
       pathItems.push({
-        label: 'Machine Management',
+        label: "Machine Management",
         current: true,
-        icon: <Settings className="w-4 h-4" />
+        icon: <Settings className="w-4 h-4" />,
       });
     }
 
@@ -53,7 +57,10 @@ export default function InteractiveBreadcrumb({
   }, [location.pathname]);
 
   const breadcrumbItems = items || defaultItems;
-  const defaultBackUrl = breadcrumbItems.length > 1 ? breadcrumbItems[breadcrumbItems.length - 2]?.href : '/dashboard';
+  const defaultBackUrl =
+    breadcrumbItems.length > 1
+      ? breadcrumbItems[breadcrumbItems.length - 2]?.href
+      : "/dashboard";
 
   const handleBack = () => {
     if (onBack) {
@@ -69,10 +76,10 @@ export default function InteractiveBreadcrumb({
       {showBackButton && (
         <div className="flex items-center gap-2">
           {backUrl || defaultBackUrl ? (
-            <Link to={backUrl || defaultBackUrl || '/dashboard'}>
-              <Button 
-                variant="ghost" 
-                size="sm" 
+            <Link to={backUrl || defaultBackUrl || "/dashboard"}>
+              <Button
+                variant="ghost"
+                size="sm"
                 className="hover:scale-105 transition-all duration-200 hover:bg-primary/10"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -80,9 +87,9 @@ export default function InteractiveBreadcrumb({
               </Button>
             </Link>
           ) : (
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={handleBack}
               className="hover:scale-105 transition-all duration-200 hover:bg-primary/10"
             >
@@ -113,9 +120,9 @@ export default function InteractiveBreadcrumb({
               </Badge>
             ) : item.href ? (
               <Link to={item.href}>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   className="gap-2 hover:scale-105 transition-transform"
                 >
                   {item.icon}
@@ -136,11 +143,11 @@ export default function InteractiveBreadcrumb({
 }
 
 // Quick Back Button Component for simple use cases
-export function QuickBackButton({ 
-  to, 
+export function QuickBackButton({
+  to,
   label = "Back",
   className = "",
-  onClick
+  onClick,
 }: {
   to?: string;
   label?: string;
@@ -151,9 +158,9 @@ export function QuickBackButton({
     <div className={className}>
       {to ? (
         <Link to={to}>
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             className="hover:scale-105 transition-all duration-200 hover:bg-primary/10 group"
           >
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -161,9 +168,9 @@ export function QuickBackButton({
           </Button>
         </Link>
       ) : (
-        <Button 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={onClick || (() => window.history.back())}
           className="hover:scale-105 transition-all duration-200 hover:bg-primary/10 group"
         >

@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { 
-  ArrowLeft, 
-  Home, 
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowLeft,
+  Home,
   Coffee,
   Settings,
   HelpCircle,
   Menu,
-  X
-} from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+  X,
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 interface FloatingNavigationProps {
   className?: string;
 }
 
-export default function FloatingNavigation({ className = "" }: FloatingNavigationProps) {
+export default function FloatingNavigation({
+  className = "",
+}: FloatingNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navigationItems = [
-    { icon: <Home className="w-4 h-4" />, label: 'Dashboard', href: '/dashboard' },
-    { icon: <Coffee className="w-4 h-4" />, label: 'Machine', href: '/machine' },
-    { icon: <Settings className="w-4 h-4" />, label: 'Settings', href: '#' },
-    { icon: <HelpCircle className="w-4 h-4" />, label: 'Help', href: '#' },
+    {
+      icon: <Home className="w-4 h-4" />,
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      icon: <Coffee className="w-4 h-4" />,
+      label: "Machine",
+      href: "/machine",
+    },
+    { icon: <Settings className="w-4 h-4" />, label: "Settings", href: "#" },
+    { icon: <HelpCircle className="w-4 h-4" />, label: "Help", href: "#" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -52,7 +62,9 @@ export default function FloatingNavigation({ className = "" }: FloatingNavigatio
           {navigationItems.map((item, index) => (
             <Link key={index} to={item.href}>
               <Button
-                variant={location.pathname === item.href ? "default" : "secondary"}
+                variant={
+                  location.pathname === item.href ? "default" : "secondary"
+                }
                 size="sm"
                 className="flex items-center gap-2 shadow-lg hover:scale-105 transition-transform backdrop-blur-sm bg-background/80"
                 onClick={() => setIsOpen(false)}
@@ -71,23 +83,19 @@ export default function FloatingNavigation({ className = "" }: FloatingNavigatio
         onClick={toggleMenu}
         className={`
           w-14 h-14 rounded-full shadow-xl hover:scale-110 transition-all duration-200 
-          ${isOpen ? 'bg-destructive hover:bg-destructive/90' : 'bg-primary hover:bg-primary/90'}
+          ${isOpen ? "bg-destructive hover:bg-destructive/90" : "bg-primary hover:bg-primary/90"}
         `}
       >
-        {isOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <Menu className="w-6 h-6" />
-        )}
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </Button>
     </div>
   );
 }
 
 // Quick Back Button that appears on scroll
-export function QuickBackFab({ 
+export function QuickBackFab({
   showOnScroll = true,
-  className = ""
+  className = "",
 }: {
   showOnScroll?: boolean;
   className?: string;
@@ -101,8 +109,8 @@ export function QuickBackFab({
       setIsVisible(window.scrollY > 200);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [showOnScroll]);
 
   const goBack = () => {
@@ -127,12 +135,12 @@ export function QuickBackFab({
 }
 
 // Navigation Helper Component for any page
-export function PageNavigation({ 
+export function PageNavigation({
   title,
   backUrl,
   backLabel = "Back",
   actions,
-  className = ""
+  className = "",
 }: {
   title?: string;
   backUrl?: string;
@@ -141,19 +149,25 @@ export function PageNavigation({
   className?: string;
 }) {
   return (
-    <div className={`flex items-center justify-between p-4 border-b bg-background/80 backdrop-blur-sm ${className}`}>
+    <div
+      className={`flex items-center justify-between p-4 border-b bg-background/80 backdrop-blur-sm ${className}`}
+    >
       <div className="flex items-center gap-3">
         {backUrl ? (
           <Link to={backUrl}>
-            <Button variant="ghost" size="sm" className="hover:scale-105 transition-transform">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hover:scale-105 transition-transform"
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               {backLabel}
             </Button>
           </Link>
         ) : (
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => window.history.back()}
             className="hover:scale-105 transition-transform"
           >

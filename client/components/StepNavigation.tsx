@@ -1,13 +1,13 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  ArrowLeft,
+  ArrowRight,
   RotateCcw,
   CheckCircle,
-  Circle
-} from 'lucide-react';
+  Circle,
+} from "lucide-react";
 
 interface StepNavigationProps {
   currentStep: number;
@@ -30,9 +30,8 @@ export default function StepNavigation({
   onNext,
   onReset,
   stepLabels = [],
-  className = ""
+  className = "",
 }: StepNavigationProps) {
-  
   const handleBack = () => {
     if (onBack && currentStep > 0) {
       onBack();
@@ -52,9 +51,9 @@ export default function StepNavigation({
   };
 
   const getStepStatus = (step: number) => {
-    if (step < currentStep) return 'completed';
-    if (step === currentStep) return 'current';
-    return 'pending';
+    if (step < currentStep) return "completed";
+    if (step === currentStep) return "current";
+    return "pending";
   };
 
   return (
@@ -65,32 +64,41 @@ export default function StepNavigation({
           const status = getStepStatus(i);
           return (
             <div key={i} className="flex items-center">
-              <div className={`
+              <div
+                className={`
                 flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-all duration-300
-                ${status === 'completed' 
-                  ? 'bg-green-500 text-white' 
-                  : status === 'current'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
+                ${
+                  status === "completed"
+                    ? "bg-green-500 text-white"
+                    : status === "current"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground"
                 }
-              `}>
-                {status === 'completed' ? (
+              `}
+              >
+                {status === "completed" ? (
                   <CheckCircle className="w-4 h-4" />
                 ) : (
                   <span>{i + 1}</span>
                 )}
               </div>
               {stepLabels[i] && (
-                <span className={`ml-2 text-sm ${
-                  status === 'current' ? 'font-medium' : 'text-muted-foreground'
-                }`}>
+                <span
+                  className={`ml-2 text-sm ${
+                    status === "current"
+                      ? "font-medium"
+                      : "text-muted-foreground"
+                  }`}
+                >
                   {stepLabels[i]}
                 </span>
               )}
               {i < totalSteps - 1 && (
-                <div className={`w-8 h-0.5 mx-2 transition-colors ${
-                  status === 'completed' ? 'bg-green-500' : 'bg-muted'
-                }`} />
+                <div
+                  className={`w-8 h-0.5 mx-2 transition-colors ${
+                    status === "completed" ? "bg-green-500" : "bg-muted"
+                  }`}
+                />
               )}
             </div>
           );
@@ -99,7 +107,7 @@ export default function StepNavigation({
 
       {/* Progress Bar */}
       <div className="w-full bg-muted rounded-full h-2">
-        <div 
+        <div
           className="bg-primary rounded-full h-2 transition-all duration-500 ease-out"
           style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
         />
@@ -118,7 +126,7 @@ export default function StepNavigation({
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
-          
+
           {onReset && currentStep > 0 && (
             <Button
               variant="ghost"
@@ -143,7 +151,7 @@ export default function StepNavigation({
           disabled={!canGoNext || currentStep === totalSteps - 1}
           className="hover:scale-105 transition-transform"
         >
-          {currentStep === totalSteps - 1 ? 'Complete' : 'Next'}
+          {currentStep === totalSteps - 1 ? "Complete" : "Next"}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
@@ -156,7 +164,7 @@ export function CompactStepNavigation({
   currentStep,
   totalSteps,
   onBack,
-  className = ""
+  className = "",
 }: {
   currentStep: number;
   totalSteps: number;
@@ -175,18 +183,18 @@ export function CompactStepNavigation({
           <ArrowLeft className="w-4 h-4" />
         </Button>
       )}
-      
+
       <div className="flex items-center gap-1">
         {Array.from({ length: totalSteps }, (_, i) => (
           <div
             key={i}
             className={`w-2 h-2 rounded-full transition-colors ${
-              i <= currentStep ? 'bg-primary' : 'bg-muted'
+              i <= currentStep ? "bg-primary" : "bg-muted"
             }`}
           />
         ))}
       </div>
-      
+
       <Badge variant="outline" className="text-xs">
         {currentStep + 1}/{totalSteps}
       </Badge>

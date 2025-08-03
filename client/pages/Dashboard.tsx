@@ -10,7 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import StepNavigation, { CompactStepNavigation } from "@/components/StepNavigation";
+import StepNavigation, {
+  CompactStepNavigation,
+} from "@/components/StepNavigation";
 import {
   Coffee,
   MapPin,
@@ -144,16 +146,16 @@ export default function Dashboard() {
       // Clear subsequent selections
       switch (currentStep - 1) {
         case 0:
-          setSelectedOffice('');
-          setSelectedFloor('');
-          setSelectedMachine('');
+          setSelectedOffice("");
+          setSelectedFloor("");
+          setSelectedMachine("");
           break;
         case 1:
-          setSelectedFloor('');
-          setSelectedMachine('');
+          setSelectedFloor("");
+          setSelectedMachine("");
           break;
         case 2:
-          setSelectedMachine('');
+          setSelectedMachine("");
           break;
       }
     }
@@ -161,13 +163,13 @@ export default function Dashboard() {
 
   const handleStepReset = () => {
     setCurrentStep(0);
-    setSelectedLocation('');
-    setSelectedOffice('');
-    setSelectedFloor('');
-    setSelectedMachine('');
+    setSelectedLocation("");
+    setSelectedOffice("");
+    setSelectedFloor("");
+    setSelectedMachine("");
   };
 
-  const stepLabels = steps.map(step => step.title);
+  const stepLabels = steps.map((step) => step.title);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-coffee-light/30 to-background">
