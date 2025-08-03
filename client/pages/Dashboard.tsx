@@ -257,6 +257,17 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* Step Navigation */}
+          <StepNavigation
+            currentStep={currentStep}
+            totalSteps={steps.length}
+            onBack={handleStepBack}
+            onReset={handleStepReset}
+            stepLabels={stepLabels}
+            canGoBack={currentStep > 0}
+            canGoNext={false}
+          />
+
           {/* Current Step Selection */}
           {currentStep < steps.length && (
             <Card>
