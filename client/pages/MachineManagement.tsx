@@ -197,7 +197,7 @@ export default function MachineManagement() {
                         {supply === 'water' && <Droplets className="w-4 h-4" />}
                         {supply === 'milk' && <Milk className="w-4 h-4" />}
                         {supply === 'coffeeBeans' && <Coffee className="w-4 h-4" />}
-                        {supply === 'sugar' && <Sugar className="w-4 h-4" />}
+                        {supply === 'sugar' && <Candy className="w-4 h-4" />}
                         {supply === 'coffeeBeans' ? 'Coffee Beans' : supply}
                       </Label>
                       <span className="text-sm font-medium">{percentage}%</span>
