@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import StepNavigation, { CompactStepNavigation } from "@/components/StepNavigation";
 import {
   Coffee,
   MapPin,
