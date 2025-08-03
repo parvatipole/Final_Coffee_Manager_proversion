@@ -142,6 +142,17 @@ export default function Dashboard() {
       <header className="border-b bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={logout}
+              className="hover:scale-105 transition-all duration-200 hover:bg-primary/10 group"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+              <span className="hidden sm:inline">Sign Out</span>
+              <span className="sm:hidden">Out</span>
+            </Button>
+            <div className="w-px h-6 bg-border" />
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <Coffee className="w-5 h-5 text-primary-foreground" />
             </div>
