@@ -98,15 +98,12 @@ const App = () => (
   </QueryClientProvider>
 );
 
-// Ensure createRoot is only called once, even during hot reloads
+// Handle root creation properly for hot reloads
 const rootElement = document.getElementById("root")!;
 
-// Check if root already has a React root attached
-if (!(rootElement as any)._reactRootContainer && !(rootElement as any).__reactRoot) {
-  const root = createRoot(rootElement);
-  root.render(<App />);
-} else {
-  // During hot reload, we need to get the existing root
-  // This is a fallback for development
-  console.warn("Root already exists, using existing root for hot reload");
+// Store root in global scope to persist across hot reloads
+if (!(window as any).__reactRoot) {
+  (window as any).__reactRoot = createRoot(rootElement);
 }
+
+(window as any).__reactRoot.render(<App />);
