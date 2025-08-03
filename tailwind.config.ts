@@ -57,6 +57,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        coffee: {
+          brown: "hsl(var(--coffee-brown))",
+          light: "hsl(var(--coffee-light))",
+        },
+        machine: {
+          silver: "hsl(var(--machine-silver))",
+        },
+        success: {
+          green: "hsl(var(--success-green))",
+        },
+        warning: {
+          orange: "hsl(var(--warning-orange))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
