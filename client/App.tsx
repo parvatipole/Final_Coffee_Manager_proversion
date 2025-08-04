@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import DashboardIntegrated from "./pages/DashboardIntegrated";
 import MachineManagement from "./pages/MachineManagement";
 import NotFound from "./pages/NotFound";
 import FloatingNavigation, {
