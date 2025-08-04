@@ -118,7 +118,8 @@ export default function DashboardIntegrated() {
       setLocations(data);
       setError(null);
     } catch (err) {
-      setError("Failed to load locations. Using offline mode.");
+      console.warn("Loading locations in offline mode:", err);
+      setError("🔄 Working in offline mode - backend not available");
       // Fallback to demo data
       setLocations(["New York", "Los Angeles", "Chicago", "Houston"]);
     } finally {
@@ -133,8 +134,16 @@ export default function DashboardIntegrated() {
       setOffices(data);
       setError(null);
     } catch (err) {
-      setError("Failed to load offices. Using offline mode.");
-      setOffices(["Main Office", "North Branch", "South Branch", "East Wing"]);
+      console.warn("Loading offices in offline mode:", err);
+      setError("🔄 Working in offline mode - using demo data");
+      // Location-specific demo data
+      const officeMap: { [key: string]: string[] } = {
+        "New York": ["Main Office", "Wall Street Branch", "Brooklyn Office"],
+        "Los Angeles": ["Downtown Office", "Hollywood Branch", "Santa Monica"],
+        "Chicago": ["Loop Office", "North Side Branch", "Millennium Center"],
+        "Houston": ["Downtown Office", "Energy Corridor", "Medical Center"]
+      };
+      setOffices(officeMap[location] || ["Main Office", "North Branch", "South Branch"]);
     } finally {
       setIsLoading(false);
     }
@@ -147,8 +156,9 @@ export default function DashboardIntegrated() {
       setFloors(data);
       setError(null);
     } catch (err) {
-      setError("Failed to load floors. Using offline mode.");
-      setFloors(["Ground Floor", "1st Floor", "2nd Floor", "3rd Floor"]);
+      console.warn("Loading floors in offline mode:", err);
+      setError("🔄 Working in offline mode - using demo data");
+      setFloors(["Ground Floor", "1st Floor", "2nd Floor", "3rd Floor", "5th Floor"]);
     } finally {
       setIsLoading(false);
     }
@@ -161,12 +171,15 @@ export default function DashboardIntegrated() {
       setMachines(data);
       setError(null);
     } catch (err) {
-      setError("Failed to load machines. Using offline mode.");
-      setMachines([
-        { machineId: "A-001", name: "Machine A-001" },
-        { machineId: "A-002", name: "Machine A-002" },
-        { machineId: "B-001", name: "Machine B-001" }
-      ]);
+      console.warn("Loading machines in offline mode:", err);
+      setError("🔄 Working in offline mode - using demo data");
+      // Generate demo machines based on selections
+      const demoMachines = [
+        { machineId: "A-001", name: `Machine A-001 (${floor})` },
+        { machineId: "A-002", name: `Machine A-002 (${floor})` },
+        { machineId: "B-001", name: `Machine B-001 (${floor})` }
+      ];
+      setMachines(demoMachines);
     } finally {
       setIsLoading(false);
     }
