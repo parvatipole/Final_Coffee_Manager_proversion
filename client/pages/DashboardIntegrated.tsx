@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import StepNavigation from "@/components/StepNavigation";
+import OfflineModeIndicator from "@/components/OfflineModeIndicator";
 import { apiClient } from "@/lib/api";
 import { mqttClient, MachineStatusUpdate, useMQTTSubscription } from "@/lib/mqtt";
 import {
