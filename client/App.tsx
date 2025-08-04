@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import FloatingNavigation, {
   QuickBackFab,
 } from "./components/FloatingNavigation";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
