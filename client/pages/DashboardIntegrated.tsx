@@ -158,7 +158,7 @@ export default function DashboardIntegrated() {
       setError(null);
     } catch (err) {
       console.warn("Loading floors in offline mode:", err);
-      setError("���� Working in offline mode - using demo data");
+      setError("🔄 Working in offline mode - using demo data");
       setFloors(["Ground Floor", "1st Floor", "2nd Floor", "3rd Floor", "5th Floor"]);
     } finally {
       setIsLoading(false);
@@ -302,6 +302,9 @@ export default function DashboardIntegrated() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
+          {/* Offline Mode Banner */}
+          <OfflineModeIndicator />
+
           <div className="text-center space-y-2">
             <h2 className="text-3xl font-bold text-coffee-brown">Machine Selection</h2>
             <p className="text-muted-foreground">
