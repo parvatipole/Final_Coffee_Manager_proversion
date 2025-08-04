@@ -1,7 +1,13 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -13,7 +19,10 @@ interface ErrorBoundaryProps {
   fallback?: React.ReactNode;
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -24,7 +33,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error boundary caught an error:', error, errorInfo);
+    console.error("Error boundary caught an error:", error, errorInfo);
   }
 
   render() {
@@ -51,8 +60,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
                   <strong>Error:</strong> {this.state.error.message}
                 </div>
               )}
-              <Button 
-                onClick={() => window.location.reload()} 
+              <Button
+                onClick={() => window.location.reload()}
                 className="w-full"
               >
                 <RefreshCw className="w-4 h-4 mr-2" />
