@@ -174,6 +174,8 @@ class MQTTClient {
 export const mqttClient = new MQTTClient();
 
 // Convenience hooks for React components
+import React from 'react';
+
 export const useMQTTSubscription = (topic: string, handler: MessageHandler) => {
   React.useEffect(() => {
     mqttClient.subscribe(topic, handler);
