@@ -158,7 +158,7 @@ export default function DashboardIntegrated() {
       setError(null);
     } catch (err) {
       console.warn("Loading floors in offline mode:", err);
-      setError("🔄 Working in offline mode - using demo data");
+      setError("���� Working in offline mode - using demo data");
       setFloors(["Ground Floor", "1st Floor", "2nd Floor", "3rd Floor", "5th Floor"]);
     } finally {
       setIsLoading(false);
@@ -289,17 +289,8 @@ export default function DashboardIntegrated() {
           </div>
           
           <div className="flex items-center gap-4">
-            {/* MQTT Status */}
-            <div className="flex items-center gap-2">
-              {mqttConnected ? (
-                <Wifi className="w-4 h-4 text-green-500" />
-              ) : (
-                <WifiOff className="w-4 h-4 text-red-500" />
-              )}
-              <span className="text-xs text-muted-foreground">
-                {mqttConnected ? "Live" : "Offline"}
-              </span>
-            </div>
+            {/* Connection Status */}
+            <OfflineModeIndicator compact={true} />
             
             <Badge variant={user?.role === "technician" ? "default" : "secondary"} className="gap-1 animate-fadeIn">
               {user?.role === "technician" ? <Edit3 className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
