@@ -1,8 +1,8 @@
 // API Configuration and JWT Token Management
-const API_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "http://localhost:8080/api" // Change this to your production backend URL
-    : "http://localhost:8080/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+
+// Debug logging for local development
+const DEBUG = import.meta.env.VITE_DEBUG === "true" || import.meta.env.DEV;
 
 // Token management
 export const tokenManager = {
