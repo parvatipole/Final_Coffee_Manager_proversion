@@ -38,11 +38,11 @@ class ApiClient {
   }
 
   private async request<T>(
-    endpoint: string, 
+    endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
-    
+
     // Add JWT token to headers if available
     const token = tokenManager.getToken();
     const headers: HeadersInit = {
@@ -58,12 +58,13 @@ class ApiClient {
       const response = await fetch(url, {
         ...options,
         headers,
+        // Add timeout for better error handling
+        signal: AbortSignal.timeout(10000), // 10 second timeout
       });
 
       // Handle 401 (unauthorized) - token might be expired
       if (response.status === 401) {
         tokenManager.removeToken();
-        // You might want to redirect to login here
         throw new Error('Authentication required');
       }
 
@@ -74,6 +75,17 @@ class ApiClient {
 
       return await response.json();
     } catch (error) {
+      // Better error classification
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        console.warn(`Backend unavailable: ${endpoint}. App will work in offline mode.`);
+        throw new Error('Backend unavailable - working in offline mode');
+      }
+
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.warn(`Request timeout: ${endpoint}`);
+        throw new Error('Request timeout - please check your connection');
+      }
+
       console.error(`API request failed: ${endpoint}`, error);
       throw error;
     }
