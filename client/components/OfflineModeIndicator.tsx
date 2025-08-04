@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { 
-  WifiOff, 
-  Wifi, 
-  AlertTriangle, 
-  RefreshCw,
-  Info
-} from 'lucide-react';
-import { apiClient } from '@/lib/api';
+import React, { useState, useEffect } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { WifiOff, Wifi, AlertTriangle, RefreshCw, Info } from "lucide-react";
+import { apiClient } from "@/lib/api";
 
 interface OfflineModeIndicatorProps {
   className?: string;
   compact?: boolean;
 }
 
-export default function OfflineModeIndicator({ 
-  className = "", 
-  compact = false 
+export default function OfflineModeIndicator({
+  className = "",
+  compact = false,
 }: OfflineModeIndicatorProps) {
   const [isOnline, setIsOnline] = useState(true);
   const [isChecking, setIsChecking] = useState(false);
@@ -40,10 +34,10 @@ export default function OfflineModeIndicator({
   useEffect(() => {
     // Initial check
     checkBackendConnection();
-    
+
     // Periodic checks every 30 seconds
     const interval = setInterval(checkBackendConnection, 30000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -66,7 +60,9 @@ export default function OfflineModeIndicator({
             disabled={isChecking}
             className="h-6 px-2"
           >
-            <RefreshCw className={`w-3 h-3 ${isChecking ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`w-3 h-3 ${isChecking ? "animate-spin" : ""}`}
+            />
           </Button>
         )}
       </div>
@@ -85,7 +81,7 @@ export default function OfflineModeIndicator({
           <strong className="text-orange-800">Offline Mode Active</strong>
           <br />
           <span className="text-orange-700 text-sm">
-            Backend server is not available. The app is running with demo data. 
+            Backend server is not available. The app is running with demo data.
             Some features may be limited.
           </span>
           {lastCheckTime && (
@@ -134,7 +130,7 @@ export const useOfflineMode = () => {
 
     checkConnection();
     const interval = setInterval(checkConnection, 30000);
-    
+
     return () => clearInterval(interval);
   }, []);
 

@@ -10,7 +10,7 @@ export interface MQTTMessage {
 
 export interface MachineStatusUpdate {
   machineId: string;
-  status: 'operational' | 'maintenance' | 'offline';
+  status: "operational" | "maintenance" | "offline";
   temperature: number;
   pressure: number;
   waterLevel: number;
@@ -42,12 +42,12 @@ class MQTTClient {
 
   connect(): Promise<void> {
     return new Promise((resolve) => {
-      console.log('🔌 Connecting to MQTT broker...');
-      
+      console.log("🔌 Connecting to MQTT broker...");
+
       // Simulate connection
       setTimeout(() => {
         this.isConnected = true;
-        console.log('✅ Connected to MQTT broker');
+        console.log("✅ Connected to MQTT broker");
         this.startSimulation();
         resolve();
       }, 1000);
@@ -59,7 +59,7 @@ class MQTTClient {
     if (this.simulationInterval) {
       clearInterval(this.simulationInterval);
     }
-    console.log('🔌 Disconnected from MQTT broker');
+    console.log("🔌 Disconnected from MQTT broker");
   }
 
   subscribe(topic: string, handler: MessageHandler): void {
@@ -85,30 +85,30 @@ class MQTTClient {
 
   publish(topic: string, payload: any): void {
     if (!this.isConnected) {
-      console.warn('⚠️ Cannot publish - not connected to MQTT broker');
+      console.warn("⚠️ Cannot publish - not connected to MQTT broker");
       return;
     }
 
     const message: MQTTMessage = {
       topic,
       payload,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     // In real implementation, this would send to MQTT broker
     console.log(`📤 Publishing to ${topic}:`, payload);
-    
+
     // Simulate local delivery for demo
     this.deliverMessage(message);
   }
 
   private deliverMessage(message: MQTTMessage): void {
     const handlers = this.handlers.get(message.topic) || [];
-    handlers.forEach(handler => {
+    handlers.forEach((handler) => {
       try {
         handler(message);
       } catch (error) {
-        console.error('❌ Error in MQTT message handler:', error);
+        console.error("❌ Error in MQTT message handler:", error);
       }
     });
   }
@@ -121,21 +121,24 @@ class MQTTClient {
   }
 
   private simulateRealTimeUpdates(): void {
-    const machines = ['A-001', 'A-002', 'B-001'];
-    
-    machines.forEach(machineId => {
+    const machines = ["A-001", "A-002", "B-001"];
+
+    machines.forEach((machineId) => {
       // Simulate status update
       const statusUpdate: MachineStatusUpdate = {
         machineId,
-        status: Math.random() > 0.9 ? 'maintenance' : 'operational',
+        status: Math.random() > 0.9 ? "maintenance" : "operational",
         temperature: 88 + Math.random() * 8,
         pressure: 13 + Math.random() * 4,
         waterLevel: Math.max(0, 50 + Math.random() * 50),
         milkLevel: Math.max(0, 30 + Math.random() * 70),
         coffeeBeansLevel: Math.max(0, 40 + Math.random() * 60),
         sugarLevel: Math.max(0, 60 + Math.random() * 40),
-        currentOrder: Math.random() > 0.7 ? ['Espresso', 'Latte', 'Cappuccino'][Math.floor(Math.random() * 3)] : undefined,
-        queueLength: Math.floor(Math.random() * 5)
+        currentOrder:
+          Math.random() > 0.7
+            ? ["Espresso", "Latte", "Cappuccino"][Math.floor(Math.random() * 3)]
+            : undefined,
+        queueLength: Math.floor(Math.random() * 5),
       };
 
       this.publish(`coffee/machines/${machineId}/status`, statusUpdate);
@@ -146,7 +149,7 @@ class MQTTClient {
           machineId,
           cupsToday: Math.floor(100 + Math.random() * 50),
           revenue: Math.floor(300 + Math.random() * 200),
-          lastActivity: 'Just now'
+          lastActivity: "Just now",
         };
 
         this.publish(`coffee/machines/${machineId}/usage`, usageUpdate);
@@ -155,12 +158,14 @@ class MQTTClient {
 
     // Simulate alert messages
     if (Math.random() > 0.95) {
-      this.publish('coffee/alerts', {
-        type: 'low_supply',
+      this.publish("coffee/alerts", {
+        type: "low_supply",
         machineId: machines[Math.floor(Math.random() * machines.length)],
-        supply: ['water', 'milk', 'coffee_beans', 'sugar'][Math.floor(Math.random() * 4)],
+        supply: ["water", "milk", "coffee_beans", "sugar"][
+          Math.floor(Math.random() * 4)
+        ],
         level: Math.floor(Math.random() * 20),
-        message: 'Supply level is critically low'
+        message: "Supply level is critically low",
       });
     }
   }
@@ -174,7 +179,7 @@ class MQTTClient {
 export const mqttClient = new MQTTClient();
 
 // Convenience hooks for React components
-import React from 'react';
+import React from "react";
 
 export const useMQTTSubscription = (topic: string, handler: MessageHandler) => {
   React.useEffect(() => {
@@ -189,7 +194,7 @@ export const initializeMQTT = async () => {
     await mqttClient.connect();
     return true;
   } catch (error) {
-    console.error('❌ Failed to connect to MQTT broker:', error);
+    console.error("❌ Failed to connect to MQTT broker:", error);
     return false;
   }
 };

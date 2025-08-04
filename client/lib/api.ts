@@ -1,32 +1,33 @@
 // API Configuration and JWT Token Management
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'http://localhost:8080/api'  // Change this to your production backend URL
-  : 'http://localhost:8080/api';
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "http://localhost:8080/api" // Change this to your production backend URL
+    : "http://localhost:8080/api";
 
 // Token management
 export const tokenManager = {
   getToken: (): string | null => {
-    return localStorage.getItem('coffee_auth_token');
+    return localStorage.getItem("coffee_auth_token");
   },
-  
+
   setToken: (token: string): void => {
-    localStorage.setItem('coffee_auth_token', token);
+    localStorage.setItem("coffee_auth_token", token);
   },
-  
+
   removeToken: (): void => {
-    localStorage.removeItem('coffee_auth_token');
-    localStorage.removeItem('coffee_auth_user');
+    localStorage.removeItem("coffee_auth_token");
+    localStorage.removeItem("coffee_auth_user");
   },
-  
+
   isTokenExpired: (token: string): boolean => {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       const currentTime = Date.now() / 1000;
       return payload.exp < currentTime;
     } catch {
       return true;
     }
-  }
+  },
 };
 
 // API Client with automatic JWT handling
@@ -39,14 +40,14 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
 
     // Add JWT token to headers if available
     const token = tokenManager.getToken();
     const headers: HeadersInit = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...options.headers,
     };
 
@@ -65,25 +66,30 @@ class ApiClient {
       // Handle 401 (unauthorized) - token might be expired
       if (response.status === 401) {
         tokenManager.removeToken();
-        throw new Error('Authentication required');
+        throw new Error("Authentication required");
       }
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+        throw new Error(
+          errorData.message ||
+            `HTTP ${response.status}: ${response.statusText}`,
+        );
       }
 
       return await response.json();
     } catch (error) {
       // Better error classification
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        console.warn(`Backend unavailable: ${endpoint}. App will work in offline mode.`);
-        throw new Error('Backend unavailable - working in offline mode');
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        console.warn(
+          `Backend unavailable: ${endpoint}. App will work in offline mode.`,
+        );
+        throw new Error("Backend unavailable - working in offline mode");
       }
 
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && error.name === "AbortError") {
         console.warn(`Request timeout: ${endpoint}`);
-        throw new Error('Request timeout - please check your connection');
+        throw new Error("Request timeout - please check your connection");
       }
 
       console.error(`API request failed: ${endpoint}`, error);
@@ -101,21 +107,21 @@ class ApiClient {
       name: string;
       role: string;
       authorities: string[];
-    }>('/auth/signin', {
-      method: 'POST',
+    }>("/auth/signin", {
+      method: "POST",
       body: JSON.stringify({ username, password }),
     });
   }
 
   async logout() {
-    return this.request('/auth/signout', {
-      method: 'POST',
+    return this.request("/auth/signout", {
+      method: "POST",
     });
   }
 
   // Coffee Machines
   async getMachines() {
-    return this.request<any[]>('/machines');
+    return this.request<any[]>("/machines");
   }
 
   async getMachine(id: string) {
@@ -128,33 +134,43 @@ class ApiClient {
 
   async updateMachine(id: string, data: any) {
     return this.request<any>(`/machines/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(data),
     });
   }
 
   async updateSupplies(id: string, supplies: any) {
     return this.request<{ message: string }>(`/machines/${id}/supplies`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(supplies),
     });
   }
 
   // Location navigation
   async getLocations() {
-    return this.request<string[]>('/machines/locations');
+    return this.request<string[]>("/machines/locations");
   }
 
   async getOffices(location: string) {
-    return this.request<string[]>(`/machines/offices?location=${encodeURIComponent(location)}`);
+    return this.request<string[]>(
+      `/machines/offices?location=${encodeURIComponent(location)}`,
+    );
   }
 
   async getFloors(location: string, office: string) {
-    return this.request<string[]>(`/machines/floors?location=${encodeURIComponent(location)}&office=${encodeURIComponent(office)}`);
+    return this.request<string[]>(
+      `/machines/floors?location=${encodeURIComponent(location)}&office=${encodeURIComponent(office)}`,
+    );
   }
 
-  async getMachinesByLocationOfficeFloor(location: string, office: string, floor: string) {
-    return this.request<any[]>(`/machines/by-location-office-floor?location=${encodeURIComponent(location)}&office=${encodeURIComponent(office)}&floor=${encodeURIComponent(floor)}`);
+  async getMachinesByLocationOfficeFloor(
+    location: string,
+    office: string,
+    floor: string,
+  ) {
+    return this.request<any[]>(
+      `/machines/by-location-office-floor?location=${encodeURIComponent(location)}&office=${encodeURIComponent(office)}&floor=${encodeURIComponent(floor)}`,
+    );
   }
 
   // Monitoring
@@ -163,7 +179,7 @@ class ApiClient {
   }
 
   async getMaintenanceNeededMachines() {
-    return this.request<any[]>('/machines/maintenance-needed');
+    return this.request<any[]>("/machines/maintenance-needed");
   }
 }
 

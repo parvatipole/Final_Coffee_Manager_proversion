@@ -13,7 +13,11 @@ import { Badge } from "@/components/ui/badge";
 import StepNavigation from "@/components/StepNavigation";
 import OfflineModeIndicator from "@/components/OfflineModeIndicator";
 import { apiClient } from "@/lib/api";
-import { mqttClient, MachineStatusUpdate, useMQTTSubscription } from "@/lib/mqtt";
+import {
+  mqttClient,
+  MachineStatusUpdate,
+  useMQTTSubscription,
+} from "@/lib/mqtt";
 import {
   Coffee,
   MapPin,
@@ -57,7 +61,9 @@ export default function DashboardIntegrated() {
 
   // MQTT status
   const [mqttConnected, setMqttConnected] = useState(false);
-  const [realtimeUpdates, setRealtimeUpdates] = useState<Map<string, MachineStatusUpdate>>(new Map());
+  const [realtimeUpdates, setRealtimeUpdates] = useState<
+    Map<string, MachineStatusUpdate>
+  >(new Map());
 
   const steps: NavigationStep[] = [
     {
@@ -65,29 +71,29 @@ export default function DashboardIntegrated() {
       title: "Select Location",
       description: "Choose your city location",
       icon: <MapPin className="w-5 h-5" />,
-      completed: !!selectedLocation
+      completed: !!selectedLocation,
     },
     {
       id: "office",
-      title: "Select Office", 
+      title: "Select Office",
       description: "Choose your office building",
       icon: <Building className="w-5 h-5" />,
-      completed: !!selectedOffice
+      completed: !!selectedOffice,
     },
     {
       id: "floor",
       title: "Select Floor",
-      description: "Choose your floor level", 
+      description: "Choose your floor level",
       icon: <Layers className="w-5 h-5" />,
-      completed: !!selectedFloor
+      completed: !!selectedFloor,
     },
     {
       id: "machine",
       title: "Select Machine",
       description: "Choose the coffee machine",
       icon: <Coffee className="w-5 h-5" />,
-      completed: !!selectedMachine
-    }
+      completed: !!selectedMachine,
+    },
   ];
 
   // Load initial data
@@ -100,16 +106,16 @@ export default function DashboardIntegrated() {
     const checkMqttStatus = () => {
       setMqttConnected(mqttClient.isConnectedToBroker());
     };
-    
+
     checkMqttStatus();
     const interval = setInterval(checkMqttStatus, 1000);
     return () => clearInterval(interval);
   }, []);
 
   // MQTT subscription for real-time updates
-  useMQTTSubscription('coffee/machines/+/status', (message) => {
+  useMQTTSubscription("coffee/machines/+/status", (message) => {
     const update = message.payload as MachineStatusUpdate;
-    setRealtimeUpdates(prev => new Map(prev.set(update.machineId, update)));
+    setRealtimeUpdates((prev) => new Map(prev.set(update.machineId, update)));
   });
 
   const loadLocations = async () => {
@@ -141,10 +147,12 @@ export default function DashboardIntegrated() {
       const officeMap: { [key: string]: string[] } = {
         "New York": ["Main Office", "Wall Street Branch", "Brooklyn Office"],
         "Los Angeles": ["Downtown Office", "Hollywood Branch", "Santa Monica"],
-        "Chicago": ["Loop Office", "North Side Branch", "Millennium Center"],
-        "Houston": ["Downtown Office", "Energy Corridor", "Medical Center"]
+        Chicago: ["Loop Office", "North Side Branch", "Millennium Center"],
+        Houston: ["Downtown Office", "Energy Corridor", "Medical Center"],
       };
-      setOffices(officeMap[location] || ["Main Office", "North Branch", "South Branch"]);
+      setOffices(
+        officeMap[location] || ["Main Office", "North Branch", "South Branch"],
+      );
     } finally {
       setIsLoading(false);
     }
@@ -159,16 +167,30 @@ export default function DashboardIntegrated() {
     } catch (err) {
       console.warn("Loading floors in offline mode:", err);
       setError("🔄 Working in offline mode - using demo data");
-      setFloors(["Ground Floor", "1st Floor", "2nd Floor", "3rd Floor", "5th Floor"]);
+      setFloors([
+        "Ground Floor",
+        "1st Floor",
+        "2nd Floor",
+        "3rd Floor",
+        "5th Floor",
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const loadMachines = async (location: string, office: string, floor: string) => {
+  const loadMachines = async (
+    location: string,
+    office: string,
+    floor: string,
+  ) => {
     try {
       setIsLoading(true);
-      const data = await apiClient.getMachinesByLocationOfficeFloor(location, office, floor);
+      const data = await apiClient.getMachinesByLocationOfficeFloor(
+        location,
+        office,
+        floor,
+      );
       setMachines(data);
       setError(null);
     } catch (err) {
@@ -178,7 +200,7 @@ export default function DashboardIntegrated() {
       const demoMachines = [
         { machineId: "A-001", name: `Machine A-001 (${floor})` },
         { machineId: "A-002", name: `Machine A-002 (${floor})` },
-        { machineId: "B-001", name: `Machine B-001 (${floor})` }
+        { machineId: "B-001", name: `Machine B-001 (${floor})` },
       ];
       setMachines(demoMachines);
     } finally {
@@ -221,11 +243,16 @@ export default function DashboardIntegrated() {
 
   const getOptionsForStep = (stepIndex: number) => {
     switch (stepIndex) {
-      case 0: return locations;
-      case 1: return offices;
-      case 2: return floors;
-      case 3: return machines.map(m => m.machineId || m.name);
-      default: return [];
+      case 0:
+        return locations;
+      case 1:
+        return offices;
+      case 2:
+        return floors;
+      case 3:
+        return machines.map((m) => m.machineId || m.name);
+      default:
+        return [];
     }
   };
 
@@ -258,7 +285,7 @@ export default function DashboardIntegrated() {
   };
 
   const allStepsCompleted = steps.every((step) => step.completed);
-  const stepLabels = steps.map(step => step.title);
+  const stepLabels = steps.map((step) => step.title);
 
   const getRealtimeStatus = (machineId: string) => {
     return realtimeUpdates.get(machineId);
@@ -269,9 +296,9 @@ export default function DashboardIntegrated() {
       <header className="border-b bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={logout}
               className="hover:scale-105 transition-all duration-200 hover:bg-primary/10 group"
             >
@@ -287,13 +314,20 @@ export default function DashboardIntegrated() {
               Coffee Manager
             </h1>
           </div>
-          
+
           <div className="flex items-center gap-4">
             {/* Connection Status */}
             <OfflineModeIndicator compact={true} />
-            
-            <Badge variant={user?.role === "technician" ? "default" : "secondary"} className="gap-1 animate-fadeIn">
-              {user?.role === "technician" ? <Edit3 className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
+
+            <Badge
+              variant={user?.role === "technician" ? "default" : "secondary"}
+              className="gap-1 animate-fadeIn"
+            >
+              {user?.role === "technician" ? (
+                <Edit3 className="w-3 h-3" />
+              ) : (
+                <Eye className="w-3 h-3" />
+              )}
               {user?.name}
             </Badge>
           </div>
@@ -306,7 +340,9 @@ export default function DashboardIntegrated() {
           <OfflineModeIndicator />
 
           <div className="text-center space-y-2">
-            <h2 className="text-3xl font-bold text-coffee-brown">Machine Selection</h2>
+            <h2 className="text-3xl font-bold text-coffee-brown">
+              Machine Selection
+            </h2>
             <p className="text-muted-foreground">
               Follow the steps below to select and manage your coffee machine
             </p>
@@ -323,18 +359,22 @@ export default function DashboardIntegrated() {
               {steps.map((step, index) => (
                 <React.Fragment key={step.id}>
                   <div className="flex flex-col items-center space-y-2">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
-                      step.completed 
-                        ? "bg-primary text-primary-foreground" 
-                        : index === currentStep 
-                          ? "bg-primary/20 text-primary border-2 border-primary" 
-                          : "bg-muted text-muted-foreground"
-                    }`}>
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+                        step.completed
+                          ? "bg-primary text-primary-foreground"
+                          : index === currentStep
+                            ? "bg-primary/20 text-primary border-2 border-primary"
+                            : "bg-muted text-muted-foreground"
+                      }`}
+                    >
                       {step.icon}
                     </div>
                     <div className="text-center">
                       <p className="text-sm font-medium">{step.title}</p>
-                      <p className="text-xs text-muted-foreground">{step.description}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
                   {index < steps.length - 1 && (
@@ -365,7 +405,9 @@ export default function DashboardIntegrated() {
                   {steps[currentStep].title}
                   {isLoading && <Activity className="w-4 h-4 animate-spin" />}
                 </CardTitle>
-                <CardDescription>{steps[currentStep].description}</CardDescription>
+                <CardDescription>
+                  {steps[currentStep].description}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -380,7 +422,8 @@ export default function DashboardIntegrated() {
                       <div className="flex-1">
                         <p className="font-medium">{option}</p>
                         <p className="text-sm text-muted-foreground">
-                          Click to select this {steps[currentStep].title.toLowerCase()}
+                          Click to select this{" "}
+                          {steps[currentStep].title.toLowerCase()}
                         </p>
                         {/* Show real-time status for machines */}
                         {currentStep === 3 && getRealtimeStatus(option) && (
@@ -398,20 +441,38 @@ export default function DashboardIntegrated() {
           )}
 
           {/* Selected Path Summary */}
-          {(selectedLocation || selectedOffice || selectedFloor || selectedMachine) && (
+          {(selectedLocation ||
+            selectedOffice ||
+            selectedFloor ||
+            selectedMachine) && (
             <Card>
               <CardHeader>
                 <CardTitle>Current Selection</CardTitle>
-                <CardDescription>Your selected path through the system</CardDescription>
+                <CardDescription>
+                  Your selected path through the system
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {selectedLocation && <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /> Location: {selectedLocation}</div>}
-                  {selectedOffice && <div className="flex items-center gap-2"><Building className="w-4 h-4" /> Office: {selectedOffice}</div>}
-                  {selectedFloor && <div className="flex items-center gap-2"><Layers className="w-4 h-4" /> Floor: {selectedFloor}</div>}
+                  {selectedLocation && (
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" /> Location:{" "}
+                      {selectedLocation}
+                    </div>
+                  )}
+                  {selectedOffice && (
+                    <div className="flex items-center gap-2">
+                      <Building className="w-4 h-4" /> Office: {selectedOffice}
+                    </div>
+                  )}
+                  {selectedFloor && (
+                    <div className="flex items-center gap-2">
+                      <Layers className="w-4 h-4" /> Floor: {selectedFloor}
+                    </div>
+                  )}
                   {selectedMachine && (
                     <div className="flex items-center gap-2">
-                      <Coffee className="w-4 h-4" /> 
+                      <Coffee className="w-4 h-4" />
                       Machine: {selectedMachine}
                       {getRealtimeStatus(selectedMachine) && (
                         <Badge variant="outline" className="ml-2 gap-1">
@@ -431,14 +492,20 @@ export default function DashboardIntegrated() {
             <Card className="border-primary">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <h3 className="text-xl font-semibold text-coffee-brown">Ready to Manage Machine</h3>
+                  <h3 className="text-xl font-semibold text-coffee-brown">
+                    Ready to Manage Machine
+                  </h3>
                   <p className="text-muted-foreground">
-                    You can now {user?.role === "technician" ? "edit and manage" : "view"} the selected coffee machine data.
+                    You can now{" "}
+                    {user?.role === "technician" ? "edit and manage" : "view"}{" "}
+                    the selected coffee machine data.
                   </p>
                   <Link to={`/machine?id=${selectedMachine}`}>
                     <Button size="lg" className="w-full sm:w-auto">
                       <Settings className="w-4 h-4 mr-2" />
-                      {user?.role === "technician" ? "Manage Machine" : "View Machine Data"}
+                      {user?.role === "technician"
+                        ? "Manage Machine"
+                        : "View Machine Data"}
                     </Button>
                   </Link>
                 </div>
