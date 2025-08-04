@@ -9,6 +9,7 @@
 ## Quick Start
 
 ### 1. 📁 Get the Code
+
 ```bash
 # Download or clone the project
 # Extract if downloaded as zip
@@ -16,6 +17,7 @@ cd coffee-flow-project
 ```
 
 ### 2. ⚡ Frontend Setup
+
 ```bash
 # Install dependencies
 npm install
@@ -23,9 +25,11 @@ npm install
 # Start development server
 npm run dev
 ```
+
 **Frontend:** http://localhost:5173
 
 ### 3. 🗄️ Database Setup
+
 ```bash
 # Start MySQL service
 # Windows: Start MySQL service from services
@@ -39,6 +43,7 @@ EXIT;
 ```
 
 ### 4. 🔧 Backend Setup
+
 ```bash
 # Navigate to backend
 cd backend
@@ -50,17 +55,22 @@ cd backend
 mvn clean install
 mvn spring-boot:run
 ```
+
 **Backend:** http://localhost:8080/api
 
 ## 🧪 Testing the Setup
 
 ### 1. Test Backend
+
 Visit: http://localhost:8080/api/auth/signin
+
 - Should show: `{"timestamp":"...","status":405,"error":"Method Not Allowed"}`
 - This means backend is running correctly!
 
 ### 2. Test Frontend
+
 Visit: http://localhost:5173
+
 - Should show the CoffeeFlow login page
 - Try logging in with:
   - **Technician:** `tech1` / `password`
@@ -70,14 +80,15 @@ Visit: http://localhost:5173
 
 The backend automatically creates these accounts on first run:
 
-| Username | Password | Role | Permissions |
-|----------|----------|------|-------------|
-| tech1 | password | Technician | Full access (edit everything) |
-| admin1 | password | Admin | View-only access |
+| Username | Password | Role       | Permissions                   |
+| -------- | -------- | ---------- | ----------------------------- |
+| tech1    | password | Technician | Full access (edit everything) |
+| admin1   | password | Admin      | View-only access              |
 
 ## 📡 Features
 
 ### ✅ Working Features
+
 - **JWT Authentication** with real backend
 - **Role-based access control**
 - **Real-time MQTT simulation**
@@ -87,6 +98,7 @@ The backend automatically creates these accounts on first run:
 - **Offline mode** with demo data fallback
 
 ### 🎛️ API Endpoints
+
 - `POST /api/auth/signin` - Login
 - `GET /api/machines` - Get all machines
 - `PUT /api/machines/{id}/supplies` - Update supplies (Technician only)
@@ -97,6 +109,7 @@ The backend automatically creates these accounts on first run:
 ## 🐛 Troubleshooting
 
 ### Frontend Issues
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -107,6 +120,7 @@ netstat -tulpn | grep 5173
 ```
 
 ### Backend Issues
+
 ```bash
 # Check if port 8080 is free
 netstat -tulpn | grep 8080
@@ -120,6 +134,7 @@ mvn spring-boot:run
 ```
 
 ### Database Issues
+
 ```bash
 # Reset database
 mysql -u root -p
@@ -128,7 +143,9 @@ CREATE DATABASE coffee_flow_db;
 ```
 
 ### CORS Issues
+
 If you get CORS errors, check that backend `WebSecurityConfig.java` includes:
+
 ```java
 configuration.setAllowedOriginPatterns(Arrays.asList(
     "http://localhost:*"
@@ -147,6 +164,7 @@ configuration.setAllowedOriginPatterns(Arrays.asList(
 ## 📝 Environment Variables
 
 Create `client/.env.local`:
+
 ```env
 VITE_API_BASE_URL=http://localhost:8080/api
 VITE_DEBUG=true
