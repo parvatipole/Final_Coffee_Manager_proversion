@@ -145,6 +145,9 @@ export default function Login() {
                     <span>Admin: admin1 / password</span>
                   </div>
                 </div>
+                <div className="mt-3 p-2 bg-blue-50 rounded text-xs text-blue-700">
+                  💡 Works with or without backend server - includes demo mode
+                </div>
               </div>
             </div>
           </CardContent>
