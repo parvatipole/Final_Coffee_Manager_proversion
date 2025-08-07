@@ -33,11 +33,24 @@ export const useAuth = () => {
   return context;
 };
 
+// Detect demo mode based on hostname patterns
+const isDemoMode = () => {
+  const hostname = window.location.hostname;
+  return (
+    hostname.includes('.fly.dev') ||
+    hostname.includes('.netlify.app') ||
+    hostname.includes('.vercel.app') ||
+    hostname.includes('builder.io') ||
+    hostname.includes('localhost') === false && hostname !== '127.0.0.1'
+  );
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [demoMode] = useState(isDemoMode());
 
   useEffect(() => {
     // Check for stored auth on mount
@@ -66,6 +79,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   ): Promise<boolean> => {
     setIsLoading(true);
 
+    // Skip backend API calls in demo mode
+    if (demoMode) {
+      console.debug("Demo mode detected, using mock authentication");
+      return performMockLogin(username, password);
+    }
+
     try {
       // Try real backend API first
       const response = await apiClient.login(username, password);
@@ -93,59 +112,64 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       // Silently fall back to demo mode when backend is unavailable
       console.debug("Backend unavailable, using demo mode authentication:", error);
-
-      // Fallback to mock authentication for demo purposes
-      const mockUsers = [
-        {
-          id: "1",
-          username: "tech1",
-          role: "technician",
-          name: "John Technician",
-        },
-        { id: "2", username: "admin1", role: "admin", name: "Sarah Admin" },
-      ];
-
-      const foundUser = mockUsers.find((u) => u.username === username);
-      if (foundUser && (password === "password" || password === username)) {
-        // Create mock JWT token
-        const mockToken = btoa(
-          JSON.stringify({
-            sub: foundUser.username,
-            role: foundUser.role,
-            exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 hours
-          }),
-        );
-
-        tokenManager.setToken(mockToken);
-
-        const userData: User = {
-          id: foundUser.id,
-          username: foundUser.username,
-          name: foundUser.name,
-          role: foundUser.role as UserRole,
-        };
-
-        setUser(userData);
-        localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
-
-        // Initialize MQTT in demo mode
-        await initializeMQTT();
-
-        setIsLoading(false);
-        return true;
-      }
-
-      setIsLoading(false);
-      return false;
+      return performMockLogin(username, password);
     }
   };
 
+  const performMockLogin = async (username: string, password: string): Promise<boolean> => {
+    // Fallback to mock authentication for demo purposes
+    const mockUsers = [
+      {
+        id: "1",
+        username: "tech1",
+        role: "technician",
+        name: "John Technician",
+      },
+      { id: "2", username: "admin1", role: "admin", name: "Sarah Admin" },
+    ];
+
+    const foundUser = mockUsers.find((u) => u.username === username);
+    if (foundUser && (password === "password" || password === username)) {
+      // Create mock JWT token
+      const mockToken = btoa(
+        JSON.stringify({
+          sub: foundUser.username,
+          role: foundUser.role,
+          exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 hours
+        }),
+      );
+
+      tokenManager.setToken(mockToken);
+
+      const userData: User = {
+        id: foundUser.id,
+        username: foundUser.username,
+        name: foundUser.name,
+        role: foundUser.role as UserRole,
+      };
+
+      setUser(userData);
+      localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
+
+      // Initialize MQTT in demo mode
+      await initializeMQTT();
+
+      setIsLoading(false);
+      return true;
+    }
+
+    setIsLoading(false);
+    return false;
+  };
+
   const logout = async () => {
-    try {
-      // Call backend logout endpoint
-      await apiClient.logout();
-    } catch (error) {
-      console.warn("Logout API call failed:", error);
+    if (!demoMode) {
+      try {
+        // Call backend logout endpoint
+        await apiClient.logout();
+      } catch (error) {
+        console.warn("Logout API call failed:", error);
+      }
     }
 
     // Clear local state and storage
