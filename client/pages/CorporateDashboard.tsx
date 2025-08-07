@@ -12,7 +12,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import OfflineModeIndicator from "@/components/OfflineModeIndicator";
 import { apiClient } from "@/lib/api";
 import {
   mqttClient,
@@ -312,7 +311,6 @@ export default function CorporateDashboard() {
           </div>
           
           <div className="flex items-center gap-4">
-            <OfflineModeIndicator compact={true} />
             <Badge variant={user?.role === "technician" ? "default" : "secondary"} className="gap-2 px-3 py-1.5">
               {user?.role === "technician" ? <Edit3 className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               <span className="font-medium">{user?.name}</span>
@@ -324,8 +322,6 @@ export default function CorporateDashboard() {
 
       <main className="container mx-auto px-6 py-8">
         <div className="max-w-7xl mx-auto space-y-8">
-          {/* Offline Mode Banner */}
-          <OfflineModeIndicator />
           
           {/* Page Header */}
           <div className="text-center space-y-4">
