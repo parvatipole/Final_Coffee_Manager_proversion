@@ -91,7 +91,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
       return true;
     } catch (error) {
-      console.warn("Backend login failed, falling back to demo mode:", error);
+      // Silently fall back to demo mode when backend is unavailable
+      console.debug("Backend unavailable, using demo mode authentication:", error);
 
       // Fallback to mock authentication for demo purposes
       const mockUsers = [
