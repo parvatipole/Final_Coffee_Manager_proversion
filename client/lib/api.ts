@@ -92,12 +92,7 @@ class ApiClient {
         throw new Error("Request timeout - please check your connection");
       }
 
-      // Only log actual errors, not expected connection failures
-      if (!(error instanceof TypeError)) {
-        console.error(`API request failed: ${endpoint}`, error);
-      } else {
-        console.debug(`Expected connection failure: ${endpoint}`, error);
-      }
+      // Only log actual errors, not expected connection failures (silently handled)
       throw error;
     }
   }
