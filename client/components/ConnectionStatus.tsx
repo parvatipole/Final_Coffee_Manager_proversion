@@ -45,7 +45,8 @@ export default function ConnectionStatus({
       await apiClient.getMachines();
       setBackendStatus("connected");
     } catch (error) {
-      console.warn("Backend connection check failed:", error);
+      // Silently handle connection errors in demo mode
+      console.debug("Backend connection check failed (expected in demo mode):", error);
       setBackendStatus("disconnected");
     }
     setLastCheck(new Date());
