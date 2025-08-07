@@ -282,7 +282,7 @@ export default function MachineManagement() {
 
           {/* Main Dashboard Tabs */}
           <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <Activity className="w-4 h-4" />
                 Overview
