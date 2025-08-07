@@ -141,22 +141,22 @@ export default function CorporateDashboard() {
           name: "Hinjewadi IT Park",
           address: "Phase 1, Hinjewadi, Pune - 411057",
           machines: [
-            { id: "PUN-HIN-001", name: "Reception Lounge", status: "operational", performance: { dailyCups: 125, revenue: 3750, efficiency: 96, supplies: { water: 85, milk: 70, coffee: 80, sugar: 90 } } },
-            { id: "PUN-HIN-002", name: "Cafeteria Level 1", status: "operational", performance: { dailyCups: 89, revenue: 2670, efficiency: 92, supplies: { water: 75, milk: 60, coffee: 85, sugar: 85 } } },
-            { id: "PUN-HIN-003", name: "Cafeteria Level 2", status: "maintenance", performance: { dailyCups: 0, revenue: 0, efficiency: 0, supplies: { water: 45, milk: 20, coffee: 30, sugar: 55 } } },
-            { id: "PUN-HIN-004", name: "Break Room Tower A", status: "operational", performance: { dailyCups: 67, revenue: 2010, efficiency: 88, supplies: { water: 90, milk: 80, coffee: 75, sugar: 70 } } }
+            { id: "PUN-HIN-001", name: "Reception Lounge", status: "operational", performance: { dailyCups: 125, efficiency: 96, supplies: { water: 85, milk: 70, coffee: 80, sugar: 90 } } },
+            { id: "PUN-HIN-002", name: "Cafeteria Level 1", status: "operational", performance: { dailyCups: 89, efficiency: 92, supplies: { water: 75, milk: 60, coffee: 85, sugar: 85 } } },
+            { id: "PUN-HIN-003", name: "Cafeteria Level 2", status: "maintenance", performance: { dailyCups: 0, efficiency: 0, supplies: { water: 45, milk: 20, coffee: 30, sugar: 55 } } },
+            { id: "PUN-HIN-004", name: "Break Room Tower A", status: "operational", performance: { dailyCups: 67, efficiency: 88, supplies: { water: 90, milk: 80, coffee: 75, sugar: 70 } } }
           ],
-          performance: { dailyRevenue: 8430, weeklyCups: 1890, efficiency: 92, uptime: 98.5, alerts: 1 }
+          performance: { weeklyCups: 1890, efficiency: 92, uptime: 98.5, alerts: 1 }
         },
         {
           name: "Koregaon Park Corporate",
           address: "Koregaon Park, Pune - 411001", 
           machines: [
-            { id: "PUN-KOR-001", name: "Executive Floor", status: "operational", performance: { dailyCups: 78, revenue: 2340, efficiency: 94, supplies: { water: 80, milk: 85, coffee: 70, sugar: 95 } } },
-            { id: "PUN-KOR-002", name: "Employee Lounge", status: "operational", performance: { dailyCups: 134, revenue: 4020, efficiency: 97, supplies: { water: 90, milk: 75, coffee: 85, sugar: 80 } } },
-            { id: "PUN-KOR-003", name: "Conference Center", status: "operational", performance: { dailyCups: 45, revenue: 1350, efficiency: 89, supplies: { water: 70, milk: 65, coffee: 90, sugar: 75 } } }
+            { id: "PUN-KOR-001", name: "Executive Floor", status: "operational", performance: { dailyCups: 78, efficiency: 94, supplies: { water: 80, milk: 85, coffee: 70, sugar: 95 } } },
+            { id: "PUN-KOR-002", name: "Employee Lounge", status: "operational", performance: { dailyCups: 134, efficiency: 97, supplies: { water: 90, milk: 75, coffee: 85, sugar: 80 } } },
+            { id: "PUN-KOR-003", name: "Conference Center", status: "operational", performance: { dailyCups: 45, efficiency: 89, supplies: { water: 70, milk: 65, coffee: 90, sugar: 75 } } }
           ],
-          performance: { dailyRevenue: 7710, weeklyCups: 1802, efficiency: 93, uptime: 99.2, alerts: 0 }
+          performance: { weeklyCups: 1802, efficiency: 93, uptime: 99.2, alerts: 0 }
         },
         {
           name: "Viman Nagar Tech Hub",
