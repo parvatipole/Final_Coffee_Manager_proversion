@@ -65,7 +65,6 @@ interface MachineData {
   usage: {
     dailyCups: number;
     weeklyCups: number;
-    monthlyRevenue: number;
   };
   notes: string;
 }
@@ -100,7 +99,6 @@ export default function MachineManagement() {
     usage: {
       dailyCups: 127,
       weeklyCups: 890,
-      monthlyRevenue: 2340,
     },
     notes: "Machine running smoothly. Recent cleaning completed on schedule.",
   });
