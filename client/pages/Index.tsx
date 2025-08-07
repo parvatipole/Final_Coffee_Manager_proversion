@@ -15,7 +15,7 @@ export default function Index() {
       const data = (await response.json()) as DemoResponse;
       setExampleFromServer(data.message);
     } catch (error) {
-      console.error("Error fetching hello:", error);
+      // Error fetching hello (silently handled)
     }
   };
 
