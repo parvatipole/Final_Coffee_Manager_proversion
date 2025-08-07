@@ -15,10 +15,9 @@ import {
   Area,
   AreaChart
 } from 'recharts';
-import { 
-  TrendingUp, 
-  Calendar, 
-  DollarSign,
+import {
+  TrendingUp,
+  Calendar,
   Coffee,
   Clock,
   Users
@@ -29,7 +28,6 @@ type ChartType = 'hourly' | 'daily' | 'weekly';
 interface UsageData {
   name: string;
   cups: number;
-  revenue: number;
   peak?: boolean;
 }
 
@@ -42,35 +40,35 @@ export default function UsageChart({ className }: UsageChartProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const hourlyData: UsageData[] = [
-    { name: '6AM', cups: 12, revenue: 36 },
-    { name: '7AM', cups: 28, revenue: 84 },
-    { name: '8AM', cups: 45, revenue: 135, peak: true },
-    { name: '9AM', cups: 52, revenue: 156, peak: true },
-    { name: '10AM', cups: 38, revenue: 114 },
-    { name: '11AM', cups: 25, revenue: 75 },
-    { name: '12PM', cups: 42, revenue: 126, peak: true },
-    { name: '1PM', cups: 48, revenue: 144, peak: true },
-    { name: '2PM', cups: 35, revenue: 105 },
-    { name: '3PM', cups: 29, revenue: 87 },
-    { name: '4PM', cups: 22, revenue: 66 },
-    { name: '5PM', cups: 15, revenue: 45 }
+    { name: '6AM', cups: 12 },
+    { name: '7AM', cups: 28 },
+    { name: '8AM', cups: 45, peak: true },
+    { name: '9AM', cups: 52, peak: true },
+    { name: '10AM', cups: 38 },
+    { name: '11AM', cups: 25 },
+    { name: '12PM', cups: 42, peak: true },
+    { name: '1PM', cups: 48, peak: true },
+    { name: '2PM', cups: 35 },
+    { name: '3PM', cups: 29 },
+    { name: '4PM', cups: 22 },
+    { name: '5PM', cups: 15 }
   ];
 
   const dailyData: UsageData[] = [
-    { name: 'Mon', cups: 234, revenue: 702 },
-    { name: 'Tue', cups: 267, revenue: 801, peak: true },
-    { name: 'Wed', cups: 289, revenue: 867, peak: true },
-    { name: 'Thu', cups: 298, revenue: 894, peak: true },
-    { name: 'Fri', cups: 312, revenue: 936, peak: true },
-    { name: 'Sat', cups: 156, revenue: 468 },
-    { name: 'Sun', cups: 98, revenue: 294 }
+    { name: 'Mon', cups: 234 },
+    { name: 'Tue', cups: 267, peak: true },
+    { name: 'Wed', cups: 289, peak: true },
+    { name: 'Thu', cups: 298, peak: true },
+    { name: 'Fri', cups: 312, peak: true },
+    { name: 'Sat', cups: 156 },
+    { name: 'Sun', cups: 98 }
   ];
 
   const weeklyData: UsageData[] = [
-    { name: 'Week 1', cups: 1654, revenue: 4962 },
-    { name: 'Week 2', cups: 1789, revenue: 5367, peak: true },
-    { name: 'Week 3', cups: 1923, revenue: 5769, peak: true },
-    { name: 'Week 4', cups: 2134, revenue: 6402, peak: true }
+    { name: 'Week 1', cups: 1654 },
+    { name: 'Week 2', cups: 1789, peak: true },
+    { name: 'Week 3', cups: 1923, peak: true },
+    { name: 'Week 4', cups: 2134, peak: true }
   ];
 
   const getCurrentData = () => {
@@ -93,7 +91,6 @@ export default function UsageChart({ className }: UsageChartProps) {
 
   const data = getCurrentData();
   const totalCups = data.reduce((sum, item) => sum + item.cups, 0);
-  const totalRevenue = data.reduce((sum, item) => sum + item.revenue, 0);
   const avgCupsPerPeriod = Math.round(totalCups / data.length);
   const peakPeriods = data.filter(item => item.peak).length;
 
@@ -111,10 +108,6 @@ export default function UsageChart({ className }: UsageChartProps) {
           <p className="text-primary">
             <Coffee className="w-4 h-4 inline mr-1" />
             {payload[0].value} cups
-          </p>
-          <p className="text-green-600">
-            <DollarSign className="w-4 h-4 inline mr-1" />
-            ${payload[1]?.value || (payload[0].value * 3).toFixed(0)}
           </p>
         </div>
       );
@@ -155,14 +148,10 @@ export default function UsageChart({ className }: UsageChartProps) {
       <CardContent>
         <div className="space-y-4">
           {/* Stats Summary */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="text-center p-3 bg-muted/30 rounded-lg">
               <div className="text-lg font-bold text-primary">{totalCups}</div>
               <div className="text-xs text-muted-foreground">Total Cups</div>
-            </div>
-            <div className="text-center p-3 bg-muted/30 rounded-lg">
-              <div className="text-lg font-bold text-green-600">${totalRevenue}</div>
-              <div className="text-xs text-muted-foreground">Revenue</div>
             </div>
             <div className="text-center p-3 bg-muted/30 rounded-lg">
               <div className="text-lg font-bold text-orange-500">{avgCupsPerPeriod}</div>
