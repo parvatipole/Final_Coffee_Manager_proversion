@@ -178,8 +178,13 @@ export default function Login() {
                     <span>Admin: admin1 / password</span>
                   </div>
                 </div>
-                <div className="mt-3 p-2 bg-blue-50 rounded text-xs text-blue-700">
-                  💡 Works with or without backend server - includes demo mode
+                <div className="mt-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                  <div className="text-sm font-medium text-blue-800 mb-1">
+                    🚀 Demo Mode Active
+                  </div>
+                  <div className="text-xs text-blue-700">
+                    Full functionality available without backend server
+                  </div>
                 </div>
               </div>
             </div>
