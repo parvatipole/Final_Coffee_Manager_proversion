@@ -126,6 +126,8 @@ export const useOfflineMode = () => {
         await apiClient.getMachines();
         setIsOffline(false);
       } catch (error) {
+        // Silently handle connection errors
+        console.debug('Backend connection check failed (expected in demo mode)');
         setIsOffline(true);
       }
     };
