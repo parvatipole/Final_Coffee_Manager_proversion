@@ -46,7 +46,6 @@ export default function ConnectionStatus({
       setBackendStatus("connected");
     } catch (error) {
       // Silently handle connection errors in demo mode
-      console.debug("Backend connection check failed (expected in demo mode):", error);
       setBackendStatus("disconnected");
     }
     setLastCheck(new Date());
