@@ -298,13 +298,6 @@ export default function MachineManagement() {
                 <TrendingUp className="w-4 h-4" />
                 Analytics
               </TabsTrigger>
-              <TabsTrigger
-                value="maintenance"
-                className="flex items-center gap-2"
-              >
-                <Settings className="w-4 h-4" />
-                Maintenance
-              </TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}
