@@ -184,6 +184,9 @@ export default function UsageChart({ className }: UsageChartProps) {
                     type="category"
                     allowDataOverflow={false}
                     allowDecimals={false}
+                    includeHidden={false}
+                    mirror={false}
+                    reversed={false}
                   />
                   <YAxis
                     fontSize={12}
@@ -193,6 +196,9 @@ export default function UsageChart({ className }: UsageChartProps) {
                     type="number"
                     allowDataOverflow={false}
                     allowDecimals={false}
+                    includeHidden={false}
+                    mirror={false}
+                    reversed={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
@@ -217,6 +223,9 @@ export default function UsageChart({ className }: UsageChartProps) {
                     type="category"
                     allowDataOverflow={false}
                     allowDecimals={false}
+                    includeHidden={false}
+                    mirror={false}
+                    reversed={false}
                   />
                   <YAxis
                     fontSize={12}
@@ -226,6 +235,9 @@ export default function UsageChart({ className }: UsageChartProps) {
                     type="number"
                     allowDataOverflow={false}
                     allowDecimals={false}
+                    includeHidden={false}
+                    mirror={false}
+                    reversed={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar 
