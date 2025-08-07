@@ -124,8 +124,8 @@ export default function DashboardIntegrated() {
       setLocations(data);
       setError(null);
     } catch (err) {
-      console.warn("Loading locations in offline mode:", err);
-      setError("🔄 Working in offline mode - backend not available");
+      console.debug("Loading locations in demo mode:", err);
+      setError("");
       // Fallback to demo data
       setLocations(["New York", "Los Angeles", "Chicago", "Houston"]);
     } finally {
@@ -140,8 +140,8 @@ export default function DashboardIntegrated() {
       setOffices(data);
       setError(null);
     } catch (err) {
-      console.warn("Loading offices in offline mode:", err);
-      setError("🔄 Working in offline mode - using demo data");
+      console.debug("Loading offices in demo mode:", err);
+      setError("");
       // Location-specific demo data
       const officeMap: { [key: string]: string[] } = {
         "New York": ["Main Office", "Wall Street Branch", "Brooklyn Office"],
@@ -164,8 +164,8 @@ export default function DashboardIntegrated() {
       setFloors(data);
       setError(null);
     } catch (err) {
-      console.warn("Loading floors in offline mode:", err);
-      setError("🔄 Working in offline mode - using demo data");
+      console.debug("Loading floors in demo mode:", err);
+      setError("");
       setFloors([
         "Ground Floor",
         "1st Floor",
@@ -193,8 +193,8 @@ export default function DashboardIntegrated() {
       setMachines(data);
       setError(null);
     } catch (err) {
-      console.warn("Loading machines in offline mode:", err);
-      setError("🔄 Working in offline mode - using demo data");
+      console.debug("Loading machines in demo mode:", err);
+      setError("");
       // Generate demo machines based on selections
       const demoMachines = [
         { machineId: "A-001", name: `Machine A-001 (${floor})` },
