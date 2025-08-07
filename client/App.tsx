@@ -87,7 +87,7 @@ function AppRoutes() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <DashboardIntegrated />
+              <CorporateDashboard />
             </ProtectedRoute>
           }
         />
