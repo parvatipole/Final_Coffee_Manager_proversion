@@ -162,20 +162,19 @@ export default function CorporateDashboard() {
           name: "Viman Nagar Tech Hub",
           address: "Viman Nagar, Pune - 411014",
           machines: [
-            { id: "PUN-VIM-001", name: "Innovation Center", status: "operational", performance: { dailyCups: 92, revenue: 2760, efficiency: 91, supplies: { water: 85, milk: 70, coffee: 80, sugar: 85 } } },
-            { id: "PUN-VIM-002", name: "Co-working Space", status: "operational", performance: { dailyCups: 156, revenue: 4680, efficiency: 95, supplies: { water: 75, milk: 80, coffee: 85, sugar: 90 } } },
-            { id: "PUN-VIM-003", name: "Meeting Rooms", status: "offline", performance: { dailyCups: 0, revenue: 0, efficiency: 0, supplies: { water: 25, milk: 15, coffee: 20, sugar: 30 } } },
-            { id: "PUN-VIM-004", name: "Cafeteria Main", status: "operational", performance: { dailyCups: 198, revenue: 5940, efficiency: 98, supplies: { water: 95, milk: 90, coffee: 85, sugar: 80 } } },
-            { id: "PUN-VIM-005", name: "Reception Area", status: "operational", performance: { dailyCups: 67, revenue: 2010, efficiency: 87, supplies: { water: 60, milk: 55, coffee: 70, sugar: 85 } } }
+            { id: "PUN-VIM-001", name: "Innovation Center", status: "operational", performance: { dailyCups: 92, efficiency: 91, supplies: { water: 85, milk: 70, coffee: 80, sugar: 85 } } },
+            { id: "PUN-VIM-002", name: "Co-working Space", status: "operational", performance: { dailyCups: 156, efficiency: 95, supplies: { water: 75, milk: 80, coffee: 85, sugar: 90 } } },
+            { id: "PUN-VIM-003", name: "Meeting Rooms", status: "offline", performance: { dailyCups: 0, efficiency: 0, supplies: { water: 25, milk: 15, coffee: 20, sugar: 30 } } },
+            { id: "PUN-VIM-004", name: "Cafeteria Main", status: "operational", performance: { dailyCups: 198, efficiency: 98, supplies: { water: 95, milk: 90, coffee: 85, sugar: 80 } } },
+            { id: "PUN-VIM-005", name: "Reception Area", status: "operational", performance: { dailyCups: 67, efficiency: 87, supplies: { water: 60, milk: 55, coffee: 70, sugar: 85 } } }
           ],
-          performance: { dailyRevenue: 15390, weeklyCups: 3591, efficiency: 94, uptime: 96.8, alerts: 2 }
+          performance: { weeklyCups: 3591, efficiency: 94, uptime: 96.8, alerts: 2 }
         }
       ]
     },
     {
       name: "Mumbai",
       totalMachines: 15,
-      totalRevenue: 189000,
       efficiency: 96,
       status: 'excellent',
       offices: [
