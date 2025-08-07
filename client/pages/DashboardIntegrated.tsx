@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import StepNavigation from "@/components/StepNavigation";
-import OfflineModeIndicator from "@/components/OfflineModeIndicator";
 import { apiClient } from "@/lib/api";
 import {
   mqttClient,
@@ -316,8 +315,6 @@ export default function DashboardIntegrated() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Connection Status */}
-            <OfflineModeIndicator compact={true} />
 
             <Badge
               variant={user?.role === "technician" ? "default" : "secondary"}
@@ -336,8 +333,6 @@ export default function DashboardIntegrated() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Offline Mode Banner */}
-          <OfflineModeIndicator />
 
           <div className="text-center space-y-2">
             <h2 className="text-3xl font-bold text-coffee-brown">
