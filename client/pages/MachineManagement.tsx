@@ -261,15 +261,6 @@ export default function MachineManagement() {
         </div>
       </header>
 
-      {/* Action Feedback */}
-      {lastAction && (
-        <div className="container mx-auto px-4 pt-4">
-          <Alert className="animate-slideIn">
-            <CheckCircle className="h-4 w-4" />
-            <AlertDescription>{lastAction}</AlertDescription>
-          </Alert>
-        </div>
-      )}
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto space-y-6">
