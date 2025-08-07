@@ -22,7 +22,6 @@ import {
 import {
   TrendingUp,
   TrendingDown,
-  DollarSign,
   Coffee,
   Clock,
   Zap,
@@ -44,33 +43,33 @@ export default function MachineAnalytics({ machineId, machineName, className = "
   // Comprehensive performance data
   const performanceData = {
     daily: [
-      { time: '6AM', cups: 12, revenue: 360, efficiency: 85 },
-      { time: '7AM', cups: 28, revenue: 840, efficiency: 92 },
-      { time: '8AM', cups: 45, revenue: 1350, efficiency: 96 },
-      { time: '9AM', cups: 52, revenue: 1560, efficiency: 98 },
-      { time: '10AM', cups: 38, revenue: 1140, efficiency: 89 },
-      { time: '11AM', cups: 42, revenue: 1260, efficiency: 94 },
-      { time: '12PM', cups: 67, revenue: 2010, efficiency: 97 },
-      { time: '1PM', cups: 78, revenue: 2340, efficiency: 95 },
-      { time: '2PM', cups: 56, revenue: 1680, efficiency: 91 },
-      { time: '3PM', cups: 43, revenue: 1290, efficiency: 88 },
-      { time: '4PM', cups: 29, revenue: 870, efficiency: 85 },
-      { time: '5PM', cups: 18, revenue: 540, efficiency: 82 }
+      { time: '6AM', cups: 12, efficiency: 85 },
+      { time: '7AM', cups: 28, efficiency: 92 },
+      { time: '8AM', cups: 45, efficiency: 96 },
+      { time: '9AM', cups: 52, efficiency: 98 },
+      { time: '10AM', cups: 38, efficiency: 89 },
+      { time: '11AM', cups: 42, efficiency: 94 },
+      { time: '12PM', cups: 67, efficiency: 97 },
+      { time: '1PM', cups: 78, efficiency: 95 },
+      { time: '2PM', cups: 56, efficiency: 91 },
+      { time: '3PM', cups: 43, efficiency: 88 },
+      { time: '4PM', cups: 29, efficiency: 85 },
+      { time: '5PM', cups: 18, efficiency: 82 }
     ],
     weekly: [
-      { day: 'Mon', cups: 234, revenue: 7020, efficiency: 92 },
-      { day: 'Tue', cups: 267, revenue: 8010, efficiency: 94 },
-      { day: 'Wed', cups: 289, revenue: 8670, efficiency: 96 },
-      { day: 'Thu', cups: 298, revenue: 8940, efficiency: 95 },
-      { day: 'Fri', cups: 312, revenue: 9360, efficiency: 97 },
-      { day: 'Sat', cups: 156, revenue: 4680, efficiency: 89 },
-      { day: 'Sun', cups: 98, revenue: 2940, efficiency: 85 }
+      { day: 'Mon', cups: 234, efficiency: 92 },
+      { day: 'Tue', cups: 267, efficiency: 94 },
+      { day: 'Wed', cups: 289, efficiency: 96 },
+      { day: 'Thu', cups: 298, efficiency: 95 },
+      { day: 'Fri', cups: 312, efficiency: 97 },
+      { day: 'Sat', cups: 156, efficiency: 89 },
+      { day: 'Sun', cups: 98, efficiency: 85 }
     ],
     monthly: [
-      { week: 'Week 1', cups: 1654, revenue: 49620, efficiency: 93 },
-      { week: 'Week 2', cups: 1789, revenue: 53670, efficiency: 95 },
-      { week: 'Week 3', cups: 1923, revenue: 57690, efficiency: 96 },
-      { week: 'Week 4', cups: 2134, revenue: 64020, efficiency: 97 }
+      { week: 'Week 1', cups: 1654, efficiency: 93 },
+      { week: 'Week 2', cups: 1789, efficiency: 95 },
+      { week: 'Week 3', cups: 1923, efficiency: 96 },
+      { week: 'Week 4', cups: 2134, efficiency: 97 }
     ]
   };
 
@@ -96,14 +95,6 @@ export default function MachineAnalytics({ machineId, machineName, className = "
   ];
 
   const kpiData = [
-    {
-      title: "Today's Revenue",
-      value: "₹12,450",
-      change: "+8.2%",
-      trend: "up",
-      icon: <DollarSign className="w-5 h-5" />,
-      color: "text-green-600"
-    },
     {
       title: "Cups Served",
       value: "487",
@@ -197,7 +188,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
           <Card>
             <CardHeader>
               <CardTitle>Today's Hourly Performance</CardTitle>
-              <CardDescription>Cups served and revenue by hour</CardDescription>
+              <CardDescription>Cups served and efficiency by hour</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
