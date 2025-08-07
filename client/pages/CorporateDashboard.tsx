@@ -408,10 +408,6 @@ export default function CorporateDashboard() {
                             <div className="text-2xl font-bold text-blue-600">{location.totalMachines}</div>
                             <div className="text-xs text-muted-foreground">Total Machines</div>
                           </div>
-                          <div className="text-center p-3 bg-white/60 rounded-lg">
-                            <div className="text-2xl font-bold text-green-600">₹{(location.totalRevenue / 1000).toFixed(0)}K</div>
-                            <div className="text-xs text-muted-foreground">Monthly Revenue</div>
-                          </div>
                         </div>
                         
                         <div className="space-y-2">
@@ -467,11 +463,6 @@ export default function CorporateDashboard() {
                               <div className="text-xs text-blue-200 mt-1">↗️ +12% vs last week</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-3xl font-bold text-white">₹{((locationData?.totalRevenue || 0) / 1000).toFixed(0)}K</div>
-                              <div className="text-blue-100">Monthly Revenue</div>
-                              <div className="text-xs text-blue-200 mt-1">💰 +8% vs last month</div>
-                            </div>
-                            <div className="text-center">
                               <div className="text-3xl font-bold text-white">{avgUptime.toFixed(1)}%</div>
                               <div className="text-blue-100">Average Uptime</div>
                               <div className="text-xs text-blue-200 mt-1">🔄 System reliability</div>
@@ -517,10 +508,6 @@ export default function CorporateDashboard() {
                               <p className="text-sm text-muted-foreground mb-3">{office.address}</p>
                               
                               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                                <div className="text-center">
-                                  <div className="text-lg font-bold text-green-600">₹{office.performance.dailyRevenue.toLocaleString()}</div>
-                                  <div className="text-xs text-muted-foreground">Daily Revenue</div>
-                                </div>
                                 <div className="text-center">
                                   <div className="text-lg font-bold text-blue-600">{office.performance.weeklyCups}</div>
                                   <div className="text-xs text-muted-foreground">Weekly Cups</div>
@@ -643,10 +630,6 @@ export default function CorporateDashboard() {
                         <div className="text-center p-2 bg-gray-50 rounded">
                           <div className="text-lg font-bold text-blue-600">{machine.performance.dailyCups}</div>
                           <div className="text-xs text-muted-foreground">Daily Cups</div>
-                        </div>
-                        <div className="text-center p-2 bg-gray-50 rounded">
-                          <div className="text-lg font-bold text-green-600">₹{machine.performance.revenue}</div>
-                          <div className="text-xs text-muted-foreground">Revenue</div>
                         </div>
                       </div>
 
