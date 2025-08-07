@@ -15,9 +15,9 @@ import {
   Area,
   AreaChart
 } from 'recharts';
-import {
-  TrendingUp,
-  Calendar,
+import { 
+  TrendingUp, 
+  Calendar, 
   Coffee,
   Clock,
   Users
@@ -167,7 +167,10 @@ export default function UsageChart({ className }: UsageChartProps) {
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               {chartType === 'hourly' ? (
-                <AreaChart data={data}>
+                <AreaChart 
+                  data={data}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
                   <defs>
                     <linearGradient id="cupsGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
@@ -191,6 +194,16 @@ export default function UsageChart({ className }: UsageChartProps) {
                     tickFormatter={undefined}
                     hide={false}
                     interval={0}
+                    scale="auto"
+                    tickCount={undefined}
+                    domain={undefined}
+                    padding={{ left: 0, right: 0 }}
+                    minTickGap={5}
+                    angle={0}
+                    textAnchor={undefined}
+                    verticalAnchor={undefined}
+                    width={undefined}
+                    height={30}
                   />
                   <YAxis
                     fontSize={12}
@@ -207,6 +220,16 @@ export default function UsageChart({ className }: UsageChartProps) {
                     tickFormatter={undefined}
                     hide={false}
                     interval={0}
+                    scale="auto"
+                    tickCount={undefined}
+                    domain={undefined}
+                    padding={{ top: 0, bottom: 0 }}
+                    minTickGap={5}
+                    angle={0}
+                    textAnchor={undefined}
+                    verticalAnchor={undefined}
+                    width={60}
+                    height={undefined}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
@@ -220,7 +243,10 @@ export default function UsageChart({ className }: UsageChartProps) {
                   />
                 </AreaChart>
               ) : (
-                <BarChart data={data}>
+                <BarChart 
+                  data={data}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis
                     dataKey="name"
@@ -238,6 +264,16 @@ export default function UsageChart({ className }: UsageChartProps) {
                     tickFormatter={undefined}
                     hide={false}
                     interval={0}
+                    scale="auto"
+                    tickCount={undefined}
+                    domain={undefined}
+                    padding={{ left: 0, right: 0 }}
+                    minTickGap={5}
+                    angle={0}
+                    textAnchor={undefined}
+                    verticalAnchor={undefined}
+                    width={undefined}
+                    height={30}
                   />
                   <YAxis
                     fontSize={12}
@@ -254,6 +290,16 @@ export default function UsageChart({ className }: UsageChartProps) {
                     tickFormatter={undefined}
                     hide={false}
                     interval={0}
+                    scale="auto"
+                    tickCount={undefined}
+                    domain={undefined}
+                    padding={{ top: 0, bottom: 0 }}
+                    minTickGap={5}
+                    angle={0}
+                    textAnchor={undefined}
+                    verticalAnchor={undefined}
+                    width={60}
+                    height={undefined}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar 
