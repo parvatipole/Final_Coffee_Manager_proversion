@@ -81,14 +81,12 @@ class ApiClient {
     } catch (error) {
       // Better error classification with silent handling for demo mode
       if (error instanceof TypeError && error.message.includes("fetch")) {
-        console.debug(
-          `Backend unavailable: ${endpoint}. App working in demo mode.`,
-        );
+        // Backend unavailable - working in demo mode
         throw new Error("Backend unavailable - working in demo mode");
       }
 
       if (error instanceof Error && error.name === "AbortError") {
-        console.debug(`Request timeout: ${endpoint}`);
+        // Request timeout
         throw new Error("Request timeout - please check your connection");
       }
 
