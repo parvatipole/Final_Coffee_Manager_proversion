@@ -10,6 +10,18 @@ interface OfflineModeIndicatorProps {
   compact?: boolean;
 }
 
+// Detect demo mode based on hostname patterns
+const isDemoMode = () => {
+  const hostname = window.location.hostname;
+  return (
+    hostname.includes('.fly.dev') ||
+    hostname.includes('.netlify.app') ||
+    hostname.includes('.vercel.app') ||
+    hostname.includes('builder.io') ||
+    hostname.includes('localhost') === false && hostname !== '127.0.0.1'
+  );
+};
+
 export default function OfflineModeIndicator({
   className = "",
   compact = false,
@@ -17,8 +29,17 @@ export default function OfflineModeIndicator({
   const [isOnline, setIsOnline] = useState(true);
   const [isChecking, setIsChecking] = useState(false);
   const [lastCheckTime, setLastCheckTime] = useState<Date | null>(null);
+  const [demoMode] = useState(isDemoMode());
 
   const checkBackendConnection = async () => {
+    // Skip backend checks in demo mode
+    if (demoMode) {
+      console.debug('Demo mode detected, skipping backend connection check');
+      setIsOnline(false);
+      setLastCheckTime(new Date());
+      return;
+    }
+
     setIsChecking(true);
     try {
       await apiClient.getMachines();
@@ -119,8 +140,15 @@ export default function OfflineModeIndicator({
 // Hook to check if we're in offline mode
 export const useOfflineMode = () => {
   const [isOffline, setIsOffline] = useState(false);
+  const [demoMode] = useState(isDemoMode());
 
   useEffect(() => {
+    // Always offline in demo mode
+    if (demoMode) {
+      setIsOffline(true);
+      return;
+    }
+
     const checkConnection = async () => {
       try {
         await apiClient.getMachines();
@@ -136,7 +164,7 @@ export const useOfflineMode = () => {
     const interval = setInterval(checkConnection, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [demoMode]);
 
   return isOffline;
 };
