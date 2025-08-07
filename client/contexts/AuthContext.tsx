@@ -25,9 +25,9 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     // Better error handling for development
-    console.error(
-      "useAuth was called outside of AuthProvider. Make sure your component is wrapped with AuthProvider.",
-    );
+    // console.error(
+    //   "useAuth was called outside of AuthProvider. Make sure your component is wrapped with AuthProvider.",
+    // );
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       // Initialize MQTT connection for authenticated users
       initializeMQTT().then((connected) => {
         if (connected) {
-          console.log("🔌 MQTT initialized for authenticated user");
+          // MQTT initialized for authenticated user
         }
       });
     } else {
@@ -166,7 +166,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         // Call backend logout endpoint
         await apiClient.logout();
       } catch (error) {
-        console.warn("Logout API call failed:", error);
+        // Logout API call failed (silently handled)
       }
     }
 
