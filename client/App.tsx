@@ -1,4 +1,5 @@
 import "./global.css";
+import "./lib/errorHandler"; // Global error handling for demo mode
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
