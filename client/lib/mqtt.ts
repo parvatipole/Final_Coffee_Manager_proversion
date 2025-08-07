@@ -42,12 +42,12 @@ class MQTTClient {
 
   connect(): Promise<void> {
     return new Promise((resolve) => {
-      console.log("🔌 Connecting to MQTT broker...");
+      // Connecting to MQTT broker...
 
       // Simulate connection
       setTimeout(() => {
         this.isConnected = true;
-        console.log("✅ Connected to MQTT broker");
+        // Connected to MQTT broker
         this.startSimulation();
         resolve();
       }, 1000);
@@ -59,7 +59,7 @@ class MQTTClient {
     if (this.simulationInterval) {
       clearInterval(this.simulationInterval);
     }
-    console.log("🔌 Disconnected from MQTT broker");
+    // Disconnected from MQTT broker
   }
 
   subscribe(topic: string, handler: MessageHandler): void {
@@ -67,7 +67,7 @@ class MQTTClient {
       this.handlers.set(topic, []);
     }
     this.handlers.get(topic)!.push(handler);
-    console.log(`📡 Subscribed to topic: ${topic}`);
+    // Subscribed to topic
   }
 
   unsubscribe(topic: string, handler: MessageHandler): void {
@@ -85,7 +85,7 @@ class MQTTClient {
 
   publish(topic: string, payload: any): void {
     if (!this.isConnected) {
-      console.warn("⚠️ Cannot publish - not connected to MQTT broker");
+      // Cannot publish - not connected to MQTT broker
       return;
     }
 
@@ -96,7 +96,7 @@ class MQTTClient {
     };
 
     // In real implementation, this would send to MQTT broker
-    console.log(`📤 Publishing to ${topic}:`, payload);
+    // Publishing to topic
 
     // Simulate local delivery for demo
     this.deliverMessage(message);
@@ -108,7 +108,7 @@ class MQTTClient {
       try {
         handler(message);
       } catch (error) {
-        console.error("❌ Error in MQTT message handler:", error);
+        // Error in MQTT message handler (silently handled)
       }
     });
   }
@@ -194,7 +194,7 @@ export const initializeMQTT = async () => {
     await mqttClient.connect();
     return true;
   } catch (error) {
-    console.error("❌ Failed to connect to MQTT broker:", error);
+    // Failed to connect to MQTT broker (silently handled)
     return false;
   }
 };
