@@ -187,6 +187,10 @@ export default function UsageChart({ className }: UsageChartProps) {
                     includeHidden={false}
                     mirror={false}
                     reversed={false}
+                    orientation="bottom"
+                    tickFormatter={undefined}
+                    hide={false}
+                    interval={0}
                   />
                   <YAxis
                     fontSize={12}
@@ -199,6 +203,10 @@ export default function UsageChart({ className }: UsageChartProps) {
                     includeHidden={false}
                     mirror={false}
                     reversed={false}
+                    orientation="left"
+                    tickFormatter={undefined}
+                    hide={false}
+                    interval={0}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
@@ -226,6 +234,10 @@ export default function UsageChart({ className }: UsageChartProps) {
                     includeHidden={false}
                     mirror={false}
                     reversed={false}
+                    orientation="bottom"
+                    tickFormatter={undefined}
+                    hide={false}
+                    interval={0}
                   />
                   <YAxis
                     fontSize={12}
@@ -238,6 +250,10 @@ export default function UsageChart({ className }: UsageChartProps) {
                     includeHidden={false}
                     mirror={false}
                     reversed={false}
+                    orientation="left"
+                    tickFormatter={undefined}
+                    hide={false}
+                    interval={0}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar 
