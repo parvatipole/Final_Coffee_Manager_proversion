@@ -34,7 +34,6 @@ import {
   Users,
   Clock,
   Zap,
-  DollarSign,
   AlertTriangle,
   CheckCircle,
   BarChart3,
@@ -56,7 +55,6 @@ interface LocationData {
   name: string;
   offices: OfficeData[];
   totalMachines: number;
-  totalRevenue: number;
   efficiency: number;
   status: 'excellent' | 'good' | 'needs_attention';
 }
@@ -66,7 +64,6 @@ interface OfficeData {
   address: string;
   machines: MachineData[];
   performance: {
-    dailyRevenue: number;
     weeklyCups: number;
     efficiency: number;
     uptime: number;
@@ -80,7 +77,6 @@ interface MachineData {
   status: 'operational' | 'maintenance' | 'offline';
   performance: {
     dailyCups: number;
-    revenue: number;
     efficiency: number;
     supplies: {
       water: number;
@@ -138,7 +134,6 @@ export default function CorporateDashboard() {
     {
       name: "Pune",
       totalMachines: 12,
-      totalRevenue: 145000,
       efficiency: 94,
       status: 'excellent',
       offices: [
