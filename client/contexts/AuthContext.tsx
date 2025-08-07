@@ -81,7 +81,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     // Skip backend API calls in demo mode
     if (demoMode) {
-      console.debug("Demo mode detected, using mock authentication");
       return performMockLogin(username, password);
     }
 
@@ -111,7 +110,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return true;
     } catch (error) {
       // Silently fall back to demo mode when backend is unavailable
-      console.debug("Backend unavailable, using demo mode authentication:", error);
       return performMockLogin(username, password);
     }
   };
