@@ -193,6 +193,8 @@ export default function UsageChart({ className }: UsageChartProps) {
                     axisLine={true}
                     tickLine={true}
                     type="category"
+                    allowDataOverflow={false}
+                    allowDecimals={false}
                   />
                   <YAxis
                     fontSize={12}
@@ -200,6 +202,8 @@ export default function UsageChart({ className }: UsageChartProps) {
                     axisLine={true}
                     tickLine={true}
                     type="number"
+                    allowDataOverflow={false}
+                    allowDecimals={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
@@ -222,6 +226,8 @@ export default function UsageChart({ className }: UsageChartProps) {
                     axisLine={true}
                     tickLine={true}
                     type="category"
+                    allowDataOverflow={false}
+                    allowDecimals={false}
                   />
                   <YAxis
                     fontSize={12}
@@ -229,6 +235,8 @@ export default function UsageChart({ className }: UsageChartProps) {
                     axisLine={true}
                     tickLine={true}
                     type="number"
+                    allowDataOverflow={false}
+                    allowDecimals={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar 
