@@ -124,7 +124,6 @@ export default function DashboardIntegrated() {
       setLocations(data);
       setError(null);
     } catch (err) {
-      console.debug("Loading locations in demo mode:", err);
       setError("");
       // Fallback to demo data
       setLocations(["New York", "Los Angeles", "Chicago", "Houston"]);
@@ -140,7 +139,6 @@ export default function DashboardIntegrated() {
       setOffices(data);
       setError(null);
     } catch (err) {
-      console.debug("Loading offices in demo mode:", err);
       setError("");
       // Location-specific demo data
       const officeMap: { [key: string]: string[] } = {
@@ -164,7 +162,6 @@ export default function DashboardIntegrated() {
       setFloors(data);
       setError(null);
     } catch (err) {
-      console.debug("Loading floors in demo mode:", err);
       setError("");
       setFloors([
         "Ground Floor",
@@ -193,7 +190,6 @@ export default function DashboardIntegrated() {
       setMachines(data);
       setError(null);
     } catch (err) {
-      console.debug("Loading machines in demo mode:", err);
       setError("");
       // Generate demo machines based on selections
       const demoMachines = [
