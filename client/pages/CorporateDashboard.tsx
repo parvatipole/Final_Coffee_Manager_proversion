@@ -182,37 +182,37 @@ export default function CorporateDashboard() {
           name: "Bandra Kurla Complex",
           address: "BKC, Bandra East, Mumbai - 400051",
           machines: [
-            { id: "MUM-BKC-001", name: "Corporate Tower A", status: "operational", performance: { dailyCups: 189, revenue: 5670, efficiency: 97, supplies: { water: 90, milk: 85, coffee: 90, sugar: 95 } } },
-            { id: "MUM-BKC-002", name: "Corporate Tower B", status: "operational", performance: { dailyCups: 167, revenue: 5010, efficiency: 95, supplies: { water: 85, milk: 80, coffee: 85, sugar: 90 } } },
-            { id: "MUM-BKC-003", name: "Executive Lounge", status: "operational", performance: { dailyCups: 89, revenue: 2670, efficiency: 98, supplies: { water: 95, milk: 90, coffee: 95, sugar: 85 } } },
-            { id: "MUM-BKC-004", name: "Conference Hall", status: "operational", performance: { dailyCups: 56, revenue: 1680, efficiency: 92, supplies: { water: 80, milk: 75, coffee: 80, sugar: 90 } } },
-            { id: "MUM-BKC-005", name: "Cafeteria Premium", status: "operational", performance: { dailyCups: 234, revenue: 7020, efficiency: 99, supplies: { water: 90, milk: 95, coffee: 90, sugar: 85 } } }
+            { id: "MUM-BKC-001", name: "Corporate Tower A", status: "operational", performance: { dailyCups: 189, efficiency: 97, supplies: { water: 90, milk: 85, coffee: 90, sugar: 95 } } },
+            { id: "MUM-BKC-002", name: "Corporate Tower B", status: "operational", performance: { dailyCups: 167, efficiency: 95, supplies: { water: 85, milk: 80, coffee: 85, sugar: 90 } } },
+            { id: "MUM-BKC-003", name: "Executive Lounge", status: "operational", performance: { dailyCups: 89, efficiency: 98, supplies: { water: 95, milk: 90, coffee: 95, sugar: 85 } } },
+            { id: "MUM-BKC-004", name: "Conference Hall", status: "operational", performance: { dailyCups: 56, efficiency: 92, supplies: { water: 80, milk: 75, coffee: 80, sugar: 90 } } },
+            { id: "MUM-BKC-005", name: "Cafeteria Premium", status: "operational", performance: { dailyCups: 234, efficiency: 99, supplies: { water: 90, milk: 95, coffee: 90, sugar: 85 } } }
           ],
-          performance: { dailyRevenue: 22050, weeklyCups: 5145, efficiency: 96, uptime: 99.8, alerts: 0 }
+          performance: { weeklyCups: 5145, efficiency: 96, uptime: 99.8, alerts: 0 }
         },
         {
           name: "Lower Parel Financial",
           address: "Lower Parel, Mumbai - 400013",
           machines: [
-            { id: "MUM-LOW-001", name: "Trading Floor", status: "operational", performance: { dailyCups: 145, revenue: 4350, efficiency: 94, supplies: { water: 85, milk: 80, coffee: 85, sugar: 90 } } },
-            { id: "MUM-LOW-002", name: "Executive Suite", status: "operational", performance: { dailyCups: 78, revenue: 2340, efficiency: 96, supplies: { water: 90, milk: 85, coffee: 90, sugar: 95 } } },
-            { id: "MUM-LOW-003", name: "Client Meeting Area", status: "operational", performance: { dailyCups: 89, revenue: 2670, efficiency: 93, supplies: { water: 75, milk: 70, coffee: 80, sugar: 85 } } },
-            { id: "MUM-LOW-004", name: "Employee Break Zone", status: "maintenance", performance: { dailyCups: 0, revenue: 0, efficiency: 0, supplies: { water: 40, milk: 25, coffee: 35, sugar: 50 } } }
+            { id: "MUM-LOW-001", name: "Trading Floor", status: "operational", performance: { dailyCups: 145, efficiency: 94, supplies: { water: 85, milk: 80, coffee: 85, sugar: 90 } } },
+            { id: "MUM-LOW-002", name: "Executive Suite", status: "operational", performance: { dailyCups: 78, efficiency: 96, supplies: { water: 90, milk: 85, coffee: 90, sugar: 95 } } },
+            { id: "MUM-LOW-003", name: "Client Meeting Area", status: "operational", performance: { dailyCups: 89, efficiency: 93, supplies: { water: 75, milk: 70, coffee: 80, sugar: 85 } } },
+            { id: "MUM-LOW-004", name: "Employee Break Zone", status: "maintenance", performance: { dailyCups: 0, efficiency: 0, supplies: { water: 40, milk: 25, coffee: 35, sugar: 50 } } }
           ],
-          performance: { dailyRevenue: 9360, weeklyCups: 2184, efficiency: 94, uptime: 97.5, alerts: 1 }
+          performance: { weeklyCups: 2184, efficiency: 94, uptime: 97.5, alerts: 1 }
         },
         {
           name: "Andheri Tech Center",
           address: "Andheri East, Mumbai - 400069",
           machines: [
-            { id: "MUM-AND-001", name: "Innovation Lab", status: "operational", performance: { dailyCups: 123, revenue: 3690, efficiency: 95, supplies: { water: 80, milk: 85, coffee: 90, sugar: 80 } } },
-            { id: "MUM-AND-002", name: "Development Floor", status: "operational", performance: { dailyCups: 198, revenue: 5940, efficiency: 97, supplies: { water: 90, milk: 80, coffee: 85, sugar: 90 } } },
-            { id: "MUM-AND-003", name: "Testing Lab", status: "operational", performance: { dailyCups: 67, revenue: 2010, efficiency: 89, supplies: { water: 70, milk: 65, coffee: 75, sugar: 85 } } },
-            { id: "MUM-AND-004", name: "Collaboration Space", status: "operational", performance: { dailyCups: 156, revenue: 4680, efficiency: 96, supplies: { water: 85, milk: 90, coffee: 80, sugar: 75 } } },
-            { id: "MUM-AND-005", name: "Main Cafeteria", status: "operational", performance: { dailyCups: 289, revenue: 8670, efficiency: 98, supplies: { water: 95, milk: 85, coffee: 90, sugar: 95 } } },
-            { id: "MUM-AND-006", name: "Reception Lobby", status: "operational", performance: { dailyCups: 89, revenue: 2670, efficiency: 91, supplies: { water: 75, milk: 70, coffee: 85, sugar: 80 } } }
+            { id: "MUM-AND-001", name: "Innovation Lab", status: "operational", performance: { dailyCups: 123, efficiency: 95, supplies: { water: 80, milk: 85, coffee: 90, sugar: 80 } } },
+            { id: "MUM-AND-002", name: "Development Floor", status: "operational", performance: { dailyCups: 198, efficiency: 97, supplies: { water: 90, milk: 80, coffee: 85, sugar: 90 } } },
+            { id: "MUM-AND-003", name: "Testing Lab", status: "operational", performance: { dailyCups: 67, efficiency: 89, supplies: { water: 70, milk: 65, coffee: 75, sugar: 85 } } },
+            { id: "MUM-AND-004", name: "Collaboration Space", status: "operational", performance: { dailyCups: 156, efficiency: 96, supplies: { water: 85, milk: 90, coffee: 80, sugar: 75 } } },
+            { id: "MUM-AND-005", name: "Main Cafeteria", status: "operational", performance: { dailyCups: 289, efficiency: 98, supplies: { water: 95, milk: 85, coffee: 90, sugar: 95 } } },
+            { id: "MUM-AND-006", name: "Reception Lobby", status: "operational", performance: { dailyCups: 89, efficiency: 91, supplies: { water: 75, milk: 70, coffee: 85, sugar: 80 } } }
           ],
-          performance: { dailyRevenue: 27660, weeklyCups: 5733, efficiency: 94, uptime: 98.9, alerts: 0 }
+          performance: { weeklyCups: 5733, efficiency: 94, uptime: 98.9, alerts: 0 }
         }
       ]
     }
