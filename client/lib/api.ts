@@ -1,6 +1,5 @@
 // API Configuration and JWT Token Management
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
 // Debug logging for local development
 const DEBUG = import.meta.env.VITE_DEBUG === "true" || import.meta.env.DEV;
@@ -80,20 +79,25 @@ class ApiClient {
 
       return await response.json();
     } catch (error) {
-      // Better error classification
+      // Better error classification with silent handling for demo mode
       if (error instanceof TypeError && error.message.includes("fetch")) {
-        console.warn(
-          `Backend unavailable: ${endpoint}. App will work in offline mode.`,
+        console.debug(
+          `Backend unavailable: ${endpoint}. App working in demo mode.`,
         );
-        throw new Error("Backend unavailable - working in offline mode");
+        throw new Error("Backend unavailable - working in demo mode");
       }
 
       if (error instanceof Error && error.name === "AbortError") {
-        console.warn(`Request timeout: ${endpoint}`);
+        console.debug(`Request timeout: ${endpoint}`);
         throw new Error("Request timeout - please check your connection");
       }
 
-      console.error(`API request failed: ${endpoint}`, error);
+      // Only log actual errors, not expected connection failures
+      if (!(error instanceof TypeError)) {
+        console.error(`API request failed: ${endpoint}`, error);
+      } else {
+        console.debug(`Expected connection failure: ${endpoint}`, error);
+      }
       throw error;
     }
   }
