@@ -68,7 +68,7 @@ export default function ConnectionStatus({
       try {
         await initializeMQTT();
       } catch (error) {
-        console.warn("MQTT retry failed:", error);
+        // MQTT retry failed (silently handled)
       }
     }
 
