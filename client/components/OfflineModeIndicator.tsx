@@ -25,6 +25,8 @@ export default function OfflineModeIndicator({
       setIsOnline(true);
       setLastCheckTime(new Date());
     } catch (error) {
+      // Silently handle connection errors - expected in cloud environment
+      console.debug('Backend connection check failed (expected in demo mode):', error);
       setIsOnline(false);
       setLastCheckTime(new Date());
     }
