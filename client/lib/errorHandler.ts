@@ -11,7 +11,6 @@ export const setupGlobalErrorHandling = () => {
          error.message.includes('Failed to fetch') ||
          error.message.includes('Network request failed'))) {
       
-      console.debug('Suppressed expected fetch error in demo mode:', error.message);
       event.preventDefault(); // Prevent the error from being logged as unhandled
       return;
     }
@@ -19,13 +18,12 @@ export const setupGlobalErrorHandling = () => {
     // Check if it's a backend unavailable error
     if (error instanceof Error && 
         error.message.includes('Backend unavailable')) {
-      console.debug('Suppressed backend unavailable error:', error.message);
       event.preventDefault();
       return;
     }
 
-    // Let other errors through normally
-    console.error('Unhandled promise rejection:', error);
+    // Let other errors through normally (silently)
+    // console.error('Unhandled promise rejection:', error);
   });
 
   // Handle regular JavaScript errors
@@ -36,13 +34,12 @@ export const setupGlobalErrorHandling = () => {
     if (error instanceof TypeError && 
         (error.message.includes('fetch') || 
          error.message.includes('Failed to fetch'))) {
-      console.debug('Suppressed expected fetch error in demo mode:', error.message);
       event.preventDefault();
       return;
     }
 
-    // Let other errors through
-    console.error('Global error:', error);
+    // Let other errors through (silently)
+    // console.error('Global error:', error);
   });
 };
 
