@@ -74,7 +74,6 @@ export default function MachineManagement() {
   const [isEditing, setIsEditing] = useState(false);
   const [refillModalOpen, setRefillModalOpen] = useState(false);
   const [selectedSupply, setSelectedSupply] = useState<any>(null);
-  const [lastAction, setLastAction] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [machineData, setMachineData] = useState<MachineData>({
@@ -146,8 +145,6 @@ export default function MachineManagement() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsEditing(false);
     setIsLoading(false);
-    setLastAction("Settings saved successfully");
-    setTimeout(() => setLastAction(""), 3000);
   };
 
   const handleSupplyRefill = (supplyKey: string, amount: number) => {
@@ -161,8 +158,6 @@ export default function MachineManagement() {
         ),
       },
     }));
-    setLastAction(`${supplyKey} refilled by ${amount}%`);
-    setTimeout(() => setLastAction(""), 3000);
   };
 
   const openRefillModal = (supply: any) => {
@@ -319,8 +314,7 @@ export default function MachineManagement() {
                 <MachineStatusDashboard
                   canControl={canEdit}
                   onStatusChange={(status) => {
-                    setLastAction("Real-time status updated");
-                    setTimeout(() => setLastAction(""), 2000);
+                    // Real-time status updated
                   }}
                 />
               </div>
