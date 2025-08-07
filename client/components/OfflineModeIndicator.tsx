@@ -34,7 +34,6 @@ export default function OfflineModeIndicator({
   const checkBackendConnection = async () => {
     // Skip backend checks in demo mode
     if (demoMode) {
-      console.debug('Demo mode detected, skipping backend connection check');
       setIsOnline(false);
       setLastCheckTime(new Date());
       return;
@@ -47,7 +46,6 @@ export default function OfflineModeIndicator({
       setLastCheckTime(new Date());
     } catch (error) {
       // Silently handle connection errors - expected in cloud environment
-      console.debug('Backend connection check failed (expected in demo mode):', error);
       setIsOnline(false);
       setLastCheckTime(new Date());
     }
@@ -155,7 +153,6 @@ export const useOfflineMode = () => {
         setIsOffline(false);
       } catch (error) {
         // Silently handle connection errors
-        console.debug('Backend connection check failed (expected in demo mode)');
         setIsOffline(true);
       }
     };
