@@ -236,7 +236,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
           <Card>
             <CardHeader>
               <CardTitle>Weekly Performance Trends</CardTitle>
-              <CardDescription>7-day cups and revenue analysis</CardDescription>
+              <CardDescription>7-day cups and efficiency analysis</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
