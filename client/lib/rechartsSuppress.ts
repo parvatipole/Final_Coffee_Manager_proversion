@@ -7,14 +7,14 @@ console.warn = (...args: any[]) => {
   // Suppress specific Recharts defaultProps warnings
   const message = args[0];
   if (
-    typeof message === 'string' &&
-    message.includes('Support for defaultProps will be removed') &&
-    (message.includes('XAxis') || message.includes('YAxis'))
+    typeof message === "string" &&
+    message.includes("Support for defaultProps will be removed") &&
+    (message.includes("XAxis") || message.includes("YAxis"))
   ) {
     // Silently ignore these warnings from Recharts library
     return;
   }
-  
+
   // Let other warnings through
   originalConsoleWarn.apply(console, args);
 };

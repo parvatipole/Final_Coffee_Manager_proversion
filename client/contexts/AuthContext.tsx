@@ -37,11 +37,11 @@ export const useAuth = () => {
 const isDemoMode = () => {
   const hostname = window.location.hostname;
   return (
-    hostname.includes('.fly.dev') ||
-    hostname.includes('.netlify.app') ||
-    hostname.includes('.vercel.app') ||
-    hostname.includes('builder.io') ||
-    hostname.includes('localhost') === false && hostname !== '127.0.0.1'
+    hostname.includes(".fly.dev") ||
+    hostname.includes(".netlify.app") ||
+    hostname.includes(".vercel.app") ||
+    hostname.includes("builder.io") ||
+    (hostname.includes("localhost") === false && hostname !== "127.0.0.1")
   );
 };
 
@@ -114,7 +114,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const performMockLogin = async (username: string, password: string): Promise<boolean> => {
+  const performMockLogin = async (
+    username: string,
+    password: string,
+  ): Promise<boolean> => {
     // Fallback to mock authentication for demo purposes
     const mockUsers = [
       {

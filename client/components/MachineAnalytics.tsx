@@ -1,8 +1,14 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   BarChart,
   Bar,
@@ -17,8 +23,8 @@ import {
   Pie,
   Cell,
   Area,
-  AreaChart
-} from 'recharts';
+  AreaChart,
+} from "recharts";
 import {
   TrendingUp,
   TrendingDown,
@@ -30,8 +36,8 @@ import {
   Activity,
   Droplets,
   Thermometer,
-  Gauge
-} from 'lucide-react';
+  Gauge,
+} from "lucide-react";
 
 interface MachineAnalyticsProps {
   machineId: string;
@@ -39,77 +45,81 @@ interface MachineAnalyticsProps {
   className?: string;
 }
 
-export default function MachineAnalytics({ machineId, machineName, className = "" }: MachineAnalyticsProps) {
+export default function MachineAnalytics({
+  machineId,
+  machineName,
+  className = "",
+}: MachineAnalyticsProps) {
   // Comprehensive performance data
   const performanceData = {
     daily: [
-      { time: '6AM', cups: 12, efficiency: 85 },
-      { time: '7AM', cups: 28, efficiency: 92 },
-      { time: '8AM', cups: 45, efficiency: 96 },
-      { time: '9AM', cups: 52, efficiency: 98 },
-      { time: '10AM', cups: 38, efficiency: 89 },
-      { time: '11AM', cups: 42, efficiency: 94 },
-      { time: '12PM', cups: 67, efficiency: 97 },
-      { time: '1PM', cups: 78, efficiency: 95 },
-      { time: '2PM', cups: 56, efficiency: 91 },
-      { time: '3PM', cups: 43, efficiency: 88 },
-      { time: '4PM', cups: 29, efficiency: 85 },
-      { time: '5PM', cups: 18, efficiency: 82 }
+      { time: "6AM", cups: 12, efficiency: 85 },
+      { time: "7AM", cups: 28, efficiency: 92 },
+      { time: "8AM", cups: 45, efficiency: 96 },
+      { time: "9AM", cups: 52, efficiency: 98 },
+      { time: "10AM", cups: 38, efficiency: 89 },
+      { time: "11AM", cups: 42, efficiency: 94 },
+      { time: "12PM", cups: 67, efficiency: 97 },
+      { time: "1PM", cups: 78, efficiency: 95 },
+      { time: "2PM", cups: 56, efficiency: 91 },
+      { time: "3PM", cups: 43, efficiency: 88 },
+      { time: "4PM", cups: 29, efficiency: 85 },
+      { time: "5PM", cups: 18, efficiency: 82 },
     ],
     weekly: [
-      { day: 'Mon', cups: 234, efficiency: 92 },
-      { day: 'Tue', cups: 267, efficiency: 94 },
-      { day: 'Wed', cups: 289, efficiency: 96 },
-      { day: 'Thu', cups: 298, efficiency: 95 },
-      { day: 'Fri', cups: 312, efficiency: 97 },
-      { day: 'Sat', cups: 156, efficiency: 89 },
-      { day: 'Sun', cups: 98, efficiency: 85 }
+      { day: "Mon", cups: 234, efficiency: 92 },
+      { day: "Tue", cups: 267, efficiency: 94 },
+      { day: "Wed", cups: 289, efficiency: 96 },
+      { day: "Thu", cups: 298, efficiency: 95 },
+      { day: "Fri", cups: 312, efficiency: 97 },
+      { day: "Sat", cups: 156, efficiency: 89 },
+      { day: "Sun", cups: 98, efficiency: 85 },
     ],
     monthly: [
-      { week: 'Week 1', cups: 1654, efficiency: 93 },
-      { week: 'Week 2', cups: 1789, efficiency: 95 },
-      { week: 'Week 3', cups: 1923, efficiency: 96 },
-      { week: 'Week 4', cups: 2134, efficiency: 97 }
-    ]
+      { week: "Week 1", cups: 1654, efficiency: 93 },
+      { week: "Week 2", cups: 1789, efficiency: 95 },
+      { week: "Week 3", cups: 1923, efficiency: 96 },
+      { week: "Week 4", cups: 2134, efficiency: 97 },
+    ],
   };
 
   const supplyData = [
-    { name: 'Water', value: 85, color: '#3b82f6' },
-    { name: 'Coffee', value: 78, color: '#8b5cf6' },
-    { name: 'Milk', value: 62, color: '#10b981' },
-    { name: 'Sugar', value: 90, color: '#f59e0b' }
+    { name: "Water", value: 85, color: "#3b82f6" },
+    { name: "Coffee", value: 78, color: "#8b5cf6" },
+    { name: "Milk", value: 62, color: "#10b981" },
+    { name: "Sugar", value: 90, color: "#f59e0b" },
   ];
 
   const drinkPreferences = [
-    { name: 'Espresso', value: 35, color: '#8b5cf6' },
-    { name: 'Americano', value: 28, color: '#3b82f6' },
-    { name: 'Cappuccino', value: 22, color: '#10b981' },
-    { name: 'Latte', value: 15, color: '#f59e0b' }
+    { name: "Espresso", value: 35, color: "#8b5cf6" },
+    { name: "Americano", value: 28, color: "#3b82f6" },
+    { name: "Cappuccino", value: 22, color: "#10b981" },
+    { name: "Latte", value: 15, color: "#f59e0b" },
   ];
 
   const maintenanceData = [
-    { date: '2024-01-15', type: 'Cleaning', duration: 45, cost: 500 },
-    { date: '2024-01-10', type: 'Filter Change', duration: 30, cost: 800 },
-    { date: '2024-01-05', type: 'Calibration', duration: 60, cost: 1200 },
-    { date: '2024-01-01', type: 'Supply Refill', duration: 20, cost: 2500 }
+    { date: "2024-01-15", type: "Cleaning", duration: 45, cost: 500 },
+    { date: "2024-01-10", type: "Filter Change", duration: 30, cost: 800 },
+    { date: "2024-01-05", type: "Calibration", duration: 60, cost: 1200 },
+    { date: "2024-01-01", type: "Supply Refill", duration: 20, cost: 2500 },
   ];
 
   const kpiData = [
     {
       title: "Cups Served",
       value: "487",
-      change: "+12.5%", 
+      change: "+12.5%",
       trend: "up",
       icon: <Coffee className="w-5 h-5" />,
-      color: "text-blue-600"
+      color: "text-blue-600",
     },
     {
       title: "Uptime",
       value: "98.7%",
       change: "+0.3%",
-      trend: "up", 
+      trend: "up",
       icon: <Clock className="w-5 h-5" />,
-      color: "text-purple-600"
+      color: "text-purple-600",
     },
     {
       title: "Efficiency",
@@ -117,8 +127,8 @@ export default function MachineAnalytics({ machineId, machineName, className = "
       change: "-1.2%",
       trend: "down",
       icon: <Target className="w-5 h-5" />,
-      color: "text-orange-600"
-    }
+      color: "text-orange-600",
+    },
   ];
 
   const CustomTooltip = ({ active, payload, label }: any) => {
@@ -142,7 +152,9 @@ export default function MachineAnalytics({ machineId, machineName, className = "
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">{machineName} Analytics</h2>
+          <h2 className="text-2xl font-bold text-gray-900">
+            {machineName} Analytics
+          </h2>
           <p className="text-muted-foreground">Machine ID: {machineId}</p>
         </div>
         <Badge className="bg-green-100 text-green-700 gap-2">
@@ -157,18 +169,28 @@ export default function MachineAnalytics({ machineId, machineName, className = "
           <Card key={index} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
-                <div className={`p-2 rounded-lg ${kpi.color.replace('text-', 'bg-').replace('-600', '-100')}`}>
+                <div
+                  className={`p-2 rounded-lg ${kpi.color.replace("text-", "bg-").replace("-600", "-100")}`}
+                >
                   {kpi.icon}
                 </div>
-                <div className={`flex items-center gap-1 text-sm ${
-                  kpi.trend === 'up' ? 'text-green-600' : 'text-red-500'
-                }`}>
-                  {kpi.trend === 'up' ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                <div
+                  className={`flex items-center gap-1 text-sm ${
+                    kpi.trend === "up" ? "text-green-600" : "text-red-500"
+                  }`}
+                >
+                  {kpi.trend === "up" ? (
+                    <TrendingUp className="w-4 h-4" />
+                  ) : (
+                    <TrendingDown className="w-4 h-4" />
+                  )}
                   {kpi.change}
                 </div>
               </div>
               <div className="mt-4">
-                <div className={`text-2xl font-bold ${kpi.color}`}>{kpi.value}</div>
+                <div className={`text-2xl font-bold ${kpi.color}`}>
+                  {kpi.value}
+                </div>
                 <div className="text-sm text-muted-foreground">{kpi.title}</div>
               </div>
             </CardContent>
@@ -188,23 +210,39 @@ export default function MachineAnalytics({ machineId, machineName, className = "
           <Card>
             <CardHeader>
               <CardTitle>Today's Hourly Performance</CardTitle>
-              <CardDescription>Cups served and efficiency by hour</CardDescription>
+              <CardDescription>
+                Cups served and efficiency by hour
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={performanceData.daily}>
                     <defs>
-                      <linearGradient id="cupsGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                      <linearGradient
+                        id="cupsGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor="#3b82f6"
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#3b82f6"
+                          stopOpacity={0}
+                        />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis
                       dataKey="time"
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
@@ -213,7 +251,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                     />
                     <YAxis
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
@@ -240,7 +278,9 @@ export default function MachineAnalytics({ machineId, machineName, className = "
           <Card>
             <CardHeader>
               <CardTitle>Weekly Performance Trends</CardTitle>
-              <CardDescription>7-day cups and efficiency analysis</CardDescription>
+              <CardDescription>
+                7-day cups and efficiency analysis
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -250,7 +290,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                     <XAxis
                       dataKey="day"
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
@@ -259,7 +299,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                     />
                     <YAxis
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
@@ -267,11 +307,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                       allowDecimals={false}
                     />
                     <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="cups" 
-                      fill="#8b5cf6"
-                      radius={[4, 4, 0, 0]}
-                    />
+                    <Bar dataKey="cups" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -293,7 +329,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                     <XAxis
                       dataKey="week"
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
@@ -302,7 +338,7 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                     />
                     <YAxis
                       fontSize={12}
-                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                      tick={{ fill: "hsl(var(--muted-foreground))" }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
@@ -310,12 +346,12 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                       allowDecimals={false}
                     />
                     <Tooltip content={<CustomTooltip />} />
-                    <Line 
-                      type="monotone" 
-                      dataKey="cups" 
-                      stroke="#10b981" 
+                    <Line
+                      type="monotone"
+                      dataKey="cups"
+                      stroke="#10b981"
                       strokeWidth={3}
-                      dot={{ fill: '#10b981', strokeWidth: 2, r: 6 }}
+                      dot={{ fill: "#10b981", strokeWidth: 2, r: 6 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
@@ -342,7 +378,9 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                 <div key={index} className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="font-medium">{supply.name}</span>
-                    <span className={`font-bold ${supply.value > 60 ? 'text-green-600' : supply.value > 30 ? 'text-orange-500' : 'text-red-500'}`}>
+                    <span
+                      className={`font-bold ${supply.value > 60 ? "text-green-600" : supply.value > 30 ? "text-orange-500" : "text-red-500"}`}
+                    >
                       {supply.value}%
                     </span>
                   </div>
@@ -432,14 +470,21 @@ export default function MachineAnalytics({ machineId, machineName, className = "
         <CardContent>
           <div className="space-y-4">
             {maintenanceData.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
                 <div>
                   <div className="font-medium">{item.type}</div>
-                  <div className="text-sm text-muted-foreground">{item.date}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.date}
+                  </div>
                 </div>
                 <div className="text-right">
                   <div className="font-medium">₹{item.cost}</div>
-                  <div className="text-sm text-muted-foreground">{item.duration} min</div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.duration} min
+                  </div>
                 </div>
               </div>
             ))}

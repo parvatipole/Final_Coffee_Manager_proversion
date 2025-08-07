@@ -256,7 +256,6 @@ export default function MachineManagement() {
         </div>
       </header>
 
-
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto space-y-6">
           {/* Machine Overview */}
@@ -457,7 +456,6 @@ export default function MachineManagement() {
                 </Card>
               </div>
             </TabsContent>
-
           </Tabs>
         </div>
       </main>
