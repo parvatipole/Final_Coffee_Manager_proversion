@@ -201,20 +201,24 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis 
-                      dataKey="time" 
+                    <XAxis
+                      dataKey="time"
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
-                    <YAxis 
+                    <YAxis
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Area
@@ -243,20 +247,24 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={performanceData.weekly}>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis 
-                      dataKey="day" 
+                    <XAxis
+                      dataKey="day"
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
-                    <YAxis 
+                    <YAxis
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Bar 
@@ -282,20 +290,24 @@ export default function MachineAnalytics({ machineId, machineName, className = "
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={performanceData.monthly}>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis 
-                      dataKey="week" 
+                    <XAxis
+                      dataKey="week"
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="category"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
-                    <YAxis 
+                    <YAxis
                       fontSize={12}
                       tick={{ fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={true}
                       tickLine={true}
                       type="number"
+                      allowDataOverflow={false}
+                      allowDecimals={false}
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Line 
