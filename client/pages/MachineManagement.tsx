@@ -395,9 +395,127 @@ export default function MachineManagement() {
                 </Card>
               </div>
 
+              {/* Alerts & Issues Section */}
+              <Card className="animate-fadeIn" style={{ animationDelay: "300ms" }}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4" />
+                    Machine Alerts & Issues
+                  </CardTitle>
+                  <CardDescription>
+                    Monitor and resolve machine issues
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {/* Alert: Filter Replacement */}
+                    <Alert className="border-red-200 bg-red-50">
+                      <AlertTriangle className="h-4 w-4 text-red-600" />
+                      <AlertDescription>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <strong>Critical:</strong> Water filter needs immediate replacement (Filter life: 5%)
+                          </div>
+                          {canEdit && (
+                            <div className="flex items-center gap-2 ml-4">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  const resolved = confirm("Mark this alert as resolved?");
+                                  if (resolved) {
+                                    console.log("Filter replacement marked as resolved");
+                                  }
+                                }}
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Mark Resolved
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+
+                    {/* Alert: Low Supply */}
+                    <Alert className="border-orange-200 bg-orange-50">
+                      <AlertTriangle className="h-4 w-4 text-orange-600" />
+                      <AlertDescription>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <strong>Warning:</strong> Coffee beans running low (15% remaining) - refill recommended
+                          </div>
+                          {canEdit && (
+                            <div className="flex items-center gap-2 ml-4">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  const resolved = confirm("Mark this alert as resolved?");
+                                  if (resolved) {
+                                    console.log("Low coffee beans alert marked as resolved");
+                                  }
+                                }}
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Mark Resolved
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+
+                    {/* Alert: Maintenance Due */}
+                    <Alert className="border-blue-200 bg-blue-50">
+                      <Clock className="h-4 w-4 text-blue-600" />
+                      <AlertDescription>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <strong>Info:</strong> Deep cleaning scheduled for tomorrow (Last cleaned 48 hours ago)
+                          </div>
+                          {canEdit && (
+                            <div className="flex items-center gap-2 ml-4">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  const resolved = confirm("Mark this cleaning as completed?");
+                                  if (resolved) {
+                                    console.log("Deep cleaning marked as completed");
+                                  }
+                                }}
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Mark Completed
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+
+                    {/* Resolved Alert Example */}
+                    <Alert className="border-green-200 bg-green-50">
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <AlertDescription>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <strong>Resolved:</strong> Water tank refilled to 100% - completed by {user?.name} (2 hours ago)
+                          </div>
+                          <Badge variant="default" className="bg-green-100 text-green-800">
+                            ✓ Resolved
+                          </Badge>
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Machine Notes Section for Technicians */}
               {canEdit && (
-                <Card className="animate-fadeIn" style={{ animationDelay: "300ms" }}>
+                <Card className="animate-fadeIn" style={{ animationDelay: "400ms" }}>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Edit3 className="w-4 h-4" />
