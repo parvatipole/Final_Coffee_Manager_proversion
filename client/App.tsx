@@ -51,13 +51,11 @@ function AppRoutes() {
 
   // Add safety check for context
   if (!authContext) {
+    console.error("AppRoutes: AuthContext is null, showing login");
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Initializing...</p>
-        </div>
-      </div>
+      <Routes>
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     );
   }
 
