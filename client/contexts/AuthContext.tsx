@@ -156,6 +156,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: foundUser.username,
         name: foundUser.name,
         role: foundUser.role as UserRole,
+        officeName: foundUser.officeName,
       };
 
       setUser(userData);
