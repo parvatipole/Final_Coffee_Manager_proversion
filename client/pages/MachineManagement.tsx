@@ -289,7 +289,7 @@ export default function MachineManagement() {
 
           {/* Main Dashboard Tabs */}
           <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <Activity className="w-4 h-4" />
                 Overview
@@ -297,6 +297,10 @@ export default function MachineManagement() {
               <TabsTrigger value="supplies" className="flex items-center gap-2">
                 <Droplets className="w-4 h-4" />
                 Supplies
+              </TabsTrigger>
+              <TabsTrigger value="alerts" className="flex items-center gap-2">
+                <Bell className="w-4 h-4" />
+                Alerts
               </TabsTrigger>
               <TabsTrigger
                 value="analytics"
