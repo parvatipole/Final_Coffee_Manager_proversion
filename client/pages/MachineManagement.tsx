@@ -377,11 +377,6 @@ export default function MachineManagement() {
               </div>
             </TabsContent>
 
-            {/* Alerts Tab */}
-            <TabsContent value="alerts" className="space-y-6">
-              <AlertManagement />
-            </TabsContent>
-
             {/* Analytics Tab */}
             <TabsContent value="analytics" className="space-y-6">
               <UsageChart />
