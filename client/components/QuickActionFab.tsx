@@ -96,20 +96,21 @@ const QuickActionFab: React.FC = () => {
     <div className="fixed bottom-20 right-4 z-40">
       <TooltipProvider>
         <Popover open={isOpen} onOpenChange={setIsOpen}>
-          <PopoverTrigger asChild>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="relative"
-                >
-                  <Button
-                    size="lg"
-                    className="rounded-full w-14 h-14 bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all duration-300"
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <PopoverTrigger asChild>
+                <div className="relative">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <Zap className="w-6 h-6" />
-                  </Button>
+                    <Button
+                      size="lg"
+                      className="rounded-full w-14 h-14 bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      <Zap className="w-6 h-6" />
+                    </Button>
+                  </motion.div>
                   {urgentActions.length > 0 && (
                     <Badge
                       variant="destructive"
@@ -118,13 +119,13 @@ const QuickActionFab: React.FC = () => {
                       {urgentActions.length}
                     </Badge>
                   )}
-                </motion.div>
-              </TooltipTrigger>
-              <TooltipContent side="left">
-                <p>Quick Actions</p>
-              </TooltipContent>
-            </Tooltip>
-          </PopoverTrigger>
+                </div>
+              </PopoverTrigger>
+            </TooltipTrigger>
+            <TooltipContent side="left">
+              <p>Quick Actions</p>
+            </TooltipContent>
+          </Tooltip>
 
           <PopoverContent side="left" className="w-80 p-0 mr-4" sideOffset={8}>
             <Card className="border-0 shadow-lg">
