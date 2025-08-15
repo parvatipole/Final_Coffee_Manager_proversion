@@ -77,6 +77,10 @@ function AppRoutes() {
           element={user ? <Navigate to="/dashboard" replace /> : <Login />}
         />
         <Route
+          path="/signup"
+          element={user ? <Navigate to="/dashboard" replace /> : <Signup />}
+        />
+        <Route
           path="/"
           element={
             user ? (
