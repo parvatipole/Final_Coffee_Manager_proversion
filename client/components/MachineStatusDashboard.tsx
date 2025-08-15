@@ -12,8 +12,6 @@ import {
   CheckCircle,
   WifiOff,
   Settings,
-  Play,
-  Pause,
   RotateCcw,
   Activity
 } from 'lucide-react';
