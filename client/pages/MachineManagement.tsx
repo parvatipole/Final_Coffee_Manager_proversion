@@ -286,12 +286,8 @@ export default function MachineManagement() {
           </Card>
 
           {/* Main Dashboard Tabs */}
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="space-y-6"
-          >
-            <TabsList className="grid w-full grid-cols-4">
+          <Tabs defaultValue="overview" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <Activity className="w-4 h-4" />
                 Overview
@@ -299,19 +295,6 @@ export default function MachineManagement() {
               <TabsTrigger value="supplies" className="flex items-center gap-2">
                 <Droplets className="w-4 h-4" />
                 Supplies
-              </TabsTrigger>
-              <TabsTrigger
-                value="alerts"
-                className="flex items-center gap-2 relative"
-              >
-                <Bell className="w-4 h-4 animate-pulse" />
-                Alerts
-                <Badge
-                  variant="destructive"
-                  className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5 animate-pulse"
-                >
-                  2
-                </Badge>
               </TabsTrigger>
               <TabsTrigger
                 value="analytics"
