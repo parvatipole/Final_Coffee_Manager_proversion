@@ -106,6 +106,8 @@ export default function MachineManagement() {
   });
 
   const canEdit = user?.role === "technician";
+  const [activeTab, setActiveTab] = useState("overview");
+  const [showFloatingNotification, setShowFloatingNotification] = useState(canEdit);
 
   const supplies = [
     {
