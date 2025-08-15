@@ -298,9 +298,12 @@ export default function MachineManagement() {
                 <Droplets className="w-4 h-4" />
                 Supplies
               </TabsTrigger>
-              <TabsTrigger value="alerts" className="flex items-center gap-2">
+              <TabsTrigger value="alerts" className="flex items-center gap-2 relative">
                 <Bell className="w-4 h-4" />
                 Alerts
+                <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5">
+                  2
+                </Badge>
               </TabsTrigger>
               <TabsTrigger
                 value="analytics"
