@@ -17,7 +17,9 @@ public interface CoffeeMachineRepository extends JpaRepository<CoffeeMachine, Lo
     List<CoffeeMachine> findByLocation(String location);
     
     List<CoffeeMachine> findByLocationAndOffice(String location, String office);
-    
+
+    List<CoffeeMachine> findByOffice(String office);
+
     List<CoffeeMachine> findByLocationAndOfficeAndFloor(String location, String office, String floor);
     
     List<CoffeeMachine> findByStatus(CoffeeMachine.Status status);
