@@ -68,6 +68,27 @@ public class AuthController {
                 roles));
     }
     
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+
+        // Check if username already exists
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        // Create new technician user account (only technicians can signup)
+        User user = new User(signUpRequest.getUsername(),
+                           signUpRequest.getName(),
+                           encoder.encode(signUpRequest.getPassword()),
+                           User.Role.TECHNICIAN,
+                           signUpRequest.getOfficeName());
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("Technician registered successfully!"));
+    }
+
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
         return ResponseEntity.ok(new MessageResponse("User signed out successfully!"));
