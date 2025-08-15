@@ -22,9 +22,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextType | null => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (context === null) {
     // Better error handling for development - return null instead of throwing
     console.warn("useAuth was called outside of AuthProvider. Returning null.");
     return null;
