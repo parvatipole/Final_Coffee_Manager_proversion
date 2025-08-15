@@ -1,6 +1,7 @@
 package com.coffeeflow.controller;
 
 import com.coffeeflow.entity.CoffeeMachine;
+import com.coffeeflow.entity.User;
 import com.coffeeflow.payload.request.SupplyUpdateRequest;
 import com.coffeeflow.payload.response.MessageResponse;
 import com.coffeeflow.repository.CoffeeMachineRepository;
@@ -8,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
