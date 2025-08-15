@@ -127,8 +127,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: "tech1",
         role: "technician",
         name: "John Technician",
+        officeName: "Downtown Office",
       },
-      { id: "2", username: "admin1", role: "admin", name: "Sarah Admin" },
+      {
+        id: "2",
+        username: "admin1",
+        role: "admin",
+        name: "Sarah Admin",
+        officeName: null, // Admin has access to all offices
+      },
     ];
 
     const foundUser = mockUsers.find((u) => u.username === username);
