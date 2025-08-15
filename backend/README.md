@@ -67,6 +67,7 @@ The server will start on `http://localhost:8080/api`
 ### Authentication
 
 - `POST /api/auth/signin` - User login
+- `POST /api/auth/signup` - Register new technician
 - `POST /api/auth/signout` - User logout
 
 ### Coffee Machines
