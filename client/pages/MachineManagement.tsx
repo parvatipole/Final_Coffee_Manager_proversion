@@ -496,6 +496,16 @@ export default function MachineManagement() {
           canEdit={canEdit}
         />
       )}
+
+      {/* Floating Alert Notification for Technicians */}
+      {showFloatingNotification && canEdit && (
+        <FloatingAlertNotification
+          onViewAlerts={() => {
+            setActiveTab("alerts");
+            setShowFloatingNotification(false);
+          }}
+        />
+      )}
     </div>
   );
 }
