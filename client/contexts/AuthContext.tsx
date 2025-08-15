@@ -98,6 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: response.username,
         name: response.name,
         role: response.role as UserRole,
+        officeName: response.officeName,
       };
 
       // Store user data
