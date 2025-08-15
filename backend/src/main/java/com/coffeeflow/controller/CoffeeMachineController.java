@@ -68,7 +68,19 @@ public class CoffeeMachineController {
     
     @GetMapping("/offices")
     public ResponseEntity<List<String>> getOfficesByLocation(@RequestParam String location) {
-        List<String> offices = coffeeMachineRepository.findDistinctOfficesByLocation(location);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        List<String> offices;
+
+        // Admin can see all offices, technicians only see their office
+        if (currentUser.getRole() == User.Role.ADMIN) {
+            offices = coffeeMachineRepository.findDistinctOfficesByLocation(location);
+        } else {
+            // Technician - only return their office if it matches the location
+            offices = coffeeMachineRepository.findDistinctOfficesByLocationAndOffice(location, currentUser.getOfficeName());
+        }
+
         return ResponseEntity.ok(offices);
     }
     
