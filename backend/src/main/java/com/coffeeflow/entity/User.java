@@ -36,7 +36,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private Role role;
-    
+
+    @Size(max = 100)
+    @Column(name = "office_name")
+    private String officeName; // Office that technician manages (null for admin)
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
