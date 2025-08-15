@@ -507,6 +507,9 @@ export default function MachineManagement() {
           }}
         />
       )}
+
+      {/* Quick Action FAB for Technicians */}
+      {canEdit && <QuickActionFab />}
     </div>
   );
 }
