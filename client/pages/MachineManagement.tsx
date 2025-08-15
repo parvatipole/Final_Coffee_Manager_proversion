@@ -148,6 +148,20 @@ export default function MachineManagement() {
     },
   ]);
 
+  // Handle alert resolution
+  const handleAlertResolution = (alertId: string) => {
+    setAlerts(prev => prev.map(alert =>
+      alert.id === alertId
+        ? {
+            ...alert,
+            resolved: true,
+            resolvedBy: user?.name || "Technician",
+            resolvedAt: "Just now",
+          }
+        : alert
+    ));
+  };
+
   const supplies = [
     {
       name: "Water",
