@@ -64,6 +64,7 @@ public class AuthController {
                 userDetails.getUsername(),
                 userDetails.getName(),
                 userDetails.getRole().toString().toLowerCase(),
+                userDetails.getOfficeName(),
                 roles));
     }
     
