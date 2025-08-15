@@ -3,9 +3,9 @@ spring:
     name: coffee-flow-backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/coffee_flow_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: password
+    url: jdbc:mysql://localhost:3306/coffee_flow_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: coffeeflow
+    password: coffee123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
