@@ -216,6 +216,12 @@ export default function MachineManagement() {
           </div>
 
           <div className="flex items-center gap-4">
+            {user?.role === "technician" && user.officeName && (
+              <Badge variant="outline" className="gap-1 animate-fadeIn">
+                <Settings className="w-3 h-3" />
+                {user.officeName}
+              </Badge>
+            )}
             <Badge
               variant={user?.role === "technician" ? "default" : "secondary"}
               className="gap-1 animate-fadeIn"
