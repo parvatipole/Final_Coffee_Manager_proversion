@@ -722,33 +722,6 @@ export default function MachineManagement() {
                 </Card>
               </div>
 
-              {/* Supply Alerts */}
-              {canEdit && (
-                <Card className="animate-fadeIn" style={{ animationDelay: "600ms" }}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4" />
-                      Supply Alerts & Recommendations
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <Alert>
-                        <AlertTriangle className="h-4 w-4" />
-                        <AlertDescription>
-                          <strong>Coffee Beans:</strong> High consumption detected. Consider ordering extra supplies for next week.
-                        </AlertDescription>
-                      </Alert>
-                      <Alert>
-                        <AlertTriangle className="h-4 w-4" />
-                        <AlertDescription>
-                          <strong>Milk:</strong> Level dropping faster than usual. Check for potential leaks or increased demand.
-                        </AlertDescription>
-                      </Alert>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
             </TabsContent>
 
             {/* Analytics Tab */}
