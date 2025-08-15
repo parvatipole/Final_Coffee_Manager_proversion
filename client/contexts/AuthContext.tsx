@@ -20,15 +20,19 @@ interface AuthContextType {
   isAuthenticated: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+// Create a default context value to avoid null issues
+const defaultContextValue: AuthContextType = {
+  user: null,
+  login: async () => false,
+  logout: () => {},
+  isLoading: true,
+  isAuthenticated: false,
+};
 
-export const useAuth = (): AuthContextType | null => {
+const AuthContext = createContext<AuthContextType>(defaultContextValue);
+
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (context === null) {
-    // Better error handling for development - return null instead of throwing
-    console.warn("useAuth was called outside of AuthProvider. Returning null.");
-    return null;
-  }
   return context;
 };
 
