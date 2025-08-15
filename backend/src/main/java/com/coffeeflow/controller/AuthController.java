@@ -2,6 +2,7 @@ package com.coffeeflow.controller;
 
 import com.coffeeflow.entity.User;
 import com.coffeeflow.payload.request.LoginRequest;
+import com.coffeeflow.payload.request.SignupRequest;
 import com.coffeeflow.payload.response.JwtResponse;
 import com.coffeeflow.payload.response.MessageResponse;
 import com.coffeeflow.repository.UserRepository;
