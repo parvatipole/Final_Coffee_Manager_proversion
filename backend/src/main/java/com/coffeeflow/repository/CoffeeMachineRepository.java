@@ -29,6 +29,9 @@ public interface CoffeeMachineRepository extends JpaRepository<CoffeeMachine, Lo
     
     @Query("SELECT DISTINCT c.office FROM CoffeeMachine c WHERE c.location = :location ORDER BY c.office")
     List<String> findDistinctOfficesByLocation(@Param("location") String location);
+
+    @Query("SELECT DISTINCT c.office FROM CoffeeMachine c WHERE c.location = :location AND c.office = :office ORDER BY c.office")
+    List<String> findDistinctOfficesByLocationAndOffice(@Param("location") String location, @Param("office") String office);
     
     @Query("SELECT DISTINCT c.floor FROM CoffeeMachine c WHERE c.location = :location AND c.office = :office ORDER BY c.floor")
     List<String> findDistinctFloorsByLocationAndOffice(@Param("location") String location, @Param("office") String office);
