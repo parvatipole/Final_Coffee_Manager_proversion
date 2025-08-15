@@ -39,19 +39,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
-  const authContext = useAuth();
-
-  // Add safety check for context
-  if (!authContext) {
-    console.error("AppRoutes: AuthContext is null, showing login");
-    return (
-      <Routes>
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    );
-  }
-
-  const { user } = authContext;
+  const { user } = useAuth();
 
   return (
     <>
