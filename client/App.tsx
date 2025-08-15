@@ -22,15 +22,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 const queryClient = new QueryClient();
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const authContext = useAuth();
-
-  // Add safety check for context
-  if (!authContext) {
-    console.error("ProtectedRoute: AuthContext is null, redirecting to login");
-    return <Navigate to="/login" replace />;
-  }
-
-  const { user, isLoading } = authContext;
+  const { user, isLoading } = useAuth();
 
   if (isLoading) {
     return (
