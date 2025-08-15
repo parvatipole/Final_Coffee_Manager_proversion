@@ -431,6 +431,34 @@ export default function MachineManagement() {
 
             {/* Supplies Tab */}
             <TabsContent value="supplies" className="space-y-6">
+              {/* Supply Level Overview */}
+              <Card className="animate-fadeIn">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Droplets className="w-5 h-5" />
+                    Supply Status Overview
+                  </CardTitle>
+                  <CardDescription>
+                    Current supply levels and consumption trends
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {supplies.map((supply, index) => (
+                      <div key={supply.key} className="text-center">
+                        <div className="flex items-center justify-center mb-2">
+                          {supply.icon}
+                        </div>
+                        <Progress value={supply.current} className="mb-2" />
+                        <div className="text-sm font-medium">{supply.current}%</div>
+                        <div className="text-xs text-muted-foreground">{supply.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Detailed Supply Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {supplies.map((supply, index) => (
                   <Card
