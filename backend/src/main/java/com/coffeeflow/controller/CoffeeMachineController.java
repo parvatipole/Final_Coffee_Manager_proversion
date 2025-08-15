@@ -26,7 +26,19 @@ public class CoffeeMachineController {
     
     @GetMapping
     public ResponseEntity<List<CoffeeMachine>> getAllMachines() {
-        List<CoffeeMachine> machines = coffeeMachineRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        List<CoffeeMachine> machines;
+
+        // Admin can see all machines, technicians only see their office machines
+        if (currentUser.getRole() == User.Role.ADMIN) {
+            machines = coffeeMachineRepository.findAll();
+        } else {
+            // Technician - filter by office
+            machines = coffeeMachineRepository.findByOffice(currentUser.getOfficeName());
+        }
+
         return ResponseEntity.ok(machines);
     }
     
