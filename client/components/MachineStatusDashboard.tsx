@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { 
-  Coffee, 
-  Zap, 
-  Thermometer, 
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  Coffee,
+  Zap,
+  Thermometer,
   Gauge,
   AlertTriangle,
   CheckCircle,
   WifiOff,
   Settings,
   RotateCcw,
-  Activity
-} from 'lucide-react';
+  Activity,
+} from "lucide-react";
 
 interface SystemStatus {
   brewing: boolean;
@@ -34,9 +34,9 @@ interface MachineStatusDashboardProps {
   canControl: boolean;
 }
 
-export default function MachineStatusDashboard({ 
-  onStatusChange, 
-  canControl 
+export default function MachineStatusDashboard({
+  onStatusChange,
+  canControl,
 }: MachineStatusDashboardProps) {
   const [status, setStatus] = useState<SystemStatus>({
     brewing: false,
@@ -48,7 +48,7 @@ export default function MachineStatusDashboard({
     powerLevel: 85,
     wifiSignal: 90,
     lastCleaning: 4,
-    filterLife: 78
+    filterLife: 78,
   });
 
   const [isSimulating, setIsSimulating] = useState(false);
@@ -58,16 +58,18 @@ export default function MachineStatusDashboard({
     if (!isSimulating) return;
 
     const interval = setInterval(() => {
-      setStatus(prev => {
+      setStatus((prev) => {
         const newStatus = {
           ...prev,
           brewing: Math.random() > 0.7,
           temperature: 88 + Math.random() * 8,
           pressure: 13 + Math.random() * 4,
-          powerLevel: prev.brewing ? 90 + Math.random() * 10 : 70 + Math.random() * 20,
-          wifiSignal: 85 + Math.random() * 15
+          powerLevel: prev.brewing
+            ? 90 + Math.random() * 10
+            : 70 + Math.random() * 20,
+          wifiSignal: 85 + Math.random() * 15,
         };
-        
+
         onStatusChange?.(newStatus);
         return newStatus;
       });
@@ -80,49 +82,54 @@ export default function MachineStatusDashboard({
     if (!canControl) return;
 
     switch (action) {
-      case 'clean':
-        setStatus(prev => ({ 
-          ...prev, 
-          cleaning: true, 
-          brewing: false 
+      case "clean":
+        setStatus((prev) => ({
+          ...prev,
+          cleaning: true,
+          brewing: false,
         }));
         setTimeout(() => {
-          setStatus(prev => ({ 
-            ...prev, 
-            cleaning: false, 
-            lastCleaning: 0 
+          setStatus((prev) => ({
+            ...prev,
+            cleaning: false,
+            lastCleaning: 0,
           }));
         }, 5000);
         break;
-      case 'restart':
-        setStatus(prev => ({ 
-          ...prev, 
-          heating: true, 
-          brewing: false, 
-          error: false 
+      case "restart":
+        setStatus((prev) => ({
+          ...prev,
+          heating: true,
+          brewing: false,
+          error: false,
         }));
         break;
-      case 'test':
-        setStatus(prev => ({ ...prev, brewing: true }));
+      case "test":
+        setStatus((prev) => ({ ...prev, brewing: true }));
         setTimeout(() => {
-          setStatus(prev => ({ ...prev, brewing: false }));
+          setStatus((prev) => ({ ...prev, brewing: false }));
         }, 3000);
         break;
     }
   };
 
   const getStatusColor = (value: number, optimal: [number, number]) => {
-    if (value >= optimal[0] && value <= optimal[1]) return 'text-green-600';
-    if (value >= optimal[0] - 5 && value <= optimal[1] + 5) return 'text-orange-500';
-    return 'text-red-500';
+    if (value >= optimal[0] && value <= optimal[1]) return "text-green-600";
+    if (value >= optimal[0] - 5 && value <= optimal[1] + 5)
+      return "text-orange-500";
+    return "text-red-500";
   };
 
   const getOverallStatus = () => {
-    if (status.error) return { text: 'Error', color: 'destructive', icon: AlertTriangle };
-    if (status.cleaning) return { text: 'Cleaning', color: 'secondary', icon: Settings };
-    if (status.brewing) return { text: 'Brewing', color: 'default', icon: Coffee };
-    if (status.heating) return { text: 'Ready', color: 'default', icon: CheckCircle };
-    return { text: 'Offline', color: 'destructive', icon: WifiOff };
+    if (status.error)
+      return { text: "Error", color: "destructive", icon: AlertTriangle };
+    if (status.cleaning)
+      return { text: "Cleaning", color: "secondary", icon: Settings };
+    if (status.brewing)
+      return { text: "Brewing", color: "default", icon: Coffee };
+    if (status.heating)
+      return { text: "Ready", color: "default", icon: CheckCircle };
+    return { text: "Offline", color: "destructive", icon: WifiOff };
   };
 
   const overallStatus = getOverallStatus();
@@ -135,9 +142,11 @@ export default function MachineStatusDashboard({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
-              <StatusIcon className={`w-5 h-5 ${
-                status.brewing || status.cleaning ? 'animate-pulse' : ''
-              }`} />
+              <StatusIcon
+                className={`w-5 h-5 ${
+                  status.brewing || status.cleaning ? "animate-pulse" : ""
+                }`}
+              />
               Machine Status
             </CardTitle>
             <div className="flex items-center gap-2">
@@ -155,13 +164,12 @@ export default function MachineStatusDashboard({
                 <Thermometer className="w-4 h-4" />
                 <span className="text-sm font-medium">Temperature</span>
               </div>
-              <div className={`text-xl font-bold ${getStatusColor(status.temperature, [88, 96])}`}>
+              <div
+                className={`text-xl font-bold ${getStatusColor(status.temperature, [88, 96])}`}
+              >
                 {status.temperature.toFixed(1)}°C
               </div>
-              <Progress 
-                value={(status.temperature - 80) * 5} 
-                className="h-2"
-              />
+              <Progress value={(status.temperature - 80) * 5} className="h-2" />
             </div>
 
             {/* Pressure */}
@@ -170,13 +178,12 @@ export default function MachineStatusDashboard({
                 <Gauge className="w-4 h-4" />
                 <span className="text-sm font-medium">Pressure</span>
               </div>
-              <div className={`text-xl font-bold ${getStatusColor(status.pressure, [14, 16])}`}>
+              <div
+                className={`text-xl font-bold ${getStatusColor(status.pressure, [14, 16])}`}
+              >
                 {status.pressure.toFixed(1)} bar
               </div>
-              <Progress 
-                value={(status.pressure - 10) * 10} 
-                className="h-2"
-              />
+              <Progress value={(status.pressure - 10) * 10} className="h-2" />
             </div>
 
             {/* Power Level */}
@@ -188,10 +195,7 @@ export default function MachineStatusDashboard({
               <div className="text-xl font-bold text-primary">
                 {status.powerLevel.toFixed(0)}%
               </div>
-              <Progress 
-                value={status.powerLevel} 
-                className="h-2"
-              />
+              <Progress value={status.powerLevel} className="h-2" />
             </div>
 
             {/* WiFi Signal */}
@@ -203,10 +207,7 @@ export default function MachineStatusDashboard({
               <div className="text-xl font-bold text-blue-500">
                 {status.wifiSignal.toFixed(0)}%
               </div>
-              <Progress 
-                value={status.wifiSignal} 
-                className="h-2"
-              />
+              <Progress value={status.wifiSignal} className="h-2" />
             </div>
           </div>
         </CardContent>
@@ -227,7 +228,7 @@ export default function MachineStatusDashboard({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <Button
                 variant="outline"
-                onClick={() => handleQuickAction('clean')}
+                onClick={() => handleQuickAction("clean")}
                 disabled={status.cleaning || status.brewing}
                 className="h-auto p-4 flex flex-col items-center gap-2"
               >
@@ -242,7 +243,7 @@ export default function MachineStatusDashboard({
 
               <Button
                 variant="outline"
-                onClick={() => handleQuickAction('test')}
+                onClick={() => handleQuickAction("test")}
                 disabled={status.cleaning || status.brewing}
                 className="h-auto p-4 flex flex-col items-center gap-2"
               >
@@ -257,7 +258,7 @@ export default function MachineStatusDashboard({
 
               <Button
                 variant="outline"
-                onClick={() => handleQuickAction('restart')}
+                onClick={() => handleQuickAction("restart")}
                 disabled={status.cleaning || status.brewing}
                 className="h-auto p-4 flex flex-col items-center gap-2"
               >
@@ -286,20 +287,24 @@ export default function MachineStatusDashboard({
           <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
             <div>
               <p className="font-medium">Filter Replacement</p>
-              <p className="text-sm text-muted-foreground">Current life: {status.filterLife}%</p>
+              <p className="text-sm text-muted-foreground">
+                Current life: {status.filterLife}%
+              </p>
             </div>
-            <Badge variant={status.filterLife > 30 ? 'default' : 'destructive'}>
-              {status.filterLife > 30 ? 'Good' : 'Replace Soon'}
+            <Badge variant={status.filterLife > 30 ? "default" : "destructive"}>
+              {status.filterLife > 30 ? "Good" : "Replace Soon"}
             </Badge>
           </div>
 
           <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
             <div>
               <p className="font-medium">Deep Cleaning</p>
-              <p className="text-sm text-muted-foreground">Last: {status.lastCleaning} hours ago</p>
+              <p className="text-sm text-muted-foreground">
+                Last: {status.lastCleaning} hours ago
+              </p>
             </div>
-            <Badge variant={status.lastCleaning < 24 ? 'default' : 'secondary'}>
-              {status.lastCleaning < 24 ? 'Recent' : 'Schedule Soon'}
+            <Badge variant={status.lastCleaning < 24 ? "default" : "secondary"}>
+              {status.lastCleaning < 24 ? "Recent" : "Schedule Soon"}
             </Badge>
           </div>
         </CardContent>

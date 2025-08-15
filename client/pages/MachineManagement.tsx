@@ -150,16 +150,18 @@ export default function MachineManagement() {
 
   // Handle alert resolution
   const handleAlertResolution = (alertId: string) => {
-    setAlerts(prev => prev.map(alert =>
-      alert.id === alertId
-        ? {
-            ...alert,
-            resolved: true,
-            resolvedBy: user?.name || "Technician",
-            resolvedAt: "Just now",
-          }
-        : alert
-    ));
+    setAlerts((prev) =>
+      prev.map((alert) =>
+        alert.id === alertId
+          ? {
+              ...alert,
+              resolved: true,
+              resolvedBy: user?.name || "Technician",
+              resolvedAt: "Just now",
+            }
+          : alert,
+      ),
+    );
   };
 
   const supplies = [
@@ -402,7 +404,10 @@ export default function MachineManagement() {
                   </CardContent>
                 </Card>
 
-                <Card className="animate-fadeIn" style={{ animationDelay: "100ms" }}>
+                <Card
+                  className="animate-fadeIn"
+                  style={{ animationDelay: "100ms" }}
+                >
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2">
                       <Settings className="w-4 h-4" />
@@ -417,17 +422,24 @@ export default function MachineManagement() {
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm">Last Service</span>
-                        <span className="text-xs text-muted-foreground">5 days ago</span>
+                        <span className="text-xs text-muted-foreground">
+                          5 days ago
+                        </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm">Next Service</span>
-                        <span className="text-xs text-muted-foreground">25 days</span>
+                        <span className="text-xs text-muted-foreground">
+                          25 days
+                        </span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="animate-fadeIn" style={{ animationDelay: "200ms" }}>
+                <Card
+                  className="animate-fadeIn"
+                  style={{ animationDelay: "200ms" }}
+                >
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
@@ -454,59 +466,100 @@ export default function MachineManagement() {
               </div>
 
               {/* Alerts & Issues Section */}
-              <Card className="animate-fadeIn" style={{ animationDelay: "300ms" }}>
+              <Card
+                className="animate-fadeIn"
+                style={{ animationDelay: "300ms" }}
+              >
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" />
                     Machine Alerts & Issues
                   </CardTitle>
                   <CardDescription>
-                    Monitor and resolve machine issues ({alerts.filter(a => !a.resolved).length} active)
+                    Monitor and resolve machine issues (
+                    {alerts.filter((a) => !a.resolved).length} active)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {alerts.map((alert) => {
-                      const getAlertColor = (type: string, resolved: boolean) => {
+                      const getAlertColor = (
+                        type: string,
+                        resolved: boolean,
+                      ) => {
                         if (resolved) return "border-green-200 bg-green-50";
                         switch (type) {
-                          case "critical": return "border-red-200 bg-red-50";
-                          case "warning": return "border-orange-200 bg-orange-50";
-                          case "info": return "border-blue-200 bg-blue-50";
-                          default: return "border-gray-200 bg-gray-50";
+                          case "critical":
+                            return "border-red-200 bg-red-50";
+                          case "warning":
+                            return "border-orange-200 bg-orange-50";
+                          case "info":
+                            return "border-blue-200 bg-blue-50";
+                          default:
+                            return "border-gray-200 bg-gray-50";
                         }
                       };
 
-                      const getAlertIcon = (type: string, resolved: boolean) => {
-                        if (resolved) return <CheckCircle className="h-4 w-4 text-green-600" />;
+                      const getAlertIcon = (
+                        type: string,
+                        resolved: boolean,
+                      ) => {
+                        if (resolved)
+                          return (
+                            <CheckCircle className="h-4 w-4 text-green-600" />
+                          );
                         switch (type) {
-                          case "critical": return <AlertTriangle className="h-4 w-4 text-red-600" />;
-                          case "warning": return <AlertTriangle className="h-4 w-4 text-orange-600" />;
-                          case "info": return <Clock className="h-4 w-4 text-blue-600" />;
-                          default: return <AlertTriangle className="h-4 w-4 text-gray-600" />;
+                          case "critical":
+                            return (
+                              <AlertTriangle className="h-4 w-4 text-red-600" />
+                            );
+                          case "warning":
+                            return (
+                              <AlertTriangle className="h-4 w-4 text-orange-600" />
+                            );
+                          case "info":
+                            return <Clock className="h-4 w-4 text-blue-600" />;
+                          default:
+                            return (
+                              <AlertTriangle className="h-4 w-4 text-gray-600" />
+                            );
                         }
                       };
 
-                      const getAlertPrefix = (type: string, resolved: boolean) => {
+                      const getAlertPrefix = (
+                        type: string,
+                        resolved: boolean,
+                      ) => {
                         if (resolved) return "Resolved:";
                         switch (type) {
-                          case "critical": return "Critical:";
-                          case "warning": return "Warning:";
-                          case "info": return "Info:";
-                          default: return "Alert:";
+                          case "critical":
+                            return "Critical:";
+                          case "warning":
+                            return "Warning:";
+                          case "info":
+                            return "Info:";
+                          default:
+                            return "Alert:";
                         }
                       };
 
                       return (
-                        <Alert key={alert.id} className={getAlertColor(alert.type, alert.resolved)}>
+                        <Alert
+                          key={alert.id}
+                          className={getAlertColor(alert.type, alert.resolved)}
+                        >
                           {getAlertIcon(alert.type, alert.resolved)}
                           <AlertDescription>
                             <div className="flex items-center justify-between">
                               <div>
-                                <strong>{getAlertPrefix(alert.type, alert.resolved)}</strong> {alert.title} - {alert.description}
+                                <strong>
+                                  {getAlertPrefix(alert.type, alert.resolved)}
+                                </strong>{" "}
+                                {alert.title} - {alert.description}
                                 {alert.resolved && alert.resolvedBy && (
                                   <div className="text-xs text-muted-foreground mt-1">
-                                    Resolved by {alert.resolvedBy} ({alert.resolvedAt})
+                                    Resolved by {alert.resolvedBy} (
+                                    {alert.resolvedAt})
                                   </div>
                                 )}
                               </div>
@@ -515,7 +568,9 @@ export default function MachineManagement() {
                                   <Button
                                     size="sm"
                                     variant="outline"
-                                    onClick={() => handleAlertResolution(alert.id)}
+                                    onClick={() =>
+                                      handleAlertResolution(alert.id)
+                                    }
                                   >
                                     <CheckCircle className="w-3 h-3 mr-1" />
                                     Mark Resolved
@@ -523,7 +578,10 @@ export default function MachineManagement() {
                                 </div>
                               )}
                               {alert.resolved && (
-                                <Badge variant="default" className="bg-green-100 text-green-800">
+                                <Badge
+                                  variant="default"
+                                  className="bg-green-100 text-green-800"
+                                >
                                   ✓ Resolved
                                 </Badge>
                               )}
@@ -533,11 +591,13 @@ export default function MachineManagement() {
                       );
                     })}
 
-                    {alerts.filter(a => !a.resolved).length === 0 && (
+                    {alerts.filter((a) => !a.resolved).length === 0 && (
                       <div className="text-center py-8">
                         <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
                         <h3 className="text-lg font-medium">All Clear!</h3>
-                        <p className="text-muted-foreground">No active alerts for this machine.</p>
+                        <p className="text-muted-foreground">
+                          No active alerts for this machine.
+                        </p>
                       </div>
                     )}
                   </div>
@@ -546,7 +606,10 @@ export default function MachineManagement() {
 
               {/* Machine Notes Section for Technicians */}
               {canEdit && (
-                <Card className="animate-fadeIn" style={{ animationDelay: "400ms" }}>
+                <Card
+                  className="animate-fadeIn"
+                  style={{ animationDelay: "400ms" }}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Edit3 className="w-4 h-4" />
@@ -558,16 +621,19 @@ export default function MachineManagement() {
                       <Textarea
                         value={machineData.notes}
                         onChange={(e) =>
-                          setMachineData(prev => ({
+                          setMachineData((prev) => ({
                             ...prev,
-                            notes: e.target.value
+                            notes: e.target.value,
                           }))
                         }
                         placeholder="Add maintenance notes, observations, or reminders..."
                         className="min-h-[100px]"
                       />
                       <div className="flex justify-end">
-                        <Button size="sm" onClick={() => console.log('Notes saved')}>
+                        <Button
+                          size="sm"
+                          onClick={() => console.log("Notes saved")}
+                        >
                           <Save className="w-3 h-3 mr-2" />
                           Save Notes
                         </Button>
@@ -599,8 +665,12 @@ export default function MachineManagement() {
                           {supply.icon}
                         </div>
                         <Progress value={supply.current} className="mb-2" />
-                        <div className="text-sm font-medium">{supply.current}%</div>
-                        <div className="text-xs text-muted-foreground">{supply.name}</div>
+                        <div className="text-sm font-medium">
+                          {supply.current}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {supply.name}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -666,7 +736,10 @@ export default function MachineManagement() {
 
               {/* Supply Consumption Trends */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card className="animate-fadeIn" style={{ animationDelay: "400ms" }}>
+                <Card
+                  className="animate-fadeIn"
+                  style={{ animationDelay: "400ms" }}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
@@ -682,7 +755,9 @@ export default function MachineManagement() {
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-medium">15% daily</div>
-                          <div className="text-xs text-muted-foreground">Normal usage</div>
+                          <div className="text-xs text-muted-foreground">
+                            Normal usage
+                          </div>
                         </div>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
@@ -692,7 +767,9 @@ export default function MachineManagement() {
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-medium">12% daily</div>
-                          <div className="text-xs text-muted-foreground">High usage</div>
+                          <div className="text-xs text-muted-foreground">
+                            High usage
+                          </div>
                         </div>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
@@ -702,14 +779,19 @@ export default function MachineManagement() {
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-medium">8% daily</div>
-                          <div className="text-xs text-muted-foreground">Low usage</div>
+                          <div className="text-xs text-muted-foreground">
+                            Low usage
+                          </div>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="animate-fadeIn" style={{ animationDelay: "500ms" }}>
+                <Card
+                  className="animate-fadeIn"
+                  style={{ animationDelay: "500ms" }}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
@@ -721,38 +803,51 @@ export default function MachineManagement() {
                       <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
                         <div>
                           <div className="font-medium text-sm">Water Tank</div>
-                          <div className="text-xs text-muted-foreground">Refilled to 100%</div>
+                          <div className="text-xs text-muted-foreground">
+                            Refilled to 100%
+                          </div>
                         </div>
                         <div className="text-right">
                           <div className="text-xs font-medium">2 hours ago</div>
-                          <div className="text-xs text-muted-foreground">by {user?.name}</div>
+                          <div className="text-xs text-muted-foreground">
+                            by {user?.name}
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                         <div>
-                          <div className="font-medium text-sm">Coffee Beans</div>
-                          <div className="text-xs text-muted-foreground">Refilled to 90%</div>
+                          <div className="font-medium text-sm">
+                            Coffee Beans
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Refilled to 90%
+                          </div>
                         </div>
                         <div className="text-right">
                           <div className="text-xs font-medium">Yesterday</div>
-                          <div className="text-xs text-muted-foreground">by Tech Support</div>
+                          <div className="text-xs text-muted-foreground">
+                            by Tech Support
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg border border-orange-200">
                         <div>
                           <div className="font-medium text-sm">Sugar</div>
-                          <div className="text-xs text-muted-foreground">Refilled to 95%</div>
+                          <div className="text-xs text-muted-foreground">
+                            Refilled to 95%
+                          </div>
                         </div>
                         <div className="text-right">
                           <div className="text-xs font-medium">3 days ago</div>
-                          <div className="text-xs text-muted-foreground">by John Tech</div>
+                          <div className="text-xs text-muted-foreground">
+                            by John Tech
+                          </div>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
-
             </TabsContent>
 
             {/* Analytics Tab */}
