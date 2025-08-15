@@ -112,7 +112,12 @@ class ApiClient {
     });
   }
 
-  async signup(username: string, name: string, password: string, officeName: string) {
+  async signup(
+    username: string,
+    name: string,
+    password: string,
+    officeName: string,
+  ) {
     return this.request<{ message: string }>("/auth/signup", {
       method: "POST",
       body: JSON.stringify({ username, name, password, officeName }),

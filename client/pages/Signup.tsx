@@ -3,7 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Coffee, User, Building, Lock, Eye, EyeOff } from "lucide-react";
 import { apiClient } from "@/lib/api";
@@ -25,7 +31,7 @@ export default function Signup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -45,9 +51,9 @@ export default function Signup() {
         formData.username,
         formData.name,
         formData.password,
-        formData.officeName
+        formData.officeName,
       );
-      
+
       setSuccess("Registration successful! You can now login.");
       setTimeout(() => {
         navigate("/login");
@@ -61,7 +67,7 @@ export default function Signup() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (error) setError("");
   };
 
@@ -72,7 +78,9 @@ export default function Signup() {
           <div className="mx-auto mb-4 p-3 bg-orange-100 rounded-full w-fit">
             <Coffee className="h-8 w-8 text-orange-600" />
           </div>
-          <CardTitle className="text-2xl font-bold text-gray-900">Join CoffeeFlow</CardTitle>
+          <CardTitle className="text-2xl font-bold text-gray-900">
+            Join CoffeeFlow
+          </CardTitle>
           <CardDescription className="text-gray-600">
             Register as a technician to manage your office coffee machines
           </CardDescription>
@@ -196,8 +204,8 @@ export default function Signup() {
               </div>
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-orange-600 hover:bg-orange-700"
               disabled={isLoading}
             >
@@ -208,8 +216,8 @@ export default function Signup() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className="font-medium text-orange-600 hover:text-orange-700"
               >
                 Sign in here
