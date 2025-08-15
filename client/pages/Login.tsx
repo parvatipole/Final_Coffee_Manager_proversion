@@ -181,6 +181,18 @@ export default function Login() {
                 </div>
               </div>
             </div>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Don't have an account?{" "}
+                <Link
+                  to="/signup"
+                  className="font-medium text-orange-600 hover:text-orange-700"
+                >
+                  Register as Technician
+                </Link>
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
