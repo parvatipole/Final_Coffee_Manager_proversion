@@ -299,9 +299,9 @@ export default function MachineManagement() {
                 Supplies
               </TabsTrigger>
               <TabsTrigger value="alerts" className="flex items-center gap-2 relative">
-                <Bell className="w-4 h-4" />
+                <Bell className="w-4 h-4 animate-pulse" />
                 Alerts
-                <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5">
+                <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5 animate-pulse">
                   2
                 </Badge>
               </TabsTrigger>
