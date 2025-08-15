@@ -108,7 +108,8 @@ export default function MachineManagement() {
 
   const canEdit = user?.role === "technician";
   const [activeTab, setActiveTab] = useState("overview");
-  const [showFloatingNotification, setShowFloatingNotification] = useState(canEdit);
+  const [showFloatingNotification, setShowFloatingNotification] =
+    useState(canEdit);
 
   const supplies = [
     {
@@ -292,7 +293,11 @@ export default function MachineManagement() {
           </Card>
 
           {/* Main Dashboard Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="space-y-6"
+          >
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <Activity className="w-4 h-4" />
@@ -302,10 +307,16 @@ export default function MachineManagement() {
                 <Droplets className="w-4 h-4" />
                 Supplies
               </TabsTrigger>
-              <TabsTrigger value="alerts" className="flex items-center gap-2 relative">
+              <TabsTrigger
+                value="alerts"
+                className="flex items-center gap-2 relative"
+              >
                 <Bell className="w-4 h-4 animate-pulse" />
                 Alerts
-                <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5 animate-pulse">
+                <Badge
+                  variant="destructive"
+                  className="ml-1 px-1.5 py-0 text-xs h-5 min-w-5 animate-pulse"
+                >
                   2
                 </Badge>
               </TabsTrigger>

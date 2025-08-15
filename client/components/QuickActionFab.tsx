@@ -90,7 +90,7 @@ const QuickActionFab: React.FC = () => {
     },
   ];
 
-  const urgentActions = quickActions.filter(action => action.urgent);
+  const urgentActions = quickActions.filter((action) => action.urgent);
 
   return (
     <div className="fixed bottom-20 right-4 z-40">
@@ -111,8 +111,8 @@ const QuickActionFab: React.FC = () => {
                     <Zap className="w-6 h-6" />
                   </Button>
                   {urgentActions.length > 0 && (
-                    <Badge 
-                      variant="destructive" 
+                    <Badge
+                      variant="destructive"
                       className="absolute -top-2 -right-2 w-6 h-6 rounded-full p-0 flex items-center justify-center animate-pulse"
                     >
                       {urgentActions.length}
@@ -126,11 +126,7 @@ const QuickActionFab: React.FC = () => {
             </Tooltip>
           </PopoverTrigger>
 
-          <PopoverContent 
-            side="left" 
-            className="w-80 p-0 mr-4"
-            sideOffset={8}
-          >
+          <PopoverContent side="left" className="w-80 p-0 mr-4" sideOffset={8}>
             <Card className="border-0 shadow-lg">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-lg">
@@ -155,14 +151,21 @@ const QuickActionFab: React.FC = () => {
                       onClick={action.action}
                     >
                       <div className="flex items-center gap-3 w-full">
-                        <div className={`p-2 rounded-full ${action.color} text-white`}>
+                        <div
+                          className={`p-2 rounded-full ${action.color} text-white`}
+                        >
                           {action.icon}
                         </div>
                         <div className="flex-1 text-left">
                           <div className="flex items-center gap-2">
-                            <p className="font-medium text-sm">{action.title}</p>
+                            <p className="font-medium text-sm">
+                              {action.title}
+                            </p>
                             {action.urgent && (
-                              <Badge variant="destructive" className="text-xs px-1.5 py-0">
+                              <Badge
+                                variant="destructive"
+                                className="text-xs px-1.5 py-0"
+                              >
                                 URGENT
                               </Badge>
                             )}
@@ -176,7 +179,7 @@ const QuickActionFab: React.FC = () => {
                     </Button>
                   </motion.div>
                 ))}
-                
+
                 <div className="pt-2 border-t">
                   <Button
                     variant="outline"

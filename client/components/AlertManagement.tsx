@@ -73,7 +73,8 @@ const AlertManagement: React.FC = () => {
       type: "critical",
       category: "maintenance",
       title: "Filter Replacement Required",
-      description: "Water filter has reached end of life and needs immediate replacement",
+      description:
+        "Water filter has reached end of life and needs immediate replacement",
       priority: "high",
       status: "active",
       createdAt: "2024-01-15T10:30:00Z",
@@ -120,39 +121,56 @@ const AlertManagement: React.FC = () => {
 
   const getAlertIcon = (category: string) => {
     switch (category) {
-      case "maintenance": return <Wrench className="w-4 h-4" />;
-      case "supply": return <Droplets className="w-4 h-4" />;
-      case "cleaning": return <Settings className="w-4 h-4" />;
-      case "system": return <AlertTriangle className="w-4 h-4" />;
-      default: return <AlertTriangle className="w-4 h-4" />;
+      case "maintenance":
+        return <Wrench className="w-4 h-4" />;
+      case "supply":
+        return <Droplets className="w-4 h-4" />;
+      case "cleaning":
+        return <Settings className="w-4 h-4" />;
+      case "system":
+        return <AlertTriangle className="w-4 h-4" />;
+      default:
+        return <AlertTriangle className="w-4 h-4" />;
     }
   };
 
   const getAlertColor = (type: string, status: string) => {
     if (status === "resolved") return "bg-green-50 border-green-200";
     switch (type) {
-      case "critical": return "bg-red-50 border-red-200";
-      case "warning": return "bg-orange-50 border-orange-200";
-      case "info": return "bg-blue-50 border-blue-200";
-      default: return "bg-gray-50 border-gray-200";
+      case "critical":
+        return "bg-red-50 border-red-200";
+      case "warning":
+        return "bg-orange-50 border-orange-200";
+      case "info":
+        return "bg-blue-50 border-blue-200";
+      default:
+        return "bg-gray-50 border-gray-200";
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "destructive";
-      case "in_progress": return "secondary";
-      case "resolved": return "default";
-      default: return "outline";
+      case "active":
+        return "destructive";
+      case "in_progress":
+        return "secondary";
+      case "resolved":
+        return "default";
+      default:
+        return "outline";
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "text-red-600 bg-red-100";
-      case "medium": return "text-orange-600 bg-orange-100";
-      case "low": return "text-blue-600 bg-blue-100";
-      default: return "text-gray-600 bg-gray-100";
+      case "high":
+        return "text-red-600 bg-red-100";
+      case "medium":
+        return "text-orange-600 bg-orange-100";
+      case "low":
+        return "text-blue-600 bg-blue-100";
+      default:
+        return "text-gray-600 bg-gray-100";
     }
   };
 
@@ -173,14 +191,17 @@ const AlertManagement: React.FC = () => {
   const handleSaveAlert = () => {
     if (!selectedAlert) return;
 
-    const updatedAlerts = alerts.map(alert => {
+    const updatedAlerts = alerts.map((alert) => {
       if (alert.id === selectedAlert.id) {
         return {
           ...alert,
           status: editForm.status as Alert["status"],
           resolution: editForm.resolution,
           estimatedTime: editForm.estimatedTime,
-          resolvedAt: editForm.status === "resolved" ? new Date().toISOString() : undefined,
+          resolvedAt:
+            editForm.status === "resolved"
+              ? new Date().toISOString()
+              : undefined,
           resolvedBy: editForm.status === "resolved" ? user?.name : undefined,
         };
       }
@@ -192,13 +213,15 @@ const AlertManagement: React.FC = () => {
     setSelectedAlert(null);
   };
 
-  const activeAlerts = alerts.filter(alert => alert.status === "active");
-  const inProgressAlerts = alerts.filter(alert => alert.status === "in_progress");
-  const resolvedAlerts = alerts.filter(alert => alert.status === "resolved");
+  const activeAlerts = alerts.filter((alert) => alert.status === "active");
+  const inProgressAlerts = alerts.filter(
+    (alert) => alert.status === "in_progress",
+  );
+  const resolvedAlerts = alerts.filter((alert) => alert.status === "resolved");
 
   const renderAlertCard = (alert: Alert) => (
-    <Card 
-      key={alert.id} 
+    <Card
+      key={alert.id}
       className={`transition-all duration-300 hover:shadow-lg ${getAlertColor(alert.type, alert.status)}`}
     >
       <CardHeader className="pb-3">
@@ -208,7 +231,10 @@ const AlertManagement: React.FC = () => {
             <CardTitle className="text-sm font-medium">{alert.title}</CardTitle>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className={getPriorityColor(alert.priority)}>
+            <Badge
+              variant="outline"
+              className={getPriorityColor(alert.priority)}
+            >
               {alert.priority.toUpperCase()}
             </Badge>
             <Badge variant={getStatusColor(alert.status)}>
@@ -219,7 +245,7 @@ const AlertManagement: React.FC = () => {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{alert.description}</p>
-        
+
         <div className="grid grid-cols-2 gap-4 text-xs">
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
@@ -242,15 +268,17 @@ const AlertManagement: React.FC = () => {
             <p className="text-sm text-green-700">{alert.resolution}</p>
             <div className="flex items-center gap-4 mt-2 text-xs text-green-600">
               <span>By: {alert.resolvedBy}</span>
-              <span>On: {alert.resolvedAt && formatDate(alert.resolvedAt)}</span>
+              <span>
+                On: {alert.resolvedAt && formatDate(alert.resolvedAt)}
+              </span>
             </div>
           </div>
         )}
 
         {user?.role === "technician" && alert.status !== "resolved" && (
-          <Button 
+          <Button
             onClick={() => handleEditAlert(alert)}
-            variant="outline" 
+            variant="outline"
             size="sm"
             className="w-full"
           >
@@ -270,8 +298,12 @@ const AlertManagement: React.FC = () => {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-red-800">Active Alerts</p>
-                <p className="text-2xl font-bold text-red-600">{activeAlerts.length}</p>
+                <p className="text-sm font-medium text-red-800">
+                  Active Alerts
+                </p>
+                <p className="text-2xl font-bold text-red-600">
+                  {activeAlerts.length}
+                </p>
               </div>
               <AlertTriangle className="w-8 h-8 text-red-500" />
             </div>
@@ -282,8 +314,12 @@ const AlertManagement: React.FC = () => {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-orange-800">In Progress</p>
-                <p className="text-2xl font-bold text-orange-600">{inProgressAlerts.length}</p>
+                <p className="text-sm font-medium text-orange-800">
+                  In Progress
+                </p>
+                <p className="text-2xl font-bold text-orange-600">
+                  {inProgressAlerts.length}
+                </p>
               </div>
               <Clock className="w-8 h-8 text-orange-500" />
             </div>
@@ -295,7 +331,9 @@ const AlertManagement: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-green-800">Resolved</p>
-                <p className="text-2xl font-bold text-green-600">{resolvedAlerts.length}</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {resolvedAlerts.length}
+                </p>
               </div>
               <CheckCircle className="w-8 h-8 text-green-500" />
             </div>
@@ -306,8 +344,12 @@ const AlertManagement: React.FC = () => {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-blue-800">Total Alerts</p>
-                <p className="text-2xl font-bold text-blue-600">{alerts.length}</p>
+                <p className="text-sm font-medium text-blue-800">
+                  Total Alerts
+                </p>
+                <p className="text-2xl font-bold text-blue-600">
+                  {alerts.length}
+                </p>
               </div>
               <FileText className="w-8 h-8 text-blue-500" />
             </div>
@@ -339,7 +381,9 @@ const AlertManagement: React.FC = () => {
               <Card className="p-8 text-center">
                 <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
                 <h3 className="text-lg font-medium">No Active Alerts</h3>
-                <p className="text-muted-foreground">All systems are running smoothly!</p>
+                <p className="text-muted-foreground">
+                  All systems are running smoothly!
+                </p>
               </Card>
             )}
           </div>
@@ -352,7 +396,9 @@ const AlertManagement: React.FC = () => {
               <Card className="p-8 text-center">
                 <Clock className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium">No Alerts in Progress</h3>
-                <p className="text-muted-foreground">Start working on active alerts to see them here.</p>
+                <p className="text-muted-foreground">
+                  Start working on active alerts to see them here.
+                </p>
               </Card>
             )}
           </div>
@@ -365,7 +411,9 @@ const AlertManagement: React.FC = () => {
               <Card className="p-8 text-center">
                 <History className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium">No Resolved Alerts</h3>
-                <p className="text-muted-foreground">Resolved alerts will appear here.</p>
+                <p className="text-muted-foreground">
+                  Resolved alerts will appear here.
+                </p>
               </Card>
             )}
           </div>
@@ -389,12 +437,19 @@ const AlertManagement: React.FC = () => {
             <div className="space-y-4">
               <div className="p-3 bg-muted rounded-lg">
                 <h4 className="font-medium">{selectedAlert.title}</h4>
-                <p className="text-sm text-muted-foreground">{selectedAlert.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {selectedAlert.description}
+                </p>
               </div>
 
               <div className="space-y-2">
                 <Label>Status</Label>
-                <Select value={editForm.status} onValueChange={(value) => setEditForm({...editForm, status: value})}>
+                <Select
+                  value={editForm.status}
+                  onValueChange={(value) =>
+                    setEditForm({ ...editForm, status: value })
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -411,7 +466,9 @@ const AlertManagement: React.FC = () => {
                   <Label>Resolution Notes</Label>
                   <Textarea
                     value={editForm.resolution}
-                    onChange={(e) => setEditForm({...editForm, resolution: e.target.value})}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, resolution: e.target.value })
+                    }
                     placeholder="Describe what action was taken or is being taken..."
                     rows={3}
                   />
@@ -423,7 +480,12 @@ const AlertManagement: React.FC = () => {
                   <Label>Estimated Completion Time</Label>
                   <Input
                     value={editForm.estimatedTime}
-                    onChange={(e) => setEditForm({...editForm, estimatedTime: e.target.value})}
+                    onChange={(e) =>
+                      setEditForm({
+                        ...editForm,
+                        estimatedTime: e.target.value,
+                      })
+                    }
                     placeholder="e.g., 2 hours, 30 minutes"
                   />
                 </div>
@@ -432,7 +494,10 @@ const AlertManagement: React.FC = () => {
           )}
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsEditDialogOpen(false)}
+            >
               <X className="w-4 h-4 mr-2" />
               Cancel
             </Button>

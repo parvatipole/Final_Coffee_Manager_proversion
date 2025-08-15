@@ -60,9 +60,14 @@ export default function Signup() {
       }, 2000);
     } catch (error: any) {
       // Check if it's a backend connection issue
-      if (error.message.includes("Backend unavailable") || error.message.includes("fetch")) {
+      if (
+        error.message.includes("Backend unavailable") ||
+        error.message.includes("fetch")
+      ) {
         // Demo mode fallback
-        setSuccess("Demo mode: Registration simulated! You can now login with tech1/password.");
+        setSuccess(
+          "Demo mode: Registration simulated! You can now login with tech1/password.",
+        );
         setTimeout(() => {
           navigate("/login");
         }, 2000);
