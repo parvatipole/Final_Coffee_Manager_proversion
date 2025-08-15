@@ -146,15 +146,6 @@ export default function MachineStatusDashboard({
               <Badge variant={overallStatus.color as any} className="gap-1">
                 {overallStatus.text}
               </Badge>
-              {canControl && (
-                <Button
-                  variant={isSimulating ? 'destructive' : 'outline'}
-                  size="sm"
-                  onClick={() => setIsSimulating(!isSimulating)}
-                >
-                  {isSimulating ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                </Button>
-              )}
             </div>
           </div>
         </CardHeader>
