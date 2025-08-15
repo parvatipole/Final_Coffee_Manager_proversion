@@ -64,6 +64,16 @@ public class User implements UserDetails {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+
+    public User(String username, String name, String password, Role role, String officeName) {
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.officeName = officeName;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
     
     @PrePersist
     protected void onCreate() {
