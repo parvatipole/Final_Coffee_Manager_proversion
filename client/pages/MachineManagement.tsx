@@ -81,10 +81,10 @@ export default function MachineManagement() {
   // Get office-specific machine data
   const getOfficeMachineData = () => {
     const officeMachines = {
-      "Pune Main Office": {
-        id: "PUN-001",
+      "Hinjewadi IT Park": {
+        id: "HIJ-001",
         name: "Coffee Station Alpha",
-        location: "Pune Main Office - 2nd Floor",
+        location: "Hinjewadi IT Park - Building A2",
         status: "operational" as const,
         lastMaintenance: "2024-01-10",
         nextMaintenance: "2024-02-10",
@@ -93,10 +93,10 @@ export default function MachineManagement() {
         usage: { dailyCups: 127, weeklyCups: 890 },
         notes: "Machine running smoothly. Recent cleaning completed on schedule.",
       },
-      "Pune Tech Park": {
-        id: "PUN-002",
+      "Koregaon Park Office": {
+        id: "KOR-001",
         name: "Espresso Pro",
-        location: "Pune Tech Park - Ground Floor",
+        location: "Koregaon Park Office - Ground Floor",
         status: "maintenance" as const,
         lastMaintenance: "2024-01-05",
         nextMaintenance: "2024-02-05",
@@ -105,10 +105,10 @@ export default function MachineManagement() {
         usage: { dailyCups: 89, weeklyCups: 650 },
         notes: "Filter replacement scheduled for today.",
       },
-      "Mumbai Central Office": {
-        id: "MUM-001",
+      "Baner Tech Hub": {
+        id: "BAN-001",
         name: "Latte Master",
-        location: "Mumbai Central Office - 5th Floor",
+        location: "Baner Tech Hub - 3rd Floor",
         status: "operational" as const,
         lastMaintenance: "2024-01-12",
         nextMaintenance: "2024-02-12",
@@ -118,7 +118,7 @@ export default function MachineManagement() {
         notes: "High usage office. Consider additional machine.",
       },
       "Mumbai BKC": {
-        id: "MUM-002",
+        id: "BKC-001",
         name: "Cappuccino Deluxe",
         location: "Mumbai BKC - 12th Floor",
         status: "operational" as const,
@@ -129,14 +129,26 @@ export default function MachineManagement() {
         usage: { dailyCups: 98, weeklyCups: 720 },
         notes: "New installation. Performing well.",
       },
+      "Andheri East": {
+        id: "AND-001",
+        name: "Premium Coffee Station",
+        location: "Andheri East - 8th Floor",
+        status: "operational" as const,
+        lastMaintenance: "2024-01-15",
+        nextMaintenance: "2024-02-15",
+        supplies: { water: 95, milk: 70, coffeeBeans: 80, sugar: 85 },
+        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 90, pressure: 13 },
+        usage: { dailyCups: 110, weeklyCups: 770 },
+        notes: "Excellent performance. Regular maintenance on track.",
+      },
     };
 
     const userOffice = user?.officeName;
     if (user?.role === "admin") {
       // Admin sees the first machine as default
-      return officeMachines["Pune Main Office"];
+      return officeMachines["Hinjewadi IT Park"];
     }
-    return officeMachines[userOffice as keyof typeof officeMachines] || officeMachines["Pune Main Office"];
+    return officeMachines[userOffice as keyof typeof officeMachines] || officeMachines["Hinjewadi IT Park"];
   };
 
   const [machineData, setMachineData] = useState<MachineData>(getOfficeMachineData());
