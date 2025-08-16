@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Coffee, Settings, Eye, Edit3 } from "lucide-react";
+import { Coffee } from "lucide-react";
 
 export default function Login() {
   const [username, setUsername] = useState("");
