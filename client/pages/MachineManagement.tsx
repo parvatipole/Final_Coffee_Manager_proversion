@@ -650,6 +650,16 @@ export default function MachineManagement({
                 />
               </div>
 
+              {/* Power Status Control */}
+              <PowerStatusControl
+                machineId={machineData.id}
+                machineName={machineData.name}
+                powerStatus={machineData.powerStatus}
+                lastPowerUpdate={machineData.lastPowerUpdate}
+                canEdit={canEdit}
+                onPowerStatusChange={handlePowerStatusChange}
+              />
+
               {/* Enhanced Machine Information */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card className="animate-fadeIn">
