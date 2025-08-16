@@ -84,6 +84,7 @@ export default function MachineManagement({
   officePath,
 }: MachineManagementProps = {}) {
   const { user } = useAuth();
+  const { machineId } = useParams<{ machineId?: string }>();
   const [isEditing, setIsEditing] = useState(false);
   const [refillModalOpen, setRefillModalOpen] = useState(false);
   const [selectedSupply, setSelectedSupply] = useState<any>(null);
