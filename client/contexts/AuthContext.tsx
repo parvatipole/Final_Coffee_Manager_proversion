@@ -9,6 +9,7 @@ export interface User {
   username: string;
   role: UserRole;
   name: string;
+  city?: string;
   officeName?: string; // Office name for technicians, null for admin
 }
 
