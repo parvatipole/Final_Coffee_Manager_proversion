@@ -133,7 +133,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         role: "technician",
         name: "John Technician",
         city: "pune",
-        officeName: "Pune Main Office",
+        officeName: "Hinjewadi IT Park",
       },
       {
         id: "3",
@@ -141,7 +141,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         role: "technician",
         name: "Priya Shah",
         city: "mumbai",
-        officeName: "Mumbai Central Office",
+        officeName: "Mumbai BKC",
       },
       {
         id: "2",
