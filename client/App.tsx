@@ -56,7 +56,11 @@ function AppRoutes() {
           path="/"
           element={
             user ? (
-              <Navigate to="/dashboard" replace />
+              user.role === "technician" ? (
+                <Navigate to="/machine" replace />
+              ) : (
+                <Navigate to="/dashboard" replace />
+              )
             ) : (
               <Navigate to="/login" replace />
             )
