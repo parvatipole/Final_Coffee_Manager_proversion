@@ -176,7 +176,7 @@ export default function Signup() {
             Join CoffeeFlow
           </CardTitle>
           <CardDescription className="text-gray-600">
-            Register as a technician to manage your office coffee machines
+            Register to access the CoffeeFlow management system
           </CardDescription>
         </CardHeader>
 
