@@ -10,9 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Coffee, User, Building, Lock, Eye, EyeOff } from "lucide-react";
-import { apiClient } from "@/lib/api";
+import { Coffee, User, Building, Lock, Eye, EyeOff, MapPin } from "lucide-react";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -21,8 +27,25 @@ export default function Signup() {
     name: "",
     password: "",
     confirmPassword: "",
+    city: "",
     officeName: "",
   });
+
+  // Office options based on city
+  const officeOptions = {
+    pune: [
+      "Pune Main Office",
+      "Pune Tech Park",
+      "Pune Downtown",
+      "Pune North Office",
+    ],
+    mumbai: [
+      "Mumbai Central Office",
+      "Mumbai BKC",
+      "Mumbai Andheri",
+      "Mumbai Powai",
+    ],
+  };
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
