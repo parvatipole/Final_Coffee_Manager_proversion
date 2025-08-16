@@ -178,14 +178,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
     let targetOffice: string;
 
     if (officePath) {
-      // Convert path back to office name
+      // Convert path back to office name using proper mapping
       targetOffice = pathToOfficeName(officePath);
-      // Find the closest match in our office data
-      const officeKeys = Object.keys(officeMachines);
-      const matchingOffice = officeKeys.find(office =>
-        office.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '') === officePath
-      );
-      targetOffice = matchingOffice || officeKeys[0];
     } else if (user?.officeName) {
       targetOffice = user.officeName;
     } else {
