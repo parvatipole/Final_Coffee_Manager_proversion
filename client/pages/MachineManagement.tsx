@@ -147,8 +147,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
         nextMaintenance: "2024-02-08",
         supplies: { water: 70, milk: 85, coffeeBeans: 60, sugar: 80 },
         maintenance: {
-          filterStatus: "good",
-          cleaningStatus: "recent",
+          filterStatus: "good" as const,
+          cleaningStatus: "clean" as const,
           temperature: 91,
           pressure: 14,
         },
@@ -198,8 +198,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
         nextMaintenance: "2024-02-11",
         supplies: { water: 75, milk: 88, coffeeBeans: 65, sugar: 78 },
         maintenance: {
-          filterStatus: "good",
-          cleaningStatus: "recent",
+          filterStatus: "good" as const,
+          cleaningStatus: "clean" as const,
           temperature: 89,
           pressure: 14,
         },
@@ -266,8 +266,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
         nextMaintenance: "2024-02-12",
         supplies: { water: 92, milk: 68, coffeeBeans: 84, sugar: 76 },
         maintenance: {
-          filterStatus: "good",
-          cleaningStatus: "recent",
+          filterStatus: "good" as const,
+          cleaningStatus: "clean" as const,
           temperature: 94,
           pressure: 17,
         },
