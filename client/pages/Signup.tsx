@@ -65,38 +65,49 @@ export default function Signup() {
       return;
     }
 
+    if (!formData.city) {
+      setError("Please select a city");
+      return;
+    }
+
+    if (!formData.officeName) {
+      setError("Please select an office");
+      return;
+    }
+
     setIsLoading(true);
     setError("");
-    setSuccess("");
 
+    // Simple registration - save to localStorage
     try {
-      await apiClient.signup(
-        formData.username,
-        formData.name,
-        formData.password,
-        formData.officeName,
-      );
+      const userData = {
+        username: formData.username,
+        name: formData.name,
+        password: formData.password,
+        city: formData.city,
+        officeName: formData.officeName,
+        role: "technician",
+        registeredAt: new Date().toISOString(),
+      };
+
+      // Check if username already exists
+      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+      if (existingUsers.find((user: any) => user.username === formData.username)) {
+        setError("Username already exists. Please choose a different one.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Save user
+      existingUsers.push(userData);
+      localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
 
       setSuccess("Registration successful! You can now login.");
       setTimeout(() => {
         navigate("/login");
       }, 2000);
     } catch (error: any) {
-      // Check if it's a backend connection issue
-      if (
-        error.message.includes("Backend unavailable") ||
-        error.message.includes("fetch")
-      ) {
-        // Demo mode fallback
-        setSuccess(
-          "Demo mode: Registration simulated! You can now login with tech1/password.",
-        );
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      } else {
-        setError(error.message || "Registration failed. Please try again.");
-      }
+      setError("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
