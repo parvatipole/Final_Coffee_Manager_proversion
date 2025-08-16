@@ -94,9 +94,9 @@ export default function Signup() {
         username: formData.username,
         name: formData.name,
         password: formData.password,
+        role: formData.role,
         city: formData.city,
         officeName: formData.officeName,
-        role: "technician",
         registeredAt: new Date().toISOString(),
       };
 
