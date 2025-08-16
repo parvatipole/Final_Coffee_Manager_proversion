@@ -321,10 +321,16 @@ export default function MachineManagement({
       targetOffice = "Hinjewadi IT Park";
     }
 
-    return (
-      officeMachines[targetOffice as keyof typeof officeMachines] ||
-      officeMachines["Hinjewadi IT Park"]
-    );
+    const machineData = officeMachines[targetOffice as keyof typeof officeMachines] ||
+      officeMachines["Hinjewadi IT Park"];
+
+    // Add default power status if not present (for backward compatibility)
+    if (!machineData.powerStatus) {
+      machineData.powerStatus = machineData.status === "offline" ? "offline" : "online";
+      machineData.lastPowerUpdate = "2024-01-16 10:00";
+    }
+
+    return machineData;
   };
 
   const [machineData, setMachineData] = useState<MachineData>(
