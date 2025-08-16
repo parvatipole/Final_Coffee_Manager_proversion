@@ -76,31 +76,68 @@ export default function MachineManagement() {
   const [selectedSupply, setSelectedSupply] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [machineData, setMachineData] = useState<MachineData>({
-    id: "A-001",
-    name: "Machine A-001",
-    location: "New York - Main Office - 2nd Floor",
-    status: "operational",
-    lastMaintenance: "2024-01-10",
-    nextMaintenance: "2024-02-10",
-    supplies: {
-      water: 85,
-      milk: 60,
-      coffeeBeans: 75,
-      sugar: 90,
-    },
-    maintenance: {
-      filterStatus: "good",
-      cleaningStatus: "clean",
-      temperature: 92,
-      pressure: 15,
-    },
-    usage: {
-      dailyCups: 127,
-      weeklyCups: 890,
-    },
-    notes: "Machine running smoothly. Recent cleaning completed on schedule.",
-  });
+  // Get office-specific machine data
+  const getOfficeMachineData = () => {
+    const officeMachines = {
+      "Pune Main Office": {
+        id: "PUN-001",
+        name: "Coffee Station Alpha",
+        location: "Pune Main Office - 2nd Floor",
+        status: "operational" as const,
+        lastMaintenance: "2024-01-10",
+        nextMaintenance: "2024-02-10",
+        supplies: { water: 85, milk: 60, coffeeBeans: 75, sugar: 90 },
+        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 92, pressure: 15 },
+        usage: { dailyCups: 127, weeklyCups: 890 },
+        notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+      },
+      "Pune Tech Park": {
+        id: "PUN-002",
+        name: "Espresso Pro",
+        location: "Pune Tech Park - Ground Floor",
+        status: "maintenance" as const,
+        lastMaintenance: "2024-01-05",
+        nextMaintenance: "2024-02-05",
+        supplies: { water: 45, milk: 80, coffeeBeans: 30, sugar: 95 },
+        maintenance: { filterStatus: "replace", cleaningStatus: "needed", temperature: 88, pressure: 12 },
+        usage: { dailyCups: 89, weeklyCups: 650 },
+        notes: "Filter replacement scheduled for today.",
+      },
+      "Mumbai Central Office": {
+        id: "MUM-001",
+        name: "Latte Master",
+        location: "Mumbai Central Office - 5th Floor",
+        status: "operational" as const,
+        lastMaintenance: "2024-01-12",
+        nextMaintenance: "2024-02-12",
+        supplies: { water: 90, milk: 45, coffeeBeans: 85, sugar: 70 },
+        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 94, pressure: 16 },
+        usage: { dailyCups: 156, weeklyCups: 1120 },
+        notes: "High usage office. Consider additional machine.",
+      },
+      "Mumbai BKC": {
+        id: "MUM-002",
+        name: "Cappuccino Deluxe",
+        location: "Mumbai BKC - 12th Floor",
+        status: "operational" as const,
+        lastMaintenance: "2024-01-08",
+        nextMaintenance: "2024-02-08",
+        supplies: { water: 70, milk: 85, coffeeBeans: 60, sugar: 80 },
+        maintenance: { filterStatus: "good", cleaningStatus: "recent", temperature: 91, pressure: 14 },
+        usage: { dailyCups: 98, weeklyCups: 720 },
+        notes: "New installation. Performing well.",
+      },
+    };
+
+    const userOffice = user?.officeName;
+    if (user?.role === "admin") {
+      // Admin sees the first machine as default
+      return officeMachines["Pune Main Office"];
+    }
+    return officeMachines[userOffice as keyof typeof officeMachines] || officeMachines["Pune Main Office"];
+  };
+
+  const [machineData, setMachineData] = useState<MachineData>(getOfficeMachineData());
 
   const canEdit = user?.role === "technician";
 
