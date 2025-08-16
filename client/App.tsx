@@ -104,6 +104,14 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/machine/:machineId"
+          element={
+            <ProtectedRoute>
+              <MachineManagement />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
