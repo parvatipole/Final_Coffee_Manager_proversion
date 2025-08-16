@@ -132,13 +132,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: "tech1",
         role: "technician",
         name: "John Technician",
-        officeName: "Downtown Office",
+        city: "pune",
+        officeName: "Pune Main Office",
+      },
+      {
+        id: "3",
+        username: "tech2",
+        role: "technician",
+        name: "Priya Shah",
+        city: "mumbai",
+        officeName: "Mumbai Central Office",
       },
       {
         id: "2",
         username: "admin1",
         role: "admin",
         name: "Sarah Admin",
+        city: null,
         officeName: null, // Admin has access to all offices
       },
     ];
