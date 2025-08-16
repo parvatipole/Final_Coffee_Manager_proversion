@@ -70,6 +70,11 @@ export default function Signup() {
       return;
     }
 
+    if (!formData.role) {
+      setError("Please select a role");
+      return;
+    }
+
     if (!formData.city) {
       setError("Please select a city");
       return;
