@@ -24,18 +24,12 @@ import { Coffee, Settings, Eye, Edit3 } from "lucide-react";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedRole, setSelectedRole] = useState<UserRole | "">("");
   const [error, setError] = useState("");
   const { login, isLoading } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    if (!selectedRole) {
-      setError("Please select a role");
-      return;
-    }
 
     const success = await login(username, password);
     if (!success) {
