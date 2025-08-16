@@ -325,12 +325,14 @@ export default function MachineManagement({
       targetOffice = "Hinjewadi IT Park";
     }
 
-    const machineData = officeMachines[targetOffice as keyof typeof officeMachines] ||
+    const machineData =
+      officeMachines[targetOffice as keyof typeof officeMachines] ||
       officeMachines["Hinjewadi IT Park"];
 
     // Add default power status if not present (for backward compatibility)
     if (!machineData.powerStatus) {
-      machineData.powerStatus = machineData.status === "offline" ? "offline" : "online";
+      machineData.powerStatus =
+        machineData.status === "offline" ? "offline" : "online";
       machineData.lastPowerUpdate = "2024-01-16 10:00";
     }
 
@@ -468,7 +470,7 @@ export default function MachineManagement({
   const handlePowerStatusChange = (newStatus: "online" | "offline") => {
     if (!canEdit) return;
 
-    setMachineData(prev => ({
+    setMachineData((prev) => ({
       ...prev,
       powerStatus: newStatus,
       lastPowerUpdate: new Date().toLocaleString("en-US", {
@@ -477,10 +479,15 @@ export default function MachineManagement({
         day: "2-digit",
         hour: "2-digit",
         minute: "2-digit",
-        hour12: false
+        hour12: false,
       }),
       // Also update machine status if power goes offline
-      status: newStatus === "offline" ? "offline" : (prev.status === "offline" ? "operational" : prev.status)
+      status:
+        newStatus === "offline"
+          ? "offline"
+          : prev.status === "offline"
+            ? "operational"
+            : prev.status,
     }));
   };
 
@@ -619,7 +626,11 @@ export default function MachineManagement({
                       machineData.status.slice(1)}
                   </Badge>
                   <Badge
-                    variant={machineData.powerStatus === "online" ? "default" : "destructive"}
+                    variant={
+                      machineData.powerStatus === "online"
+                        ? "default"
+                        : "destructive"
+                    }
                     className="gap-1"
                   >
                     {machineData.powerStatus === "online" ? (

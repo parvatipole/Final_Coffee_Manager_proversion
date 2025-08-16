@@ -3,14 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  Power, 
-  Zap, 
-  ZapOff, 
-  Clock,
-  Shield,
-  ShieldAlert 
-} from "lucide-react";
+import { Power, Zap, ZapOff, Clock, Shield, ShieldAlert } from "lucide-react";
 
 interface PowerStatusControlProps {
   machineId: string;
@@ -21,22 +14,22 @@ interface PowerStatusControlProps {
   onPowerStatusChange?: (newStatus: "online" | "offline") => void;
 }
 
-export default function PowerStatusControl({ 
-  machineId, 
-  machineName, 
-  powerStatus, 
-  lastPowerUpdate, 
-  canEdit, 
-  onPowerStatusChange 
+export default function PowerStatusControl({
+  machineId,
+  machineName,
+  powerStatus,
+  lastPowerUpdate,
+  canEdit,
+  onPowerStatusChange,
 }: PowerStatusControlProps) {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handlePowerToggle = async () => {
     if (!canEdit || !onPowerStatusChange) return;
-    
+
     setIsUpdating(true);
     const newStatus = powerStatus === "online" ? "offline" : "online";
-    
+
     // Simulate API call delay
     setTimeout(() => {
       onPowerStatusChange(newStatus);
@@ -45,9 +38,12 @@ export default function PowerStatusControl({
   };
 
   const isOnline = powerStatus === "online";
-  
+
   return (
-    <Card className="border-l-4" style={{ borderLeftColor: isOnline ? "#10b981" : "#ef4444" }}>
+    <Card
+      className="border-l-4"
+      style={{ borderLeftColor: isOnline ? "#10b981" : "#ef4444" }}
+    >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-base">
           {isOnline ? (
@@ -58,12 +54,12 @@ export default function PowerStatusControl({
           Power Status
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Status Display */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Badge 
+            <Badge
               variant={isOnline ? "default" : "destructive"}
               className="gap-1"
             >
@@ -74,7 +70,7 @@ export default function PowerStatusControl({
               )}
               {isOnline ? "ONLINE" : "OFFLINE"}
             </Badge>
-            
+
             <div className="text-sm text-muted-foreground flex items-center gap-1">
               <Clock className="w-3 h-3" />
               {lastPowerUpdate}
@@ -112,12 +108,13 @@ export default function PowerStatusControl({
                 </>
               )}
             </Button>
-            
+
             {!isOnline && (
               <Alert>
                 <ShieldAlert className="h-4 w-4" />
                 <AlertDescription className="text-sm">
-                  Machine is offline due to power outage. Click "Electricity Restored" when power comes back.
+                  Machine is offline due to power outage. Click "Electricity
+                  Restored" when power comes back.
                 </AlertDescription>
               </Alert>
             )}
@@ -129,10 +126,9 @@ export default function PowerStatusControl({
           <div className="text-sm text-gray-600">
             <div className="flex items-center gap-1">
               <Power className="w-3 h-3" />
-              {isOnline 
-                ? "Machine has power and is operational" 
-                : "Machine is offline due to power outage"
-              }
+              {isOnline
+                ? "Machine has power and is operational"
+                : "Machine is offline due to power outage"}
             </div>
           </div>
         )}

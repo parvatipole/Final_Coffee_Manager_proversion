@@ -155,7 +155,7 @@ export default function Signup() {
       role,
       // Clear city and office when admin is selected
       city: role === "admin" ? "" : prev.city,
-      officeName: role === "admin" ? "" : prev.officeName
+      officeName: role === "admin" ? "" : prev.officeName,
     }));
     if (error) setError("");
   };
