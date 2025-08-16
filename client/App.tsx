@@ -48,11 +48,11 @@ function AppRoutes() {
       <Routes>
         <Route
           path="/login"
-          element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+          element={user ? <Navigate to="/" replace /> : <Login />}
         />
         <Route
           path="/signup"
-          element={user ? <Navigate to="/dashboard" replace /> : <Signup />}
+          element={user ? <Navigate to="/" replace /> : <Signup />}
         />
         <Route
           path="/"
