@@ -106,8 +106,8 @@ export default function Signup() {
         name: formData.name,
         password: formData.password,
         role: formData.role,
-        city: formData.city,
-        officeName: formData.officeName,
+        city: formData.role === "admin" ? null : formData.city,
+        officeName: formData.role === "admin" ? null : formData.officeName,
         registeredAt: new Date().toISOString(),
       };
 
