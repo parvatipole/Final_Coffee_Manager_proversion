@@ -78,40 +78,6 @@ export default function MachineStatusDashboard({
     return () => clearInterval(interval);
   }, [isSimulating, onStatusChange]);
 
-  const handleQuickAction = (action: string) => {
-    if (!canControl) return;
-
-    switch (action) {
-      case "clean":
-        setStatus((prev) => ({
-          ...prev,
-          cleaning: true,
-          brewing: false,
-        }));
-        setTimeout(() => {
-          setStatus((prev) => ({
-            ...prev,
-            cleaning: false,
-            lastCleaning: 0,
-          }));
-        }, 5000);
-        break;
-      case "restart":
-        setStatus((prev) => ({
-          ...prev,
-          heating: true,
-          brewing: false,
-          error: false,
-        }));
-        break;
-      case "test":
-        setStatus((prev) => ({ ...prev, brewing: true }));
-        setTimeout(() => {
-          setStatus((prev) => ({ ...prev, brewing: false }));
-        }, 3000);
-        break;
-    }
-  };
 
   const getStatusColor = (value: number, optimal: [number, number]) => {
     if (value >= optimal[0] && value <= optimal[1]) return "text-green-600";
