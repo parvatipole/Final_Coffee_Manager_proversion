@@ -462,6 +462,25 @@ export default function MachineManagement({
     setRefillModalOpen(true);
   };
 
+  const handlePowerStatusChange = (newStatus: "online" | "offline") => {
+    if (!canEdit) return;
+
+    setMachineData(prev => ({
+      ...prev,
+      powerStatus: newStatus,
+      lastPowerUpdate: new Date().toLocaleString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }),
+      // Also update machine status if power goes offline
+      status: newStatus === "offline" ? "offline" : (prev.status === "offline" ? "operational" : prev.status)
+    }));
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "operational":
