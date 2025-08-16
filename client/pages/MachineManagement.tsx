@@ -366,7 +366,7 @@ export default function MachineManagement({ officePath }: MachineManagementProps
               <Coffee className="w-5 h-5 text-primary-foreground" />
             </div>
             <h1 className="text-xl font-bold text-coffee-brown">
-              Machine Management
+              {officePath ? `${pathToOfficeName(officePath)} - Coffee Machines` : "Machine Management"}
             </h1>
           </div>
 
