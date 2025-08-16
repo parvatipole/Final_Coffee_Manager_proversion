@@ -44,6 +44,7 @@ import RealTimeMonitor from "@/components/RealTimeMonitor";
 import UsageChart from "@/components/UsageChart";
 import MachineStatusDashboard from "@/components/MachineStatusDashboard";
 import InteractiveBreadcrumb from "@/components/InteractiveBreadcrumb";
+import { pathToOfficeName } from "@/lib/officeRouting";
 
 interface MachineData {
   id: string;
