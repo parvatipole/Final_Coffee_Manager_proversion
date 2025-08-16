@@ -210,6 +210,22 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="role">Role</Label>
+              <div className="relative">
+                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
+                <Select value={formData.role} onValueChange={handleRoleChange} disabled={isLoading}>
+                  <SelectTrigger className="pl-10">
+                    <SelectValue placeholder="Select your role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="technician">Technician</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="city">City</Label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
