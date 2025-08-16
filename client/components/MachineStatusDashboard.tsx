@@ -12,7 +12,6 @@ import {
   CheckCircle,
   WifiOff,
   Settings,
-  RotateCcw,
   Activity,
 } from "lucide-react";
 
