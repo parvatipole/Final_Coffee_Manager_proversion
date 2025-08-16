@@ -15,7 +15,7 @@ import CorporateDashboard from "./pages/CorporateDashboard";
 import MachineManagement from "./pages/MachineManagement";
 import NotFound from "./pages/NotFound";
 import { officeNameToPath, isValidOfficePath } from "./lib/officeRouting";
-import OfficeSpecificMachine from "./components/OfficeSpecificMachine";
+import OfficeOverview from "./pages/OfficeOverview";
 import FloatingNavigation, {
   QuickBackFab,
 } from "./components/FloatingNavigation";
