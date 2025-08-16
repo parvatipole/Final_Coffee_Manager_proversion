@@ -218,62 +218,6 @@ export default function MachineStatusDashboard({
         )}
       </Card>
 
-      {/* Quick Actions */}
-      {canControl && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <Button
-                variant="outline"
-                onClick={() => handleQuickAction("clean")}
-                disabled={status.cleaning || status.brewing}
-                className="h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Settings className="w-5 h-5" />
-                <div className="text-center">
-                  <div className="font-medium">Start Cleaning</div>
-                  <div className="text-xs text-muted-foreground">
-                    Last: {status.lastCleaning}h ago
-                  </div>
-                </div>
-              </Button>
-
-              <Button
-                variant="outline"
-                onClick={() => handleQuickAction("test")}
-                disabled={status.cleaning || status.brewing}
-                className="h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Coffee className="w-5 h-5" />
-                <div className="text-center">
-                  <div className="font-medium">Test Brew</div>
-                  <div className="text-xs text-muted-foreground">
-                    Quick test cycle
-                  </div>
-                </div>
-              </Button>
-
-              <Button
-                variant="outline"
-                onClick={() => handleQuickAction("restart")}
-                disabled={status.cleaning || status.brewing}
-                className="h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <RotateCcw className="w-5 h-5" />
-                <div className="text-center">
-                  <div className="font-medium">Restart</div>
-                  <div className="text-xs text-muted-foreground">
-                    System restart
-                  </div>
-                </div>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Maintenance Alerts */}
       <Card>
