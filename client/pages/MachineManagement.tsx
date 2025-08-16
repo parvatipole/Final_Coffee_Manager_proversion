@@ -113,8 +113,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
         nextMaintenance: "2024-02-05",
         supplies: { water: 45, milk: 80, coffeeBeans: 30, sugar: 95 },
         maintenance: {
-          filterStatus: "replace",
-          cleaningStatus: "needed",
+          filterStatus: "needs_replacement" as const,
+          cleaningStatus: "needs_cleaning" as const,
           temperature: 88,
           pressure: 12,
         },
