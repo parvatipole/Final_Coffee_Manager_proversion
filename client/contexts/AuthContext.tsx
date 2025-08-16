@@ -83,38 +83,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   ): Promise<boolean> => {
     setIsLoading(true);
 
-    // Skip backend API calls in demo mode
-    if (demoMode) {
-      return performMockLogin(username, password);
-    }
-
     try {
-      // Try real backend API first
-      const response = await apiClient.login(username, password);
+      // Check registered users first
+      const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+      const foundUser = registeredUsers.find((user: any) =>
+        user.username === username && user.password === password
+      );
 
-      // Store JWT token
-      tokenManager.setToken(response.accessToken);
+      if (foundUser) {
+        const userData: User = {
+          id: foundUser.username,
+          username: foundUser.username,
+          name: foundUser.name,
+          role: foundUser.role as UserRole,
+          city: foundUser.city,
+          officeName: foundUser.officeName,
+        };
 
-      // Create user object
-      const userData: User = {
-        id: response.id.toString(),
-        username: response.username,
-        name: response.name,
-        role: response.role as UserRole,
-        officeName: response.officeName,
-      };
+        setUser(userData);
+        localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
 
-      // Store user data
-      setUser(userData);
-      localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
+        // Simple token for demo
+        localStorage.setItem("coffee_auth_token", "simple_token_" + Date.now());
 
-      // Initialize MQTT connection
-      await initializeMQTT();
+        // Initialize MQTT connection
+        await initializeMQTT();
 
-      setIsLoading(false);
-      return true;
+        setIsLoading(false);
+        return true;
+      }
+
+      // Fall back to demo users if not found in registered users
+      return performMockLogin(username, password);
     } catch (error) {
-      // Silently fall back to demo mode when backend is unavailable
+      // Fallback to demo mode
       return performMockLogin(username, password);
     }
   };
