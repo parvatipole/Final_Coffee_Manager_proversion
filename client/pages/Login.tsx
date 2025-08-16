@@ -95,47 +95,6 @@ export default function Login() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="role" className="text-gray-700 font-medium">
-                  Select Role
-                </Label>
-                <Select
-                  value={selectedRole}
-                  onValueChange={(value: UserRole) => setSelectedRole(value)}
-                >
-                  <SelectTrigger className="h-11 border-gray-200 focus:border-orange-500 focus:ring-orange-500">
-                    <SelectValue placeholder="Choose your role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="technician">
-                      <div className="flex items-start gap-3 py-2">
-                        <Edit3 className="w-5 h-5 text-orange-500 mt-0.5" />
-                        <div>
-                          <div className="font-medium text-gray-800">
-                            Technician
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            Full access to edit machine data
-                          </div>
-                        </div>
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="admin">
-                      <div className="flex items-start gap-3 py-2">
-                        <Eye className="w-5 h-5 text-blue-500 mt-0.5" />
-                        <div>
-                          <div className="font-medium text-gray-800">
-                            Administrator
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            View-only access to all data
-                          </div>
-                        </div>
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
 
               {error && (
                 <Alert variant="destructive">
