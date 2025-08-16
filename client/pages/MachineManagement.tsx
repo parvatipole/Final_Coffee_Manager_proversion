@@ -174,13 +174,27 @@ export default function MachineManagement({ officePath }: MachineManagementProps
       },
     };
 
-    const userOffice = user?.officeName;
-    if (user?.role === "admin") {
-      // Admin sees the first machine as default
-      return officeMachines["Hinjewadi IT Park"];
+    // Determine which office to show
+    let targetOffice: string;
+
+    if (officePath) {
+      // Convert path back to office name
+      targetOffice = pathToOfficeName(officePath);
+      // Find the closest match in our office data
+      const officeKeys = Object.keys(officeMachines);
+      const matchingOffice = officeKeys.find(office =>
+        office.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '') === officePath
+      );
+      targetOffice = matchingOffice || officeKeys[0];
+    } else if (user?.officeName) {
+      targetOffice = user.officeName;
+    } else {
+      // Default fallback
+      targetOffice = "Hinjewadi IT Park";
     }
+
     return (
-      officeMachines[userOffice as keyof typeof officeMachines] ||
+      officeMachines[targetOffice as keyof typeof officeMachines] ||
       officeMachines["Hinjewadi IT Park"]
     );
   };
