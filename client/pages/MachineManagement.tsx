@@ -95,6 +95,8 @@ export default function MachineManagement({
         name: "Coffee Station Alpha",
         location: "Hinjewadi IT Park - Building A2",
         status: "operational" as const,
+        powerStatus: "online" as const,
+        lastPowerUpdate: "2024-01-16 09:30",
         lastMaintenance: "2024-01-10",
         nextMaintenance: "2024-02-10",
         supplies: { water: 85, milk: 60, coffeeBeans: 75, sugar: 90 },
