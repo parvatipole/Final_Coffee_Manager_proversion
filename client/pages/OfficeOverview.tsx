@@ -64,7 +64,7 @@ interface MachineData {
 export default function OfficeOverview() {
   const { officePath } = useParams<{ officePath: string }>();
   const { user } = useAuth();
-  
+
   if (!officePath) {
     return <div>Office not found</div>;
   }
@@ -92,10 +92,11 @@ export default function OfficeOverview() {
             pressure: 15,
           },
           usage: { dailyCups: 127, weeklyCups: 890 },
-          notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+          notes:
+            "Machine running smoothly. Recent cleaning completed on schedule.",
         },
         {
-          id: "HIJ-002", 
+          id: "HIJ-002",
           name: "Espresso Hub Beta",
           location: "Building B1, 2nd Floor",
           status: "operational" as const,
@@ -130,8 +131,9 @@ export default function OfficeOverview() {
             pressure: 11,
           },
           usage: { dailyCups: 156, weeklyCups: 1092 },
-          notes: "Scheduled maintenance in progress. Filter replacement required.",
-        }
+          notes:
+            "Scheduled maintenance in progress. Filter replacement required.",
+        },
       ],
       "Koregaon Park Office": [
         {
@@ -171,13 +173,13 @@ export default function OfficeOverview() {
           },
           usage: { dailyCups: 67, weeklyCups: 469 },
           notes: "Low usage. Perfect for meetings.",
-        }
+        },
       ],
       "Mumbai BKC": [
         {
           id: "BKC-001",
           name: "BKC Premium Station",
-          location: "12th Floor, Main Lobby", 
+          location: "12th Floor, Main Lobby",
           status: "operational" as const,
           powerStatus: "online" as const,
           lastPowerUpdate: "2024-01-16 11:20",
@@ -192,7 +194,7 @@ export default function OfficeOverview() {
           },
           usage: { dailyCups: 98, weeklyCups: 720 },
           notes: "New installation. Performing well.",
-        }
+        },
       ],
       "Andheri East": [
         {
@@ -202,7 +204,7 @@ export default function OfficeOverview() {
           status: "operational" as const,
           powerStatus: "online" as const,
           lastPowerUpdate: "2024-01-16 09:00",
-          lastMaintenance: "2024-01-15", 
+          lastMaintenance: "2024-01-15",
           nextMaintenance: "2024-02-15",
           supplies: { water: 95, milk: 70, coffeeBeans: 80, sugar: 85 },
           maintenance: {
@@ -213,11 +215,13 @@ export default function OfficeOverview() {
           },
           usage: { dailyCups: 110, weeklyCups: 770 },
           notes: "Excellent performance. Regular maintenance on track.",
-        }
-      ]
+        },
+      ],
     };
 
-    return allOfficeMachines[officeName as keyof typeof allOfficeMachines] || [];
+    return (
+      allOfficeMachines[officeName as keyof typeof allOfficeMachines] || []
+    );
   };
 
   const machines = getOfficeMachines();
@@ -243,10 +247,16 @@ export default function OfficeOverview() {
   };
 
   const getOverallOfficeStatus = () => {
-    const operational = machines.filter(m => m.status === "operational").length;
-    const maintenance = machines.filter(m => m.status === "maintenance").length;
-    const offline = machines.filter(m => m.status === "offline" || m.powerStatus === "offline").length;
-    
+    const operational = machines.filter(
+      (m) => m.status === "operational",
+    ).length;
+    const maintenance = machines.filter(
+      (m) => m.status === "maintenance",
+    ).length;
+    const offline = machines.filter(
+      (m) => m.status === "offline" || m.powerStatus === "offline",
+    ).length;
+
     return { operational, maintenance, offline, total: machines.length };
   };
 
@@ -306,7 +316,9 @@ export default function OfficeOverview() {
               Office Overview - {officeName}
             </CardTitle>
             <CardDescription>
-              Total {officeStats.total} coffee machines • {officeStats.operational} operational • {officeStats.maintenance} in maintenance • {officeStats.offline} offline
+              Total {officeStats.total} coffee machines •{" "}
+              {officeStats.operational} operational • {officeStats.maintenance}{" "}
+              in maintenance • {officeStats.offline} offline
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -314,21 +326,27 @@ export default function OfficeOverview() {
               <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
                 <CheckCircle className="w-5 h-5 text-green-600" />
                 <div>
-                  <div className="text-lg font-semibold text-green-700">{officeStats.operational}</div>
+                  <div className="text-lg font-semibold text-green-700">
+                    {officeStats.operational}
+                  </div>
                   <div className="text-sm text-green-600">Operational</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
                 <Settings className="w-5 h-5 text-orange-600" />
                 <div>
-                  <div className="text-lg font-semibold text-orange-700">{officeStats.maintenance}</div>
+                  <div className="text-lg font-semibold text-orange-700">
+                    {officeStats.maintenance}
+                  </div>
                   <div className="text-sm text-orange-600">Maintenance</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
                 <AlertTriangle className="w-5 h-5 text-red-600" />
                 <div>
-                  <div className="text-lg font-semibold text-red-700">{officeStats.offline}</div>
+                  <div className="text-lg font-semibold text-red-700">
+                    {officeStats.offline}
+                  </div>
                   <div className="text-sm text-red-600">Offline</div>
                 </div>
               </div>
@@ -339,7 +357,10 @@ export default function OfficeOverview() {
         {/* Machines Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {machines.map((machine) => (
-            <Card key={machine.id} className="hover:shadow-lg transition-shadow">
+            <Card
+              key={machine.id}
+              className="hover:shadow-lg transition-shadow"
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div>
@@ -350,11 +371,18 @@ export default function OfficeOverview() {
                     </CardDescription>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <Badge className={`${getStatusColor(machine.status)} text-white text-xs`}>
-                      {machine.status.charAt(0).toUpperCase() + machine.status.slice(1)}
+                    <Badge
+                      className={`${getStatusColor(machine.status)} text-white text-xs`}
+                    >
+                      {machine.status.charAt(0).toUpperCase() +
+                        machine.status.slice(1)}
                     </Badge>
                     <Badge
-                      variant={machine.powerStatus === "online" ? "default" : "destructive"}
+                      variant={
+                        machine.powerStatus === "online"
+                          ? "default"
+                          : "destructive"
+                      }
                       className="gap-1 text-xs"
                     >
                       {machine.powerStatus === "online" ? (
@@ -367,7 +395,7 @@ export default function OfficeOverview() {
                   </div>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 {/* Supplies */}
                 <div className="space-y-2">
@@ -379,9 +407,16 @@ export default function OfficeOverview() {
                           <Droplets className="w-3 h-3 text-blue-500" />
                           Water
                         </span>
-                        <span className={getSupplyColor(machine.supplies.water)}>{machine.supplies.water}%</span>
+                        <span
+                          className={getSupplyColor(machine.supplies.water)}
+                        >
+                          {machine.supplies.water}%
+                        </span>
                       </div>
-                      <Progress value={machine.supplies.water} className="h-1" />
+                      <Progress
+                        value={machine.supplies.water}
+                        className="h-1"
+                      />
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
@@ -389,7 +424,9 @@ export default function OfficeOverview() {
                           <Milk className="w-3 h-3 text-purple-500" />
                           Milk
                         </span>
-                        <span className={getSupplyColor(machine.supplies.milk)}>{machine.supplies.milk}%</span>
+                        <span className={getSupplyColor(machine.supplies.milk)}>
+                          {machine.supplies.milk}%
+                        </span>
                       </div>
                       <Progress value={machine.supplies.milk} className="h-1" />
                     </div>
@@ -399,9 +436,18 @@ export default function OfficeOverview() {
                           <Coffee className="w-3 h-3 text-brown-500" />
                           Beans
                         </span>
-                        <span className={getSupplyColor(machine.supplies.coffeeBeans)}>{machine.supplies.coffeeBeans}%</span>
+                        <span
+                          className={getSupplyColor(
+                            machine.supplies.coffeeBeans,
+                          )}
+                        >
+                          {machine.supplies.coffeeBeans}%
+                        </span>
                       </div>
-                      <Progress value={machine.supplies.coffeeBeans} className="h-1" />
+                      <Progress
+                        value={machine.supplies.coffeeBeans}
+                        className="h-1"
+                      />
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
@@ -409,9 +455,16 @@ export default function OfficeOverview() {
                           <Candy className="w-3 h-3 text-pink-500" />
                           Sugar
                         </span>
-                        <span className={getSupplyColor(machine.supplies.sugar)}>{machine.supplies.sugar}%</span>
+                        <span
+                          className={getSupplyColor(machine.supplies.sugar)}
+                        >
+                          {machine.supplies.sugar}%
+                        </span>
                       </div>
-                      <Progress value={machine.supplies.sugar} className="h-1" />
+                      <Progress
+                        value={machine.supplies.sugar}
+                        className="h-1"
+                      />
                     </div>
                   </div>
                 </div>
@@ -419,22 +472,33 @@ export default function OfficeOverview() {
                 {/* Usage Stats */}
                 <div className="flex justify-between text-sm">
                   <div className="text-center">
-                    <div className="font-semibold text-lg">{machine.usage.dailyCups}</div>
+                    <div className="font-semibold text-lg">
+                      {machine.usage.dailyCups}
+                    </div>
                     <div className="text-muted-foreground text-xs">Today</div>
                   </div>
                   <div className="text-center">
-                    <div className="font-semibold text-lg">{machine.usage.weeklyCups}</div>
-                    <div className="text-muted-foreground text-xs">This Week</div>
+                    <div className="font-semibold text-lg">
+                      {machine.usage.weeklyCups}
+                    </div>
+                    <div className="text-muted-foreground text-xs">
+                      This Week
+                    </div>
                   </div>
                   <div className="text-center">
-                    <div className="font-semibold text-lg">{machine.maintenance.temperature}°C</div>
+                    <div className="font-semibold text-lg">
+                      {machine.maintenance.temperature}°C
+                    </div>
                     <div className="text-muted-foreground text-xs">Temp</div>
                   </div>
                 </div>
 
                 {/* Action Button */}
                 <Link to={`/machine/${machine.id}`}>
-                  <Button className="w-full" variant={canEdit ? "default" : "outline"}>
+                  <Button
+                    className="w-full"
+                    variant={canEdit ? "default" : "outline"}
+                  >
                     <Activity className="w-4 h-4 mr-2" />
                     {canEdit ? "Manage Machine" : "View Details"}
                   </Button>

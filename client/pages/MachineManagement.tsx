@@ -93,13 +93,13 @@ export default function MachineManagement({
   // Get machine data by ID (searches all offices)
   const getMachineDataById = (id: string): MachineData | null => {
     const allMachines = getAllMachinesData();
-    return allMachines.find(m => m.id === id) || null;
+    return allMachines.find((m) => m.id === id) || null;
   };
 
   // Get all machines from all offices
   const getAllMachinesData = (): MachineData[] => {
     const allMachines: MachineData[] = [];
-    Object.values(getOfficeMachinesData()).forEach(machines => {
+    Object.values(getOfficeMachinesData()).forEach((machines) => {
       if (Array.isArray(machines)) {
         allMachines.push(...machines);
       } else {
@@ -130,7 +130,8 @@ export default function MachineManagement({
             pressure: 15,
           },
           usage: { dailyCups: 127, weeklyCups: 890 },
-          notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+          notes:
+            "Machine running smoothly. Recent cleaning completed on schedule.",
         },
         {
           id: "HIJ-002",
@@ -150,7 +151,7 @@ export default function MachineManagement({
           },
           usage: { dailyCups: 98, weeklyCups: 686 },
           notes: "High performance. Minor calibration needed.",
-        }
+        },
       ],
       "Koregaon Park Office": [
         {
@@ -171,8 +172,8 @@ export default function MachineManagement({
           },
           usage: { dailyCups: 89, weeklyCups: 650 },
           notes: "Popular machine. Consistent performance.",
-        }
-      ]
+        },
+      ],
     };
   };
 
