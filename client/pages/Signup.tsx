@@ -150,7 +150,13 @@ export default function Signup() {
   };
 
   const handleRoleChange = (role: string) => {
-    setFormData((prev) => ({ ...prev, role }));
+    setFormData((prev) => ({
+      ...prev,
+      role,
+      // Clear city and office when admin is selected
+      city: role === "admin" ? "" : prev.city,
+      officeName: role === "admin" ? "" : prev.officeName
+    }));
     if (error) setError("");
   };
 
