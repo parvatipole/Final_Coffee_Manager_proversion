@@ -380,7 +380,15 @@ export default function MachineManagement() {
                     <Coffee className="w-5 h-5" />
                     {machineData.name}
                   </CardTitle>
-                  <CardDescription>{machineData.location}</CardDescription>
+                  <CardDescription className="flex items-center gap-2">
+                    <MapPin className="w-3 h-3" />
+                    {machineData.location}
+                  </CardDescription>
+                  {user?.role === "technician" && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      Assigned to: {user.name}
+                    </div>
+                  )}
                 </div>
                 <Badge
                   className={`${getStatusColor(machineData.status)} text-white animate-pulse`}
