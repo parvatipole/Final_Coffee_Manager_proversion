@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import CorporateDashboard from "./pages/CorporateDashboard";
 import MachineManagement from "./pages/MachineManagement";
 import NotFound from "./pages/NotFound";
+import { officeNameToPath, isValidOfficePath } from "./lib/officeRouting";
 import FloatingNavigation, {
   QuickBackFab,
 } from "./components/FloatingNavigation";
@@ -56,10 +57,12 @@ function AppRoutes() {
           path="/"
           element={
             user ? (
-              user.role === "technician" ? (
-                <Navigate to="/machine" replace />
-              ) : (
+              user.role === "technician" && user.officeName ? (
+                <Navigate to={`/office/${officeNameToPath(user.officeName)}`} replace />
+              ) : user.role === "admin" ? (
                 <Navigate to="/dashboard" replace />
+              ) : (
+                <Navigate to="/machine" replace />
               )
             ) : (
               <Navigate to="/login" replace />
@@ -79,6 +82,14 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <MachineManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/office/:officePath"
+          element={
+            <ProtectedRoute>
+              <OfficeSpecificMachine />
             </ProtectedRoute>
           }
         />
