@@ -39,7 +39,7 @@ import {
   MapPin,
   Building,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SupplyRefillModal from "@/components/SupplyRefillModal";
 import RealTimeMonitor from "@/components/RealTimeMonitor";
 import UsageChart from "@/components/UsageChart";
