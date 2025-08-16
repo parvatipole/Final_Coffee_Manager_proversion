@@ -312,12 +312,20 @@ export default function MachineManagement() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {user?.role === "technician" && user.officeName && (
-              <Badge variant="outline" className="gap-1 animate-fadeIn">
-                <Settings className="w-3 h-3" />
-                {user.officeName}
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="gap-1 animate-fadeIn">
+                  <Building className="w-3 h-3" />
+                  {user.officeName}
+                </Badge>
+                {user.city && (
+                  <Badge variant="secondary" className="gap-1 animate-fadeIn">
+                    <MapPin className="w-3 h-3" />
+                    {user.city.charAt(0).toUpperCase() + user.city.slice(1)}
+                  </Badge>
+                )}
+              </div>
             )}
             <Badge
               variant={user?.role === "technician" ? "default" : "secondary"}
