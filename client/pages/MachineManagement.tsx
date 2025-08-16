@@ -31,6 +31,7 @@ import {
   Plus,
   RotateCcw,
   Zap,
+  ZapOff,
   Activity,
   TrendingUp,
   Clock,
