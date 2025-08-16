@@ -100,7 +100,7 @@ function AppRoutes() {
           path="/office/:officePath"
           element={
             <ProtectedRoute>
-              <OfficeSpecificMachine />
+              <OfficeOverview />
             </ProtectedRoute>
           }
         />
