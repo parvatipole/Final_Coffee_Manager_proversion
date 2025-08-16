@@ -51,6 +51,8 @@ interface MachineData {
   name: string;
   location: string;
   status: "operational" | "maintenance" | "offline";
+  powerStatus: "online" | "offline";
+  lastPowerUpdate: string;
   lastMaintenance: string;
   nextMaintenance: string;
   supplies: {
