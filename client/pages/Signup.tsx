@@ -18,7 +18,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Coffee, User, Building, Lock, Eye, EyeOff, MapPin } from "lucide-react";
+import {
+  Coffee,
+  User,
+  Building,
+  Lock,
+  Eye,
+  EyeOff,
+  MapPin,
+} from "lucide-react";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -101,8 +109,12 @@ export default function Signup() {
       };
 
       // Check if username already exists
-      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
-      if (existingUsers.find((user: any) => user.username === formData.username)) {
+      const existingUsers = JSON.parse(
+        localStorage.getItem("registeredUsers") || "[]",
+      );
+      if (
+        existingUsers.find((user: any) => user.username === formData.username)
+      ) {
         setError("Username already exists. Please choose a different one.");
         setIsLoading(false);
         return;
@@ -213,7 +225,11 @@ export default function Signup() {
               <Label htmlFor="role">Role</Label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                <Select value={formData.role} onValueChange={handleRoleChange} disabled={isLoading}>
+                <Select
+                  value={formData.role}
+                  onValueChange={handleRoleChange}
+                  disabled={isLoading}
+                >
                   <SelectTrigger className="pl-10">
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
@@ -229,7 +245,11 @@ export default function Signup() {
               <Label htmlFor="city">City</Label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                <Select value={formData.city} onValueChange={handleCityChange} disabled={isLoading}>
+                <Select
+                  value={formData.city}
+                  onValueChange={handleCityChange}
+                  disabled={isLoading}
+                >
                   <SelectTrigger className="pl-10">
                     <SelectValue placeholder="Select your city" />
                   </SelectTrigger>
@@ -251,14 +271,23 @@ export default function Signup() {
                   disabled={isLoading || !formData.city}
                 >
                   <SelectTrigger className="pl-10">
-                    <SelectValue placeholder={formData.city ? "Select your office" : "Select city first"} />
+                    <SelectValue
+                      placeholder={
+                        formData.city
+                          ? "Select your office"
+                          : "Select city first"
+                      }
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    {formData.city && officeOptions[formData.city as keyof typeof officeOptions]?.map((office) => (
-                      <SelectItem key={office} value={office}>
-                        {office}
-                      </SelectItem>
-                    ))}
+                    {formData.city &&
+                      officeOptions[
+                        formData.city as keyof typeof officeOptions
+                      ]?.map((office) => (
+                        <SelectItem key={office} value={office}>
+                          {office}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               </div>

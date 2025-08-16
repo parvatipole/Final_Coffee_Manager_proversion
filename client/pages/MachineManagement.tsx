@@ -89,9 +89,15 @@ export default function MachineManagement() {
         lastMaintenance: "2024-01-10",
         nextMaintenance: "2024-02-10",
         supplies: { water: 85, milk: 60, coffeeBeans: 75, sugar: 90 },
-        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 92, pressure: 15 },
+        maintenance: {
+          filterStatus: "good",
+          cleaningStatus: "clean",
+          temperature: 92,
+          pressure: 15,
+        },
         usage: { dailyCups: 127, weeklyCups: 890 },
-        notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+        notes:
+          "Machine running smoothly. Recent cleaning completed on schedule.",
       },
       "Koregaon Park Office": {
         id: "KOR-001",
@@ -101,7 +107,12 @@ export default function MachineManagement() {
         lastMaintenance: "2024-01-05",
         nextMaintenance: "2024-02-05",
         supplies: { water: 45, milk: 80, coffeeBeans: 30, sugar: 95 },
-        maintenance: { filterStatus: "replace", cleaningStatus: "needed", temperature: 88, pressure: 12 },
+        maintenance: {
+          filterStatus: "replace",
+          cleaningStatus: "needed",
+          temperature: 88,
+          pressure: 12,
+        },
         usage: { dailyCups: 89, weeklyCups: 650 },
         notes: "Filter replacement scheduled for today.",
       },
@@ -113,7 +124,12 @@ export default function MachineManagement() {
         lastMaintenance: "2024-01-12",
         nextMaintenance: "2024-02-12",
         supplies: { water: 90, milk: 45, coffeeBeans: 85, sugar: 70 },
-        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 94, pressure: 16 },
+        maintenance: {
+          filterStatus: "good",
+          cleaningStatus: "clean",
+          temperature: 94,
+          pressure: 16,
+        },
         usage: { dailyCups: 156, weeklyCups: 1120 },
         notes: "High usage office. Consider additional machine.",
       },
@@ -125,7 +141,12 @@ export default function MachineManagement() {
         lastMaintenance: "2024-01-08",
         nextMaintenance: "2024-02-08",
         supplies: { water: 70, milk: 85, coffeeBeans: 60, sugar: 80 },
-        maintenance: { filterStatus: "good", cleaningStatus: "recent", temperature: 91, pressure: 14 },
+        maintenance: {
+          filterStatus: "good",
+          cleaningStatus: "recent",
+          temperature: 91,
+          pressure: 14,
+        },
         usage: { dailyCups: 98, weeklyCups: 720 },
         notes: "New installation. Performing well.",
       },
@@ -137,7 +158,12 @@ export default function MachineManagement() {
         lastMaintenance: "2024-01-15",
         nextMaintenance: "2024-02-15",
         supplies: { water: 95, milk: 70, coffeeBeans: 80, sugar: 85 },
-        maintenance: { filterStatus: "good", cleaningStatus: "clean", temperature: 90, pressure: 13 },
+        maintenance: {
+          filterStatus: "good",
+          cleaningStatus: "clean",
+          temperature: 90,
+          pressure: 13,
+        },
         usage: { dailyCups: 110, weeklyCups: 770 },
         notes: "Excellent performance. Regular maintenance on track.",
       },
@@ -148,10 +174,15 @@ export default function MachineManagement() {
       // Admin sees the first machine as default
       return officeMachines["Hinjewadi IT Park"];
     }
-    return officeMachines[userOffice as keyof typeof officeMachines] || officeMachines["Hinjewadi IT Park"];
+    return (
+      officeMachines[userOffice as keyof typeof officeMachines] ||
+      officeMachines["Hinjewadi IT Park"]
+    );
   };
 
-  const [machineData, setMachineData] = useState<MachineData>(getOfficeMachineData());
+  const [machineData, setMachineData] = useState<MachineData>(
+    getOfficeMachineData(),
+  );
 
   const canEdit = user?.role === "technician";
 

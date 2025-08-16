@@ -85,9 +85,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     try {
       // Check registered users first
-      const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
-      const foundUser = registeredUsers.find((user: any) =>
-        user.username === username && user.password === password
+      const registeredUsers = JSON.parse(
+        localStorage.getItem("registeredUsers") || "[]",
+      );
+      const foundUser = registeredUsers.find(
+        (user: any) => user.username === username && user.password === password,
       );
 
       if (foundUser) {

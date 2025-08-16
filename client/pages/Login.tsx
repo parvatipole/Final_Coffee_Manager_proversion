@@ -95,7 +95,6 @@ export default function Login() {
                 />
               </div>
 
-
               {error && (
                 <Alert variant="destructive">
                   <AlertDescription>{error}</AlertDescription>
