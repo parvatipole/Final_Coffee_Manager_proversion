@@ -119,6 +119,16 @@ export default function Signup() {
     if (error) setError("");
   };
 
+  const handleCityChange = (city: string) => {
+    setFormData((prev) => ({ ...prev, city, officeName: "" })); // Reset office when city changes
+    if (error) setError("");
+  };
+
+  const handleOfficeChange = (officeName: string) => {
+    setFormData((prev) => ({ ...prev, officeName }));
+    if (error) setError("");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-amber-50 p-4">
       <Card className="w-full max-w-md">
