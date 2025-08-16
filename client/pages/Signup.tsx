@@ -134,6 +134,11 @@ export default function Signup() {
     if (error) setError("");
   };
 
+  const handleRoleChange = (role: string) => {
+    setFormData((prev) => ({ ...prev, role }));
+    if (error) setError("");
+  };
+
   const handleOfficeChange = (officeName: string) => {
     setFormData((prev) => ({ ...prev, officeName }));
     if (error) setError("");
