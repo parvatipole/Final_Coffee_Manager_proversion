@@ -141,7 +141,7 @@ export default function Login() {
                   to="/signup"
                   className="font-medium text-orange-600 hover:text-orange-700"
                 >
-                  Register as Technician
+                  Create Account
                 </Link>
               </p>
             </div>
