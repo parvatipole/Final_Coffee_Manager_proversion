@@ -192,6 +192,8 @@ export default function MachineManagement({
         name: "Business Brew",
         location: "Magarpatta City - Tower B",
         status: "operational" as const,
+        powerStatus: "offline" as const,
+        lastPowerUpdate: "2024-01-16 07:45",
         lastMaintenance: "2024-01-14",
         nextMaintenance: "2024-02-14",
         supplies: { water: 88, milk: 65, coffeeBeans: 72, sugar: 92 },
