@@ -66,7 +66,7 @@ function AppRoutes() {
                     role: user.role,
                     officeName: user.officeName,
                     officePath: officePath,
-                    redirectTo: `/office/${officePath}`
+                    redirectTo: `/office/${officePath}`,
                   });
                   return <Navigate to={`/office/${officePath}`} replace />;
                 })()

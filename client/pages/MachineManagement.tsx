@@ -76,7 +76,9 @@ interface MachineManagementProps {
   officePath?: string; // Optional for backward compatibility
 }
 
-export default function MachineManagement({ officePath }: MachineManagementProps = {}) {
+export default function MachineManagement({
+  officePath,
+}: MachineManagementProps = {}) {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [refillModalOpen, setRefillModalOpen] = useState(false);
@@ -221,7 +223,8 @@ export default function MachineManagement({ officePath }: MachineManagementProps
           pressure: 11,
         },
         usage: { dailyCups: 78, weeklyCups: 546 },
-        notes: "Scheduled maintenance in progress. Filter and cleaning required.",
+        notes:
+          "Scheduled maintenance in progress. Filter and cleaning required.",
       },
       "Powai Tech Park": {
         id: "POW-001",
@@ -485,7 +488,9 @@ export default function MachineManagement({ officePath }: MachineManagementProps
               <Coffee className="w-5 h-5 text-primary-foreground" />
             </div>
             <h1 className="text-xl font-bold text-coffee-brown">
-              {officePath ? `${pathToOfficeName(officePath)} - Coffee Machines` : "Machine Management"}
+              {officePath
+                ? `${pathToOfficeName(officePath)} - Coffee Machines`
+                : "Machine Management"}
             </h1>
           </div>
 
