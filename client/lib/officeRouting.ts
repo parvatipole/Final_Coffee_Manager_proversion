@@ -13,12 +13,28 @@ export function officeNameToPath(officeName: string): string {
 }
 
 /**
- * Converts URL path back to office name (for validation)
+ * Mapping of office paths to actual office names for accurate reverse lookup
+ */
+const OFFICE_PATH_TO_NAME: Record<string, string> = {
+  'hinjewadi-it-park': 'Hinjewadi IT Park',
+  'koregaon-park-office': 'Koregaon Park Office',
+  'baner-tech-hub': 'Baner Tech Hub',
+  'magarpatta-city': 'Magarpatta City',
+  'wakad-business-center': 'Wakad Business Center',
+  'viman-nagar-branch': 'Viman Nagar Branch',
+  'mumbai-bkc': 'Mumbai BKC',
+  'andheri-east': 'Andheri East',
+  'powai-tech-park': 'Powai Tech Park',
+  'lower-parel': 'Lower Parel',
+  'worli-business-district': 'Worli Business District',
+  'goregaon-east': 'Goregaon East',
+};
+
+/**
+ * Converts URL path back to office name
  */
 export function pathToOfficeName(path: string): string {
-  // This is a reverse mapping - you might want to maintain a lookup table
-  // for more reliable reverse conversion in production
-  return path
+  return OFFICE_PATH_TO_NAME[path] || path
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
