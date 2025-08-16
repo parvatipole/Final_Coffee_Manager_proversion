@@ -195,20 +195,41 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="officeName">Office Name</Label>
+              <Label htmlFor="city">City</Label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  id="officeName"
-                  name="officeName"
-                  type="text"
-                  placeholder="Enter your office name"
+                <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
+                <Select value={formData.city} onValueChange={handleCityChange} disabled={isLoading}>
+                  <SelectTrigger className="pl-10">
+                    <SelectValue placeholder="Select your city" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pune">Pune</SelectItem>
+                    <SelectItem value="mumbai">Mumbai</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="officeName">Office</Label>
+              <div className="relative">
+                <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
+                <Select
                   value={formData.officeName}
-                  onChange={handleInputChange}
-                  className="pl-10"
-                  required
-                  disabled={isLoading}
-                />
+                  onValueChange={handleOfficeChange}
+                  disabled={isLoading || !formData.city}
+                >
+                  <SelectTrigger className="pl-10">
+                    <SelectValue placeholder={formData.city ? "Select your office" : "Select city first"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {formData.city && officeOptions[formData.city as keyof typeof officeOptions]?.map((office) => (
+                      <SelectItem key={office} value={office}>
+                        {office}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
