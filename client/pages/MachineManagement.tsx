@@ -90,7 +90,93 @@ export default function MachineManagement({
   const [selectedSupply, setSelectedSupply] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Get office-specific machine data
+  // Get machine data by ID (searches all offices)
+  const getMachineDataById = (id: string): MachineData | null => {
+    const allMachines = getAllMachinesData();
+    return allMachines.find(m => m.id === id) || null;
+  };
+
+  // Get all machines from all offices
+  const getAllMachinesData = (): MachineData[] => {
+    const allMachines: MachineData[] = [];
+    Object.values(getOfficeMachinesData()).forEach(machines => {
+      if (Array.isArray(machines)) {
+        allMachines.push(...machines);
+      } else {
+        allMachines.push(machines);
+      }
+    });
+    return allMachines;
+  };
+
+  // Get all office machine data
+  const getOfficeMachinesData = () => {
+    return {
+      "Hinjewadi IT Park": [
+        {
+          id: "HIJ-001",
+          name: "Coffee Station Alpha",
+          location: "Hinjewadi IT Park - Building A2",
+          status: "operational" as const,
+          powerStatus: "online" as const,
+          lastPowerUpdate: "2024-01-16 09:30",
+          lastMaintenance: "2024-01-10",
+          nextMaintenance: "2024-02-10",
+          supplies: { water: 85, milk: 60, coffeeBeans: 75, sugar: 90 },
+          maintenance: {
+            filterStatus: "good" as const,
+            cleaningStatus: "clean" as const,
+            temperature: 92,
+            pressure: 15,
+          },
+          usage: { dailyCups: 127, weeklyCups: 890 },
+          notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+        },
+        {
+          id: "HIJ-002",
+          name: "Espresso Hub Beta",
+          location: "Hinjewadi IT Park - Building B1",
+          status: "operational" as const,
+          powerStatus: "online" as const,
+          lastPowerUpdate: "2024-01-16 08:45",
+          lastMaintenance: "2024-01-12",
+          nextMaintenance: "2024-02-12",
+          supplies: { water: 92, milk: 45, coffeeBeans: 88, sugar: 76 },
+          maintenance: {
+            filterStatus: "good" as const,
+            cleaningStatus: "clean" as const,
+            temperature: 89,
+            pressure: 14,
+          },
+          usage: { dailyCups: 98, weeklyCups: 686 },
+          notes: "High performance. Minor calibration needed.",
+        }
+      ],
+      "Koregaon Park Office": [
+        {
+          id: "KOR-001",
+          name: "Executive Espresso",
+          location: "Koregaon Park Office - Ground Floor",
+          status: "operational" as const,
+          powerStatus: "online" as const,
+          lastPowerUpdate: "2024-01-16 10:15",
+          lastMaintenance: "2024-01-05",
+          nextMaintenance: "2024-02-05",
+          supplies: { water: 78, milk: 80, coffeeBeans: 65, sugar: 95 },
+          maintenance: {
+            filterStatus: "good" as const,
+            cleaningStatus: "clean" as const,
+            temperature: 88,
+            pressure: 12,
+          },
+          usage: { dailyCups: 89, weeklyCups: 650 },
+          notes: "Popular machine. Consistent performance.",
+        }
+      ]
+    };
+  };
+
+  // Get office-specific machine data (legacy function)
   const getOfficeMachineData = () => {
     const officeMachines = {
       "Hinjewadi IT Park": {
