@@ -426,9 +426,15 @@ export default function MachineManagement({
     return machineData;
   };
 
-  const [machineData, setMachineData] = useState<MachineData>(
-    getOfficeMachineData(),
-  );
+  const [machineData, setMachineData] = useState<MachineData>(() => {
+    // If machineId is provided, get specific machine
+    if (machineId) {
+      const machine = getMachineDataById(machineId);
+      if (machine) return machine;
+    }
+    // Otherwise, get office machine data (legacy behavior)
+    return getOfficeMachineData();
+  });
 
   const canEdit = user?.role === "technician";
 
