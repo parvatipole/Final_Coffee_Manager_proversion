@@ -59,7 +59,17 @@ function AppRoutes() {
           element={
             user ? (
               user.role === "technician" && user.officeName ? (
-                <Navigate to={`/office/${officeNameToPath(user.officeName)}`} replace />
+                (() => {
+                  const officePath = officeNameToPath(user.officeName);
+                  console.log("Technician redirect:", {
+                    user: user.username,
+                    role: user.role,
+                    officeName: user.officeName,
+                    officePath: officePath,
+                    redirectTo: `/office/${officePath}`
+                  });
+                  return <Navigate to={`/office/${officePath}`} replace />;
+                })()
               ) : user.role === "admin" ? (
                 <Navigate to="/dashboard" replace />
               ) : (
