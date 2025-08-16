@@ -72,7 +72,11 @@ interface MachineData {
   notes: string;
 }
 
-export default function MachineManagement() {
+interface MachineManagementProps {
+  officePath?: string; // Optional for backward compatibility
+}
+
+export default function MachineManagement({ officePath }: MachineManagementProps = {}) {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [refillModalOpen, setRefillModalOpen] = useState(false);
