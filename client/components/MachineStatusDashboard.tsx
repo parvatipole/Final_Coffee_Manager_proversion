@@ -77,7 +77,6 @@ export default function MachineStatusDashboard({
     return () => clearInterval(interval);
   }, [isSimulating, onStatusChange]);
 
-
   const getStatusColor = (value: number, optimal: [number, number]) => {
     if (value >= optimal[0] && value <= optimal[1]) return "text-green-600";
     if (value >= optimal[0] - 5 && value <= optimal[1] + 5)
@@ -182,7 +181,6 @@ export default function MachineStatusDashboard({
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent animate-pulse" />
         )}
       </Card>
-
 
       {/* Maintenance Alerts */}
       <Card>
