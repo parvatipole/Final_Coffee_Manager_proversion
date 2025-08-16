@@ -35,6 +35,8 @@ import {
   TrendingUp,
   Clock,
   RefreshCw,
+  MapPin,
+  Building,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SupplyRefillModal from "@/components/SupplyRefillModal";
