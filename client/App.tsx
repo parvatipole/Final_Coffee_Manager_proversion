@@ -48,39 +48,11 @@ function AppRoutes() {
       <Routes>
         <Route
           path="/login"
-<<<<<<< HEAD
           element={user ? <Navigate to="/" replace /> : <Login />}
         />
         <Route
           path="/signup"
           element={user ? <Navigate to="/" replace /> : <Signup />}
-=======
-          element={
-            user ? (
-              user.role === "technician" ? (
-                <Navigate to="/machine" replace />
-              ) : (
-                <Navigate to="/dashboard" replace />
-              )
-            ) : (
-              <Login />
-            )
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            user ? (
-              user.role === "technician" ? (
-                <Navigate to="/machine" replace />
-              ) : (
-                <Navigate to="/dashboard" replace />
-              )
-            ) : (
-              <Signup />
-            )
-          }
->>>>>>> refs/remotes/origin/main
         />
         <Route
           path="/"
