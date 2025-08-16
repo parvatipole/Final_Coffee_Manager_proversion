@@ -83,14 +83,17 @@ export default function Signup() {
       return;
     }
 
-    if (!formData.city) {
-      setError("Please select a city");
-      return;
-    }
+    // Only require city and office for technicians, not admins
+    if (formData.role === "technician") {
+      if (!formData.city) {
+        setError("Please select a city");
+        return;
+      }
 
-    if (!formData.officeName) {
-      setError("Please select an office");
-      return;
+      if (!formData.officeName) {
+        setError("Please select an office");
+        return;
+      }
     }
 
     setIsLoading(true);
