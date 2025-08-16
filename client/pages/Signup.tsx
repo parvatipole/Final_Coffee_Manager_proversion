@@ -27,6 +27,7 @@ export default function Signup() {
     name: "",
     password: "",
     confirmPassword: "",
+    role: "",
     city: "",
     officeName: "",
   });
@@ -34,16 +35,20 @@ export default function Signup() {
   // Office options based on city
   const officeOptions = {
     pune: [
-      "Pune Main Office",
-      "Pune Tech Park",
-      "Pune Downtown",
-      "Pune North Office",
+      "Hinjewadi IT Park",
+      "Koregaon Park Office",
+      "Baner Tech Hub",
+      "Magarpatta City",
+      "Wakad Business Center",
+      "Viman Nagar Branch",
     ],
     mumbai: [
-      "Mumbai Central Office",
       "Mumbai BKC",
-      "Mumbai Andheri",
-      "Mumbai Powai",
+      "Andheri East",
+      "Powai Tech Park",
+      "Lower Parel",
+      "Worli Business District",
+      "Goregaon East",
     ],
   };
   const [showPassword, setShowPassword] = useState(false);
