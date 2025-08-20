@@ -38,24 +38,18 @@ export function pathToOfficeName(path: string): string {
 }
 
 /**
- * Available offices from signup
+ * Available offices from signup - matching admin dashboard
  */
 export const OFFICE_LOCATIONS = {
   pune: [
     "Hinjewadi IT Park",
-    "Koregaon Park Office",
-    "Baner Tech Hub",
-    "Magarpatta City",
-    "Wakad Business Center",
-    "Viman Nagar Branch",
+    "Koregaon Park Corporate",
+    "Viman Nagar Tech Hub",
   ],
   mumbai: [
-    "Mumbai BKC",
-    "Andheri East",
-    "Powai Tech Park",
-    "Lower Parel",
-    "Worli Business District",
-    "Goregaon East",
+    "Bandra Kurla Complex",
+    "Lower Parel Financial",
+    "Andheri Tech Center",
   ],
 } as const;
 
