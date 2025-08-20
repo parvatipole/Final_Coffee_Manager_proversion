@@ -39,7 +39,7 @@ const initializeData = () => {
       },
       {
         id: "2",
-        machineId: "VM002",
+        machineId: "VM-002",
         name: "Coffee Machine Beta",
         location: "Tech Tower",
         office: "Engineering",
