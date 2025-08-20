@@ -56,6 +56,53 @@ const initializeData = () => {
         notes: "High performance. Minor calibration needed.",
         alerts: [],
       },
+      {
+        id: "3",
+        machineId: "VM-003",
+        name: "Coffee Machine Gamma",
+        location: "Tech Tower",
+        office: "Engineering",
+        floor: "Floor 1",
+        powerStatus: "online",
+        status: "operational",
+        supplies: {
+          coffee: 75,
+          water: 95,
+          milk: 60,
+          sugar: 80,
+        },
+        usage: { dailyCups: 110, weeklyCups: 770 },
+        notes: "Newly installed. Running well.",
+        alerts: [],
+      },
+      {
+        id: "4",
+        machineId: "VM-004",
+        name: "Coffee Machine Delta",
+        location: "Mumbai BKC",
+        office: "Mumbai BKC",
+        floor: "Floor 5",
+        powerStatus: "online",
+        status: "operational",
+        supplies: {
+          coffee: 68,
+          water: 85,
+          milk: 45,
+          sugar: 70,
+        },
+        usage: { dailyCups: 95, weeklyCups: 665 },
+        notes: "Good performance in Mumbai office.",
+        alerts: [
+          {
+            id: "alert-2",
+            type: "supply",
+            message: "Milk supply running low",
+            priority: "high",
+            resolved: false,
+            timestamp: "2024-01-16T09:00:00Z",
+          },
+        ],
+      },
     ];
 
     sampleMachines.forEach((machine) => {
