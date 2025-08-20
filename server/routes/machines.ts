@@ -10,7 +10,7 @@ const initializeData = () => {
     const sampleMachines = [
       {
         id: "1",
-        machineId: "VM001",
+        machineId: "VM-001",
         name: "Coffee Machine Alpha",
         location: "Tech Tower",
         office: "Engineering",
