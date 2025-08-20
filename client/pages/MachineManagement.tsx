@@ -382,19 +382,35 @@ export default function MachineManagement({
   ]);
 
   // Handle alert resolution
-  const handleAlertResolution = (alertId: string) => {
-    setAlerts((prev) =>
-      prev.map((alert) =>
-        alert.id === alertId
-          ? {
-              ...alert,
-              resolved: true,
-              resolvedBy: user?.name || "Technician",
-              resolvedAt: "Just now",
-            }
-          : alert,
-      ),
+  const handleAlertResolution = async (alertId: string) => {
+    const updatedAlerts = alerts.map((alert) =>
+      alert.id === alertId
+        ? {
+            ...alert,
+            resolved: true,
+            resolvedBy: user?.name || "Technician",
+            resolvedAt: "Just now",
+          }
+        : alert,
     );
+
+    // Update local state immediately
+    setAlerts(updatedAlerts);
+
+    // Update machine data to include resolved alerts
+    const updatedMachineData = {
+      ...machineData,
+      alerts: updatedAlerts,
+    };
+    setMachineData(updatedMachineData);
+
+    try {
+      // Save to backend
+      await api.updateMachine(machineData.id, updatedMachineData);
+    } catch (error) {
+      console.error('Failed to resolve alert:', error);
+      // Could revert local state and show error toast
+    }
   };
 
   const supplies = [
