@@ -335,6 +335,29 @@ export default function MachineManagement({
     return getOfficeMachineData();
   });
 
+  // Load machine data from API on component mount
+  useEffect(() => {
+    const loadMachineData = async () => {
+      try {
+        const data = await api.getMachine(machineId!);
+        if (data) {
+          setMachineData(data);
+          // Update alerts if machine data contains them
+          if (data.alerts) {
+            setAlerts(data.alerts);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load machine data:', error);
+        // Keep using static data as fallback
+      }
+    };
+
+    if (machineId) {
+      loadMachineData();
+    }
+  }, [machineId]);
+
   const canEdit = user?.role === "technician";
 
   // Alert management state
@@ -985,10 +1008,11 @@ export default function MachineManagement({
                       <div className="flex justify-end">
                         <Button
                           size="sm"
-                          onClick={() => console.log("Notes saved")}
+                          onClick={handleSave}
+                          disabled={isLoading}
                         >
                           <Save className="w-3 h-3 mr-2" />
-                          Save Notes
+                          {isLoading ? 'Saving...' : 'Save Notes'}
                         </Button>
                       </div>
                     </div>
