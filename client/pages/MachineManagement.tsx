@@ -339,7 +339,7 @@ export default function MachineManagement({
   useEffect(() => {
     const loadMachineData = async () => {
       try {
-        const data = await api.getMachineByMachineId(machineId!);
+        const data = await apiClient.getMachineByMachineId(machineId!);
         if (data) {
           setMachineData(data);
           // Update alerts if machine data contains them
@@ -429,7 +429,7 @@ export default function MachineManagement({
 
     try {
       // Save to backend
-      await api.updateMachine(machineData.id, updatedMachineData);
+      await apiClient.updateMachine(machineData.id, updatedMachineData);
     } catch (error) {
       console.error('Failed to resolve alert:', error);
       // Could revert local state and show error toast
@@ -475,7 +475,7 @@ export default function MachineManagement({
     setIsLoading(true);
     try {
       // Save machine data to backend using the database ID
-      await api.updateMachine(machineData.id, machineData);
+      await apiClient.updateMachine(machineData.id, machineData);
       setIsEditing(false);
     } catch (error) {
       console.error('Failed to save machine data:', error);
@@ -502,7 +502,7 @@ export default function MachineManagement({
 
     try {
       // Save to backend
-      await api.updateSupplies(machineData.id, { supplies: updatedSupplies });
+      await apiClient.updateSupplies(machineData.id, { supplies: updatedSupplies });
     } catch (error) {
       console.error('Failed to update supplies:', error);
       // Could revert local state and show error toast
@@ -543,7 +543,7 @@ export default function MachineManagement({
 
     try {
       // Save to backend
-      await api.updateMachine(machineData.id, updatedData);
+      await apiClient.updateMachine(machineData.id, updatedData);
     } catch (error) {
       console.error('Failed to update power status:', error);
       // Could revert local state and show error toast
