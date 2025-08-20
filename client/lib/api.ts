@@ -1,5 +1,5 @@
 // API Configuration and JWT Token Management
-import { tokenManager } from './tokenManager';
+import { tokenManager } from "./tokenManager";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
@@ -114,7 +114,14 @@ class ApiClient {
       };
     }>("/auth/signup", {
       method: "POST",
-      body: JSON.stringify({ username, name, password, role, city, officeName }),
+      body: JSON.stringify({
+        username,
+        name,
+        password,
+        role,
+        city,
+        officeName,
+      }),
     });
   }
 

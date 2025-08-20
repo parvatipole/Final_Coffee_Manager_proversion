@@ -1,14 +1,14 @@
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 // JWT payload interface
 interface JWTPayload {
-  sub: string;        // username
-  userId: string;     // user ID
-  role: string;       // user role
+  sub: string; // username
+  userId: string; // user ID
+  role: string; // user role
   officeName?: string; // office name (null for admin)
-  city?: string;      // city (null for admin)
-  iat: number;        // issued at
-  exp: number;        // expiration time
+  city?: string; // city (null for admin)
+  iat: number; // issued at
+  exp: number; // expiration time
 }
 
 export const tokenManager = {
@@ -44,7 +44,7 @@ export const tokenManager = {
     try {
       const decoded = tokenManager.decodeToken(token);
       if (!decoded) return true;
-      
+
       const currentTime = Date.now() / 1000; // Convert to seconds
       return decoded.exp < currentTime;
     } catch (error) {
@@ -62,7 +62,7 @@ export const tokenManager = {
       username: decoded.sub,
       role: decoded.role,
       officeName: decoded.officeName,
-      city: decoded.city
+      city: decoded.city,
     };
   },
 
@@ -71,5 +71,5 @@ export const tokenManager = {
     const token = tokenManager.getToken();
     if (!token) return false;
     return !tokenManager.isTokenExpired(token);
-  }
+  },
 };
