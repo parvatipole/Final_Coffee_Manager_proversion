@@ -40,23 +40,17 @@ export default function Signup() {
     officeName: "",
   });
 
-  // Office options based on city
+  // Office options based on city - matching admin dashboard offices only
   const officeOptions = {
     pune: [
       "Hinjewadi IT Park",
-      "Koregaon Park Office",
-      "Baner Tech Hub",
-      "Magarpatta City",
-      "Wakad Business Center",
-      "Viman Nagar Branch",
+      "Koregaon Park Corporate",
+      "Viman Nagar Tech Hub",
     ],
     mumbai: [
-      "Mumbai BKC",
-      "Andheri East",
-      "Powai Tech Park",
-      "Lower Parel",
-      "Worli Business District",
-      "Goregaon East",
+      "Bandra Kurla Complex",
+      "Lower Parel Financial",
+      "Andheri Tech Center",
     ],
   };
   const [showPassword, setShowPassword] = useState(false);
