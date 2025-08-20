@@ -277,11 +277,11 @@ export default function MachineManagement({
         notes: "Excellent performance. Regular maintenance on track.",
       },
       "Lower Parel Financial": {
-        id: "MAG-001",
+        id: "LOW-001",
         name: "Business Brew",
-        location: "Magarpatta City - Tower B",
+        location: "Lower Parel Financial - Tower B",
         status: "operational" as const,
-        powerStatus: "offline" as const,
+        powerStatus: "online" as const,
         lastPowerUpdate: "2024-01-16 07:45",
         lastMaintenance: "2024-01-14",
         nextMaintenance: "2024-02-14",
@@ -293,7 +293,7 @@ export default function MachineManagement({
           pressure: 15,
         },
         usage: { dailyCups: 134, weeklyCups: 945 },
-        notes: "Busy corporate environment. Machine handling well.",
+        notes: "Busy financial district environment. Machine handling well.",
       },
       "Wakad Business Center": {
         id: "WAK-001",
