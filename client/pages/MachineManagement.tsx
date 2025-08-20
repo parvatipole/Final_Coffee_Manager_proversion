@@ -339,7 +339,7 @@ export default function MachineManagement({
   useEffect(() => {
     const loadMachineData = async () => {
       try {
-        const data = await api.getMachine(machineId!);
+        const data = await api.getMachineByMachineId(machineId!);
         if (data) {
           setMachineData(data);
           // Update alerts if machine data contains them
