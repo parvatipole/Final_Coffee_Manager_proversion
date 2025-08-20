@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Slider } from '@/components/ui/slider';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { 
-  Coffee, 
-  Droplets, 
-  Milk, 
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Slider } from "@/components/ui/slider";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  Coffee,
+  Droplets,
+  Milk,
   Candy,
   Plus,
   CheckCircle,
-  AlertTriangle
-} from 'lucide-react';
+  AlertTriangle,
+} from "lucide-react";
 
 interface SupplyRefillModalProps {
   isOpen: boolean;
@@ -28,12 +34,12 @@ interface SupplyRefillModalProps {
   canEdit: boolean;
 }
 
-export default function SupplyRefillModal({ 
-  isOpen, 
-  onClose, 
-  supply, 
-  onRefill, 
-  canEdit 
+export default function SupplyRefillModal({
+  isOpen,
+  onClose,
+  supply,
+  onRefill,
+  canEdit,
 }: SupplyRefillModalProps) {
   const [refillAmount, setRefillAmount] = useState([0]);
   const [isRefilling, setIsRefilling] = useState(false);
@@ -46,7 +52,7 @@ export default function SupplyRefillModal({
       setRefillAmount([0]);
       onClose();
     } catch (error) {
-      console.error('Failed to refill supply:', error);
+      console.error("Failed to refill supply:", error);
       // Could show error toast here
     } finally {
       setIsRefilling(false);
@@ -57,9 +63,9 @@ export default function SupplyRefillModal({
   const totalCost = (refillAmount[0] / 100) * supply.cost;
 
   const getStatusColor = (level: number) => {
-    if (level > 70) return 'text-green-600';
-    if (level > 30) return 'text-orange-500';
-    return 'text-red-500';
+    if (level > 70) return "text-green-600";
+    if (level > 30) return "text-orange-500";
+    return "text-red-500";
   };
 
   const getStatusIcon = (level: number) => {
@@ -87,7 +93,9 @@ export default function SupplyRefillModal({
               <p className="text-sm font-medium">Current Level</p>
               <div className="flex items-center gap-2">
                 {getStatusIcon(supply.current)}
-                <span className={`text-lg font-bold ${getStatusColor(supply.current)}`}>
+                <span
+                  className={`text-lg font-bold ${getStatusColor(supply.current)}`}
+                >
                   {supply.current}%
                 </span>
               </div>
@@ -119,20 +127,26 @@ export default function SupplyRefillModal({
               {/* Preview */}
               {refillAmount[0] > 0 && (
                 <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg space-y-3">
-                  <h4 className="text-sm font-medium text-primary">Refill Preview</h4>
+                  <h4 className="text-sm font-medium text-primary">
+                    Refill Preview
+                  </h4>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="text-muted-foreground">After Refill</p>
                       <div className="flex items-center gap-2">
                         {getStatusIcon(newLevel)}
-                        <span className={`font-bold ${getStatusColor(newLevel)}`}>
+                        <span
+                          className={`font-bold ${getStatusColor(newLevel)}`}
+                        >
                           {newLevel}%
                         </span>
                       </div>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Cost</p>
-                      <p className="font-bold text-primary">${totalCost.toFixed(2)}</p>
+                      <p className="font-bold text-primary">
+                        ${totalCost.toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -140,15 +154,15 @@ export default function SupplyRefillModal({
 
               {/* Action Buttons */}
               <div className="flex gap-2 pt-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={onClose}
                   className="flex-1"
                   disabled={isRefilling}
                 >
                   Cancel
                 </Button>
-                <Button 
+                <Button
                   onClick={handleRefill}
                   disabled={refillAmount[0] === 0 || isRefilling}
                   className="flex-1"

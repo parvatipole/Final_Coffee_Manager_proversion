@@ -348,7 +348,7 @@ export default function MachineManagement({
           }
         }
       } catch (error) {
-        console.error('Failed to load machine data:', error);
+        console.error("Failed to load machine data:", error);
         // Keep using static data as fallback
       }
     };
@@ -431,7 +431,7 @@ export default function MachineManagement({
       // Save to backend
       await apiClient.updateMachine(machineData.id, updatedMachineData);
     } catch (error) {
-      console.error('Failed to resolve alert:', error);
+      console.error("Failed to resolve alert:", error);
       // Could revert local state and show error toast
     }
   };
@@ -478,7 +478,7 @@ export default function MachineManagement({
       await apiClient.updateMachine(machineData.id, machineData);
       setIsEditing(false);
     } catch (error) {
-      console.error('Failed to save machine data:', error);
+      console.error("Failed to save machine data:", error);
       // Could add toast notification here
     } finally {
       setIsLoading(false);
@@ -490,7 +490,8 @@ export default function MachineManagement({
       ...machineData.supplies,
       [supplyKey]: Math.min(
         100,
-        machineData.supplies[supplyKey as keyof typeof machineData.supplies] + amount,
+        machineData.supplies[supplyKey as keyof typeof machineData.supplies] +
+          amount,
       ),
     };
 
@@ -502,9 +503,11 @@ export default function MachineManagement({
 
     try {
       // Save to backend
-      await apiClient.updateSupplies(machineData.id, { supplies: updatedSupplies });
+      await apiClient.updateSupplies(machineData.id, {
+        supplies: updatedSupplies,
+      });
     } catch (error) {
-      console.error('Failed to update supplies:', error);
+      console.error("Failed to update supplies:", error);
       // Could revert local state and show error toast
     }
   };
@@ -545,7 +548,7 @@ export default function MachineManagement({
       // Save to backend
       await apiClient.updateMachine(machineData.id, updatedData);
     } catch (error) {
-      console.error('Failed to update power status:', error);
+      console.error("Failed to update power status:", error);
       // Could revert local state and show error toast
     }
   };
@@ -1012,7 +1015,7 @@ export default function MachineManagement({
                           disabled={isLoading}
                         >
                           <Save className="w-3 h-3 mr-2" />
-                          {isLoading ? 'Saving...' : 'Save Notes'}
+                          {isLoading ? "Saving..." : "Save Notes"}
                         </Button>
                       </div>
                     </div>

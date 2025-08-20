@@ -24,7 +24,8 @@ const initializeData = () => {
           sugar: 65,
         },
         usage: { dailyCups: 127, weeklyCups: 890 },
-        notes: "Machine running smoothly. Recent cleaning completed on schedule.",
+        notes:
+          "Machine running smoothly. Recent cleaning completed on schedule.",
         alerts: [
           {
             id: "alert-1",
@@ -37,11 +38,11 @@ const initializeData = () => {
         ],
       },
       {
-        id: "2", 
+        id: "2",
         machineId: "VM002",
         name: "Coffee Machine Beta",
         location: "Tech Tower",
-        office: "Engineering", 
+        office: "Engineering",
         floor: "Floor 2",
         powerStatus: "online",
         status: "operational",
@@ -57,7 +58,7 @@ const initializeData = () => {
       },
     ];
 
-    sampleMachines.forEach(machine => {
+    sampleMachines.forEach((machine) => {
       machinesStorage.set(machine.id, machine);
     });
   }
@@ -74,73 +75,80 @@ export const getMachines: RequestHandler = (req, res) => {
 export const getMachine: RequestHandler = (req, res) => {
   const { id } = req.params;
   const machine = machinesStorage.get(id);
-  
+
   if (!machine) {
     return res.status(404).json({ error: "Machine not found" });
   }
-  
+
   res.json(machine);
 };
 
 export const getMachineByMachineId: RequestHandler = (req, res) => {
   const { machineId } = req.params;
-  const machine = Array.from(machinesStorage.values()).find(m => m.machineId === machineId);
-  
+  const machine = Array.from(machinesStorage.values()).find(
+    (m) => m.machineId === machineId,
+  );
+
   if (!machine) {
     return res.status(404).json({ error: "Machine not found" });
   }
-  
+
   res.json(machine);
 };
 
 export const updateMachine: RequestHandler = (req, res) => {
   const { id } = req.params;
   const existingMachine = machinesStorage.get(id);
-  
+
   if (!existingMachine) {
     return res.status(404).json({ error: "Machine not found" });
   }
-  
+
   // Update the machine data
   const updatedMachine = { ...existingMachine, ...req.body, id };
   machinesStorage.set(id, updatedMachine);
-  
-  res.json({ message: "Machine updated successfully", machine: updatedMachine });
+
+  res.json({
+    message: "Machine updated successfully",
+    machine: updatedMachine,
+  });
 };
 
 export const updateSupplies: RequestHandler = (req, res) => {
   const { id } = req.params;
   const existingMachine = machinesStorage.get(id);
-  
+
   if (!existingMachine) {
     return res.status(404).json({ error: "Machine not found" });
   }
-  
+
   // Update supplies
-  const updatedMachine = { 
-    ...existingMachine, 
-    supplies: { ...existingMachine.supplies, ...req.body.supplies }
+  const updatedMachine = {
+    ...existingMachine,
+    supplies: { ...existingMachine.supplies, ...req.body.supplies },
   };
   machinesStorage.set(id, updatedMachine);
-  
+
   res.json({ message: "Supplies updated successfully" });
 };
 
 export const getLocations: RequestHandler = (req, res) => {
   const machines = Array.from(machinesStorage.values());
-  const locations = [...new Set(machines.map(m => m.location))];
+  const locations = [...new Set(machines.map((m) => m.location))];
   res.json(locations);
 };
 
 export const getOffices: RequestHandler = (req, res) => {
   const { location } = req.query;
   const machines = Array.from(machinesStorage.values());
-  let offices = machines.map(m => m.office);
-  
+  let offices = machines.map((m) => m.office);
+
   if (location) {
-    offices = machines.filter(m => m.location === location).map(m => m.office);
+    offices = machines
+      .filter((m) => m.location === location)
+      .map((m) => m.office);
   }
-  
+
   const uniqueOffices = [...new Set(offices)];
   res.json(uniqueOffices);
 };
@@ -148,18 +156,20 @@ export const getOffices: RequestHandler = (req, res) => {
 export const getFloors: RequestHandler = (req, res) => {
   const { location, office } = req.query;
   const machines = Array.from(machinesStorage.values());
-  let floors = machines.map(m => m.floor);
-  
+  let floors = machines.map((m) => m.floor);
+
   if (location && office) {
     floors = machines
-      .filter(m => m.location === location && m.office === office)
-      .map(m => m.floor);
+      .filter((m) => m.location === location && m.office === office)
+      .map((m) => m.floor);
   } else if (location) {
-    floors = machines.filter(m => m.location === location).map(m => m.floor);
+    floors = machines
+      .filter((m) => m.location === location)
+      .map((m) => m.floor);
   } else if (office) {
-    floors = machines.filter(m => m.office === office).map(m => m.floor);
+    floors = machines.filter((m) => m.office === office).map((m) => m.floor);
   }
-  
+
   const uniqueFloors = [...new Set(floors)];
   res.json(uniqueFloors);
 };
@@ -167,36 +177,38 @@ export const getFloors: RequestHandler = (req, res) => {
 export const getMachinesByLocationOfficeFloor: RequestHandler = (req, res) => {
   const { location, office, floor } = req.query;
   let machines = Array.from(machinesStorage.values());
-  
+
   if (location) {
-    machines = machines.filter(m => m.location === location);
+    machines = machines.filter((m) => m.location === location);
   }
   if (office) {
-    machines = machines.filter(m => m.office === office);
+    machines = machines.filter((m) => m.office === office);
   }
   if (floor) {
-    machines = machines.filter(m => m.floor === floor);
+    machines = machines.filter((m) => m.floor === floor);
   }
-  
+
   res.json(machines);
 };
 
 export const getLowSupplyMachines: RequestHandler = (req, res) => {
   const machines = Array.from(machinesStorage.values());
-  const lowSupplyMachines = machines.filter(machine => {
+  const lowSupplyMachines = machines.filter((machine) => {
     const supplies = machine.supplies;
     return Object.values(supplies).some((level: any) => level < 30);
   });
-  
+
   res.json(lowSupplyMachines);
 };
 
 export const getMaintenanceNeededMachines: RequestHandler = (req, res) => {
   const machines = Array.from(machinesStorage.values());
-  const maintenanceMachines = machines.filter(machine => {
-    return machine.status === "maintenance" || 
-           (machine.alerts && machine.alerts.some((alert: any) => !alert.resolved));
+  const maintenanceMachines = machines.filter((machine) => {
+    return (
+      machine.status === "maintenance" ||
+      (machine.alerts && machine.alerts.some((alert: any) => !alert.resolved))
+    );
   });
-  
+
   res.json(maintenanceMachines);
 };
