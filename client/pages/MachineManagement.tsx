@@ -47,7 +47,7 @@ import MachineStatusDashboard from "@/components/MachineStatusDashboard";
 import InteractiveBreadcrumb from "@/components/InteractiveBreadcrumb";
 import { pathToOfficeName, officeNameToPath } from "@/lib/officeRouting";
 import PowerStatusControl from "@/components/PowerStatusControl";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 
 interface MachineData {
   id: string;
