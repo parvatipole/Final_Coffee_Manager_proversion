@@ -47,6 +47,7 @@ import MachineStatusDashboard from "@/components/MachineStatusDashboard";
 import InteractiveBreadcrumb from "@/components/InteractiveBreadcrumb";
 import { pathToOfficeName, officeNameToPath } from "@/lib/officeRouting";
 import PowerStatusControl from "@/components/PowerStatusControl";
+import { api } from "@/lib/api";
 
 interface MachineData {
   id: string;
@@ -433,23 +434,40 @@ export default function MachineManagement({
 
   const handleSave = async () => {
     setIsLoading(true);
-    // Simulate save operation
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsEditing(false);
-    setIsLoading(false);
+    try {
+      // Save machine data to backend
+      await api.updateMachine(machineData.id, machineData);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Failed to save machine data:', error);
+      // Could add toast notification here
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSupplyRefill = (supplyKey: string, amount: number) => {
+  const handleSupplyRefill = async (supplyKey: string, amount: number) => {
+    const updatedSupplies = {
+      ...machineData.supplies,
+      [supplyKey]: Math.min(
+        100,
+        machineData.supplies[supplyKey as keyof typeof machineData.supplies] + amount,
+      ),
+    };
+
+    // Update local state immediately for responsive UI
     setMachineData((prev) => ({
       ...prev,
-      supplies: {
-        ...prev.supplies,
-        [supplyKey]: Math.min(
-          100,
-          prev.supplies[supplyKey as keyof typeof prev.supplies] + amount,
-        ),
-      },
+      supplies: updatedSupplies,
     }));
+
+    try {
+      // Save to backend
+      await api.updateSupplies(machineData.id, { supplies: updatedSupplies });
+    } catch (error) {
+      console.error('Failed to update supplies:', error);
+      // Could revert local state and show error toast
+    }
   };
 
   const openRefillModal = (supply: any) => {
@@ -458,11 +476,11 @@ export default function MachineManagement({
     setRefillModalOpen(true);
   };
 
-  const handlePowerStatusChange = (newStatus: "online" | "offline") => {
+  const handlePowerStatusChange = async (newStatus: "online" | "offline") => {
     if (!canEdit) return;
 
-    setMachineData((prev) => ({
-      ...prev,
+    const updatedData = {
+      ...machineData,
       powerStatus: newStatus,
       lastPowerUpdate: new Date().toLocaleString("en-US", {
         year: "numeric",
@@ -476,10 +494,21 @@ export default function MachineManagement({
       status:
         newStatus === "offline"
           ? "offline"
-          : prev.status === "offline"
+          : machineData.status === "offline"
             ? "operational"
-            : prev.status,
-    }));
+            : machineData.status,
+    };
+
+    // Update local state immediately
+    setMachineData(updatedData);
+
+    try {
+      // Save to backend
+      await api.updateMachine(machineData.id, updatedData);
+    } catch (error) {
+      console.error('Failed to update power status:', error);
+      // Could revert local state and show error toast
+    }
   };
 
   const getStatusColor = (status: string) => {
