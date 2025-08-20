@@ -32,18 +32,18 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Machine API routes
-  app.get("/api/machines", getMachines);
-  app.get("/api/machines/:id", getMachine);
-  app.get("/api/machines/machine/:machineId", getMachineByMachineId);
-  app.put("/api/machines/:id", updateMachine);
-  app.put("/api/machines/:id/supplies", updateSupplies);
+  // Machine API routes (specific routes first to avoid conflicts)
   app.get("/api/machines/locations", getLocations);
   app.get("/api/machines/offices", getOffices);
   app.get("/api/machines/floors", getFloors);
   app.get("/api/machines/by-location", getMachinesByLocationOfficeFloor);
   app.get("/api/machines/low-supply", getLowSupplyMachines);
   app.get("/api/machines/maintenance-needed", getMaintenanceNeededMachines);
+  app.get("/api/machines/machine/:machineId", getMachineByMachineId);
+  app.get("/api/machines", getMachines);
+  app.get("/api/machines/:id", getMachine);
+  app.put("/api/machines/:id", updateMachine);
+  app.put("/api/machines/:id/supplies", updateSupplies);
 
   return app;
 }
