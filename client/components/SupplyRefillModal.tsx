@@ -24,7 +24,7 @@ interface SupplyRefillModalProps {
     unit: string;
     cost: number;
   };
-  onRefill: (amount: number) => void;
+  onRefill: (amount: number) => Promise<void> | void;
   canEdit: boolean;
 }
 
