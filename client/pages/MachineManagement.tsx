@@ -474,7 +474,7 @@ export default function MachineManagement({
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      // Save machine data to backend
+      // Save machine data to backend using the database ID
       await api.updateMachine(machineData.id, machineData);
       setIsEditing(false);
     } catch (error) {
