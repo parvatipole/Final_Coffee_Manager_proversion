@@ -200,10 +200,10 @@ export default function MachineManagement({
         notes:
           "Machine running smoothly. Recent cleaning completed on schedule.",
       },
-      "Koregaon Park Office": {
+      "Koregaon Park Corporate": {
         id: "KOR-001",
         name: "Espresso Pro",
-        location: "Koregaon Park Office - Ground Floor",
+        location: "Koregaon Park Corporate - Ground Floor",
         status: "maintenance" as const,
         powerStatus: "offline" as const,
         lastPowerUpdate: "2024-01-16 08:15",
@@ -219,10 +219,10 @@ export default function MachineManagement({
         usage: { dailyCups: 89, weeklyCups: 650 },
         notes: "Filter replacement scheduled for today.",
       },
-      "Baner Tech Hub": {
-        id: "BAN-001",
+      "Viman Nagar Tech Hub": {
+        id: "VIM-001",
         name: "Latte Master",
-        location: "Baner Tech Hub - 3rd Floor",
+        location: "Viman Nagar Tech Hub - 3rd Floor",
         status: "operational" as const,
         powerStatus: "online" as const,
         lastPowerUpdate: "2024-01-16 10:45",
@@ -238,10 +238,10 @@ export default function MachineManagement({
         usage: { dailyCups: 156, weeklyCups: 1120 },
         notes: "High usage office. Consider additional machine.",
       },
-      "Mumbai BKC": {
+      "Bandra Kurla Complex": {
         id: "BKC-001",
         name: "Cappuccino Deluxe",
-        location: "Mumbai BKC - 12th Floor",
+        location: "Bandra Kurla Complex - 12th Floor",
         status: "operational" as const,
         powerStatus: "online" as const,
         lastPowerUpdate: "2024-01-16 11:20",
@@ -257,10 +257,10 @@ export default function MachineManagement({
         usage: { dailyCups: 98, weeklyCups: 720 },
         notes: "New installation. Performing well.",
       },
-      "Andheri East": {
+      "Andheri Tech Center": {
         id: "AND-001",
         name: "Premium Coffee Station",
-        location: "Andheri East - 8th Floor",
+        location: "Andheri Tech Center - 8th Floor",
         status: "operational" as const,
         powerStatus: "online" as const,
         lastPowerUpdate: "2024-01-16 09:00",
@@ -276,7 +276,7 @@ export default function MachineManagement({
         usage: { dailyCups: 110, weeklyCups: 770 },
         notes: "Excellent performance. Regular maintenance on track.",
       },
-      "Magarpatta City": {
+      "Lower Parel Financial": {
         id: "MAG-001",
         name: "Business Brew",
         location: "Magarpatta City - Tower B",
