@@ -17,17 +17,11 @@ export function officeNameToPath(officeName: string): string {
  */
 const OFFICE_PATH_TO_NAME: Record<string, string> = {
   "hinjewadi-it-park": "Hinjewadi IT Park",
-  "koregaon-park-office": "Koregaon Park Office",
-  "baner-tech-hub": "Baner Tech Hub",
-  "magarpatta-city": "Magarpatta City",
-  "wakad-business-center": "Wakad Business Center",
-  "viman-nagar-branch": "Viman Nagar Branch",
-  "mumbai-bkc": "Mumbai BKC",
-  "andheri-east": "Andheri East",
-  "powai-tech-park": "Powai Tech Park",
-  "lower-parel": "Lower Parel",
-  "worli-business-district": "Worli Business District",
-  "goregaon-east": "Goregaon East",
+  "koregaon-park-corporate": "Koregaon Park Corporate",
+  "viman-nagar-tech-hub": "Viman Nagar Tech Hub",
+  "bandra-kurla-complex": "Bandra Kurla Complex",
+  "lower-parel-financial": "Lower Parel Financial",
+  "andheri-tech-center": "Andheri Tech Center",
 };
 
 /**
