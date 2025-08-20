@@ -40,14 +40,17 @@ export default function SupplyRefillModal({
 
   const handleRefill = async () => {
     setIsRefilling(true);
-    
-    // Simulate refill process
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    onRefill(refillAmount[0]);
-    setIsRefilling(false);
-    setRefillAmount([0]);
-    onClose();
+
+    try {
+      await onRefill(refillAmount[0]);
+      setRefillAmount([0]);
+      onClose();
+    } catch (error) {
+      console.error('Failed to refill supply:', error);
+      // Could show error toast here
+    } finally {
+      setIsRefilling(false);
+    }
   };
 
   const newLevel = Math.min(100, supply.current + refillAmount[0]);
