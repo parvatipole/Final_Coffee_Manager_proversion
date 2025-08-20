@@ -1,35 +1,14 @@
 // API Configuration and JWT Token Management
+import { tokenManager } from "./tokenManager";
+
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
 // Debug logging for local development
 const DEBUG = import.meta.env.VITE_DEBUG === "true" || import.meta.env.DEV;
 
-// Token management
-export const tokenManager = {
-  getToken: (): string | null => {
-    return localStorage.getItem("coffee_auth_token");
-  },
-
-  setToken: (token: string): void => {
-    localStorage.setItem("coffee_auth_token", token);
-  },
-
-  removeToken: (): void => {
-    localStorage.removeItem("coffee_auth_token");
-    localStorage.removeItem("coffee_auth_user");
-  },
-
-  isTokenExpired: (token: string): boolean => {
-    try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      const currentTime = Date.now() / 1000;
-      return payload.exp < currentTime;
-    } catch {
-      return true;
-    }
-  },
-};
+// Export token manager for use in other files
+export { tokenManager };
 
 // API Client with automatic JWT handling
 class ApiClient {
@@ -96,16 +75,19 @@ class ApiClient {
     }
   }
 
-  // Authentication
+  // Authentication - JWT Based
   async login(username: string, password: string) {
     return this.request<{
       accessToken: string;
       tokenType: string;
-      id: number;
-      username: string;
-      name: string;
-      role: string;
-      authorities: string[];
+      user: {
+        id: string;
+        username: string;
+        name: string;
+        role: string;
+        city?: string;
+        officeName?: string;
+      };
     }>("/auth/signin", {
       method: "POST",
       body: JSON.stringify({ username, password }),
@@ -116,11 +98,30 @@ class ApiClient {
     username: string,
     name: string,
     password: string,
-    officeName: string,
+    role: string,
+    city?: string,
+    officeName?: string,
   ) {
-    return this.request<{ message: string }>("/auth/signup", {
+    return this.request<{
+      message: string;
+      user?: {
+        id: string;
+        username: string;
+        name: string;
+        role: string;
+        city?: string;
+        officeName?: string;
+      };
+    }>("/auth/signup", {
       method: "POST",
-      body: JSON.stringify({ username, name, password, officeName }),
+      body: JSON.stringify({
+        username,
+        name,
+        password,
+        role,
+        city,
+        officeName,
+      }),
     });
   }
 
