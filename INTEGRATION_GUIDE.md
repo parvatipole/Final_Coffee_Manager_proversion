@@ -28,6 +28,7 @@ This guide explains how to run the integrated Coffee App with both the Spring Bo
 ## Quick Start
 
 ### Option 1: Run both servers with one command
+
 ```bash
 npm run dev:full
 ```
@@ -35,12 +36,14 @@ npm run dev:full
 ### Option 2: Run servers separately
 
 **Terminal 1 - Backend:**
+
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
 **Terminal 2 - Frontend:**
+
 ```bash
 npm run dev:frontend
 ```
@@ -54,17 +57,20 @@ npm run dev:frontend
 ## Sample Users
 
 The backend initializes with sample users:
+
 - **Admin**: username `admin`, password `admin123`
 - **User**: username `user`, password `user123`
 
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/signin` - User login
-- `POST /api/auth/signup` - User registration  
+- `POST /api/auth/signup` - User registration
 - `POST /api/auth/signout` - User logout
 
 ### Machines
+
 - `GET /api/machines` - Get all machines
 - `GET /api/machines/{id}` - Get machine by ID
 - `GET /api/machines/machine/{machineId}` - Get machine by machine ID
@@ -88,16 +94,19 @@ The backend initializes with sample users:
 ## Troubleshooting
 
 ### Backend Issues
+
 - Ensure Java 17+ is installed: `java -version`
 - Check MySQL is running: Try connecting to localhost:3306
 - Check backend logs for detailed error messages
 
-### Frontend Issues  
+### Frontend Issues
+
 - Ensure Node.js is installed: `node -version`
 - Clear browser cache and localStorage
 - Check browser console for API call errors
 
 ### Database Connection Issues
+
 - Verify MySQL server is running
 - Check database credentials in `application.properties`
 - Ensure database `coffee_app` exists (or let Spring Boot create it)
@@ -105,6 +114,7 @@ The backend initializes with sample users:
 ## Production Deployment
 
 For production deployment:
+
 1. Build the frontend: `npm run build:client`
 2. Build the backend: `cd backend && ./mvnw clean package`
 3. Configure production database settings
