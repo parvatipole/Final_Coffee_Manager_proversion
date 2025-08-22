@@ -23,21 +23,21 @@ export const tokenManager = {
   isTokenExpired: (token: string): boolean => {
     try {
       // Handle both JWT and simple tokens
-      if (!token || typeof token !== 'string') {
+      if (!token || typeof token !== "string") {
         return true;
       }
 
       // Simple token format (demo mode)
-      if (token.startsWith('simple_token_')) {
-        const timestamp = token.replace('simple_token_', '');
+      if (token.startsWith("simple_token_")) {
+        const timestamp = token.replace("simple_token_", "");
         const tokenTime = parseInt(timestamp);
         const currentTime = Date.now();
         // Simple tokens expire after 24 hours
-        return (currentTime - tokenTime) > (24 * 60 * 60 * 1000);
+        return currentTime - tokenTime > 24 * 60 * 60 * 1000;
       }
 
       // JWT token format
-      const parts = token.split('.');
+      const parts = token.split(".");
       if (parts.length !== 3) {
         return true;
       }
