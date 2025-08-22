@@ -225,13 +225,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const logout = async () => {
-    if (!demoMode) {
-      try {
-        // Call backend logout endpoint
+    try {
+      // Always try to call backend logout endpoint if we have a token
+      const token = tokenManager.getToken();
+      if (token && !tokenManager.isTokenExpired(token)) {
         await apiClient.logout();
-      } catch (error) {
-        // Logout API call failed (silently handled)
       }
+    } catch (error) {
+      // Logout API call failed, continue with local cleanup
+      console.log("Backend logout failed, continuing with local cleanup");
     }
 
     // Clear local state and storage
@@ -239,8 +241,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     tokenManager.removeToken();
 
     // Disconnect MQTT
-    const { mqttClient } = await import("@/lib/mqtt");
-    mqttClient.disconnect();
+    try {
+      const { mqttClient } = await import("@/lib/mqtt");
+      if (mqttClient) {
+        mqttClient.disconnect();
+      }
+    } catch (error) {
+      // MQTT disconnect failed, continue
+      console.log("MQTT disconnect failed");
+    }
   };
 
   const isAuthenticated = !!user && !!tokenManager.getToken();
