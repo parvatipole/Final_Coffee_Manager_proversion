@@ -34,14 +34,34 @@ public class DataInitializationService implements CommandLineRunner {
     
     private void initializeUsers() {
         if (userRepository.count() == 0) {
+            // Admin users
+            User admin1 = new User("admin1", "Sarah Admin", passwordEncoder.encode("password"), "Head Office");
+            admin1.setRole("admin");
+            userRepository.save(admin1);
+
             User admin = new User("admin", "Administrator", passwordEncoder.encode("admin123"), "Head Office");
-            admin.setRole("ADMIN");
+            admin.setRole("admin");
             userRepository.save(admin);
-            
+
+            // Technician users
+            User tech1 = new User("tech1", "John Technician", passwordEncoder.encode("password"), "Hinjewadi IT Park");
+            tech1.setRole("technician");
+            userRepository.save(tech1);
+
+            User tech2 = new User("tech2", "Priya Shah", passwordEncoder.encode("password"), "Mumbai BKC");
+            tech2.setRole("technician");
+            userRepository.save(tech2);
+
             User user = new User("user", "John Doe", passwordEncoder.encode("user123"), "Branch Office");
+            user.setRole("technician");
             userRepository.save(user);
-            
-            System.out.println("Sample users created - admin:admin123, user:user123");
+
+            System.out.println("Sample users created:");
+            System.out.println("- admin1:password (admin)");
+            System.out.println("- admin:admin123 (admin)");
+            System.out.println("- tech1:password (technician)");
+            System.out.println("- tech2:password (technician)");
+            System.out.println("- user:user123 (technician)");
         }
     }
     
