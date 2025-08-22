@@ -101,11 +101,11 @@ class ApiClient {
     return this.request<{
       accessToken: string;
       tokenType: string;
-      id: number;
+      userId: number;
       username: string;
       name: string;
       role: string;
-      authorities: string[];
+      officeName: string;
     }>("/auth/signin", {
       method: "POST",
       body: JSON.stringify({ username, password }),
