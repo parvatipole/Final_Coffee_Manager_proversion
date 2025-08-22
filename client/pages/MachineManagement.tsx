@@ -49,6 +49,25 @@ import { pathToOfficeName, officeNameToPath } from "@/lib/officeRouting";
 import PowerStatusControl from "@/components/PowerStatusControl";
 import { apiClient } from "@/lib/api";
 
+// Normalize supplies between backend and UI keys
+const mapSuppliesFromBackend = (backend: any) => {
+  return {
+    water: backend?.water ?? 0,
+    milk: backend?.milk ?? 0,
+    coffeeBeans: backend?.coffeeBeans ?? backend?.beans ?? 0,
+    sugar: backend?.sugar ?? backend?.cups ?? 0,
+  };
+};
+
+const mapSuppliesToBackend = (ui: any) => {
+  return {
+    water: ui?.water ?? 0,
+    milk: ui?.milk ?? 0,
+    beans: ui?.coffeeBeans ?? 0,
+    cups: ui?.sugar ?? 0,
+  } as Record<string, number>;
+};
+
 interface MachineData {
   id: string;
   name: string;
@@ -341,10 +360,13 @@ export default function MachineManagement({
       try {
         const data = await apiClient.getMachineByMachineId(machineId!);
         if (data) {
-          setMachineData(data);
-          // Update alerts if machine data contains them
-          if (data.alerts) {
-            setAlerts(data.alerts);
+          const normalized = {
+            ...data,
+            supplies: mapSuppliesFromBackend(data.supplies),
+          } as any;
+          setMachineData(normalized);
+          if (normalized.alerts) {
+            setAlerts(normalized.alerts);
           }
         }
       } catch (error) {
@@ -475,7 +497,10 @@ export default function MachineManagement({
     setIsLoading(true);
     try {
       // Save machine data to backend using the database ID
-      await apiClient.updateMachine(machineData.id, machineData);
+      await apiClient.updateMachine(machineData.id, {
+        ...machineData,
+        supplies: mapSuppliesToBackend(machineData.supplies),
+      });
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to save machine data:", error);
@@ -503,9 +528,10 @@ export default function MachineManagement({
 
     try {
       // Save to backend
-      await apiClient.updateSupplies(machineData.id, {
-        supplies: updatedSupplies,
-      });
+      await apiClient.updateSupplies(
+        machineData.id,
+        mapSuppliesToBackend(updatedSupplies),
+      );
     } catch (error) {
       console.error("Failed to update supplies:", error);
       // Could revert local state and show error toast
@@ -521,6 +547,13 @@ export default function MachineManagement({
   const handlePowerStatusChange = async (newStatus: "online" | "offline") => {
     if (!canEdit) return;
 
+    const computedStatus: "operational" | "maintenance" | "offline" =
+      newStatus === "offline"
+        ? "offline"
+        : machineData.status === "offline"
+          ? "operational"
+          : machineData.status;
+
     const updatedData = {
       ...machineData,
       powerStatus: newStatus,
@@ -533,20 +566,18 @@ export default function MachineManagement({
         hour12: false,
       }),
       // Also update machine status if power goes offline
-      status:
-        newStatus === "offline"
-          ? "offline"
-          : machineData.status === "offline"
-            ? "operational"
-            : machineData.status,
+      status: computedStatus,
     };
 
     // Update local state immediately
-    setMachineData(updatedData);
+    setMachineData(updatedData as MachineData);
 
     try {
       // Save to backend
-      await apiClient.updateMachine(machineData.id, updatedData);
+      await apiClient.updateMachine(machineData.id, {
+        ...updatedData,
+        supplies: mapSuppliesToBackend(updatedData.supplies),
+      });
     } catch (error) {
       console.error("Failed to update power status:", error);
       // Could revert local state and show error toast

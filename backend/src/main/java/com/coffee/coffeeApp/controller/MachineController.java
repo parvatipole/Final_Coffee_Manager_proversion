@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/machines")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 public class MachineController {
     
     @Autowired
@@ -84,6 +84,16 @@ public class MachineController {
         }
         if (machineDetails.getLastMaintenance() != null) {
             machine.setLastMaintenance(machineDetails.getLastMaintenance());
+        }
+        // New editable fields
+        if (machineDetails.getPowerStatus() != null) {
+            machine.setPowerStatus(machineDetails.getPowerStatus());
+        }
+        if (machineDetails.getLastPowerUpdate() != null) {
+            machine.setLastPowerUpdate(machineDetails.getLastPowerUpdate());
+        }
+        if (machineDetails.getNotes() != null) {
+            machine.setNotes(machineDetails.getNotes());
         }
         
         Machine updatedMachine = machineRepository.save(machine);

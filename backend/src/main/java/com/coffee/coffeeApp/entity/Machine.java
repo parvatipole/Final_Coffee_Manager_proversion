@@ -47,6 +47,11 @@ public class Machine {
     private LocalDateTime createdAt;
     
     private LocalDateTime updatedAt;
+
+    // Additional fields managed by technicians
+    private String powerStatus; // "online" or "offline"
+    private String lastPowerUpdate; // store as string for simplicity
+    private String notes; // technician notes
     
     // Constructors
     public Machine() {
@@ -163,6 +168,33 @@ public class Machine {
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPowerStatus() {
+        return powerStatus;
+    }
+
+    public void setPowerStatus(String powerStatus) {
+        this.powerStatus = powerStatus;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getLastPowerUpdate() {
+        return lastPowerUpdate;
+    }
+
+    public void setLastPowerUpdate(String lastPowerUpdate) {
+        this.lastPowerUpdate = lastPowerUpdate;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+        this.updatedAt = LocalDateTime.now();
     }
     
     @PreUpdate
