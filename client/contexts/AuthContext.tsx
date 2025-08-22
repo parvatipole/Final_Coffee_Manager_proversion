@@ -57,21 +57,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [demoMode] = useState(isDemoMode());
 
   useEffect(() => {
-    // Check for stored auth on mount
-    const storedUser = localStorage.getItem("coffee_auth_user");
-    const token = tokenManager.getToken();
+    // Check for stored auth on mount with better error handling
+    try {
+      const storedUser = localStorage.getItem("coffee_auth_user");
+      const token = tokenManager.getToken();
 
-    if (storedUser && token && !tokenManager.isTokenExpired(token)) {
-      setUser(JSON.parse(storedUser));
-      // Initialize MQTT connection for authenticated users
-      initializeMQTT().then((connected) => {
-        if (connected) {
-          // MQTT initialized for authenticated user
+      if (storedUser && token) {
+        // Validate token format and expiration
+        if (!tokenManager.isTokenExpired(token)) {
+          const userData = JSON.parse(storedUser);
+          setUser(userData);
+
+          // Initialize MQTT connection for authenticated users (non-blocking)
+          initializeMQTT().catch((error) => {
+            console.log("MQTT connection failed:", error);
+          });
+        } else {
+          // Token expired, clear storage
+          console.log("Token expired, clearing stored auth data");
+          tokenManager.removeToken();
         }
-      });
-    } else {
-      // Clear invalid stored data
+      }
+    } catch (error) {
+      // Clear corrupted auth data
+      console.log("Error loading stored auth data, clearing:", error);
       tokenManager.removeToken();
+      localStorage.removeItem("coffee_auth_user");
     }
 
     setIsLoading(false);
