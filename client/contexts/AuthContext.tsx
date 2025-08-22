@@ -84,29 +84,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
 
     try {
-      // Check registered users first
-      const registeredUsers = JSON.parse(
-        localStorage.getItem("registeredUsers") || "[]",
-      );
-      const foundUser = registeredUsers.find(
-        (user: any) => user.username === username && user.password === password,
-      );
+      // First try to authenticate with the backend
+      const response = await apiClient.login(username, password);
 
-      if (foundUser) {
+      if (response && response.accessToken) {
+        // Backend authentication successful
+        tokenManager.setToken(response.accessToken);
+
         const userData: User = {
-          id: foundUser.username,
-          username: foundUser.username,
-          name: foundUser.name,
-          role: foundUser.role as UserRole,
-          city: foundUser.city,
-          officeName: foundUser.officeName,
+          id: response.id.toString(),
+          username: response.username,
+          name: response.name,
+          role: response.role as UserRole,
+          city: undefined, // Backend doesn't provide city
+          officeName: response.authorities?.find(auth => auth.startsWith('OFFICE_'))?.replace('OFFICE_', '') || undefined,
         };
 
         setUser(userData);
         localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
-
-        // Simple token for demo
-        localStorage.setItem("coffee_auth_token", "simple_token_" + Date.now());
 
         // Initialize MQTT connection
         await initializeMQTT();
@@ -114,13 +109,51 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsLoading(false);
         return true;
       }
-
-      // Fall back to demo users if not found in registered users
-      return performMockLogin(username, password);
     } catch (error) {
-      // Fallback to demo mode
-      return performMockLogin(username, password);
+      console.log("Backend authentication failed, trying local storage...");
+
+      try {
+        // Check registered users as fallback
+        const registeredUsers = JSON.parse(
+          localStorage.getItem("registeredUsers") || "[]",
+        );
+        const foundUser = registeredUsers.find(
+          (user: any) => user.username === username && user.password === password,
+        );
+
+        if (foundUser) {
+          const userData: User = {
+            id: foundUser.username,
+            username: foundUser.username,
+            name: foundUser.name,
+            role: foundUser.role as UserRole,
+            city: foundUser.city,
+            officeName: foundUser.officeName,
+          };
+
+          setUser(userData);
+          localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
+
+          // Simple token for demo
+          localStorage.setItem("coffee_auth_token", "simple_token_" + Date.now());
+
+          // Initialize MQTT connection
+          await initializeMQTT();
+
+          setIsLoading(false);
+          return true;
+        }
+
+        // Final fallback to demo users
+        return performMockLogin(username, password);
+      } catch (fallbackError) {
+        // Ultimate fallback to demo mode
+        return performMockLogin(username, password);
+      }
     }
+
+    setIsLoading(false);
+    return false;
   };
 
   const performMockLogin = async (
