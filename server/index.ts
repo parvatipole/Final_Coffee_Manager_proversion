@@ -32,18 +32,20 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Machine API routes (specific routes first to avoid conflicts)
-  app.get("/api/machines/locations", getLocations);
-  app.get("/api/machines/offices", getOffices);
-  app.get("/api/machines/floors", getFloors);
-  app.get("/api/machines/by-location", getMachinesByLocationOfficeFloor);
-  app.get("/api/machines/low-supply", getLowSupplyMachines);
-  app.get("/api/machines/maintenance-needed", getMaintenanceNeededMachines);
-  app.get("/api/machines/machine/:machineId", getMachineByMachineId);
-  app.get("/api/machines", getMachines);
-  app.get("/api/machines/:id", getMachine);
-  app.put("/api/machines/:id", updateMachine);
-  app.put("/api/machines/:id/supplies", updateSupplies);
+  // Note: Machine API routes moved to Java backend on port 8081
+  // The frontend should use Java backend for authentication and machine management
+  // These routes are kept for fallback/demo purposes only
+  app.get("/api/fallback/machines/locations", getLocations);
+  app.get("/api/fallback/machines/offices", getOffices);
+  app.get("/api/fallback/machines/floors", getFloors);
+  app.get("/api/fallback/machines/by-location", getMachinesByLocationOfficeFloor);
+  app.get("/api/fallback/machines/low-supply", getLowSupplyMachines);
+  app.get("/api/fallback/machines/maintenance-needed", getMaintenanceNeededMachines);
+  app.get("/api/fallback/machines/machine/:machineId", getMachineByMachineId);
+  app.get("/api/fallback/machines", getMachines);
+  app.get("/api/fallback/machines/:id", getMachine);
+  app.put("/api/fallback/machines/:id", updateMachine);
+  app.put("/api/fallback/machines/:id/supplies", updateSupplies);
 
   return app;
 }
