@@ -38,9 +38,15 @@ export function createServer() {
   app.get("/api/fallback/machines/locations", getLocations);
   app.get("/api/fallback/machines/offices", getOffices);
   app.get("/api/fallback/machines/floors", getFloors);
-  app.get("/api/fallback/machines/by-location", getMachinesByLocationOfficeFloor);
+  app.get(
+    "/api/fallback/machines/by-location",
+    getMachinesByLocationOfficeFloor,
+  );
   app.get("/api/fallback/machines/low-supply", getLowSupplyMachines);
-  app.get("/api/fallback/machines/maintenance-needed", getMaintenanceNeededMachines);
+  app.get(
+    "/api/fallback/machines/maintenance-needed",
+    getMaintenanceNeededMachines,
+  );
   app.get("/api/fallback/machines/machine/:machineId", getMachineByMachineId);
   app.get("/api/fallback/machines", getMachines);
   app.get("/api/fallback/machines/:id", getMachine);

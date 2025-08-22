@@ -118,7 +118,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           localStorage.getItem("registeredUsers") || "[]",
         );
         const foundUser = registeredUsers.find(
-          (user: any) => user.username === username && user.password === password,
+          (user: any) =>
+            user.username === username && user.password === password,
         );
 
         if (foundUser) {
@@ -135,7 +136,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
 
           // Simple token for demo
-          localStorage.setItem("coffee_auth_token", "simple_token_" + Date.now());
+          localStorage.setItem(
+            "coffee_auth_token",
+            "simple_token_" + Date.now(),
+          );
 
           // Initialize MQTT connection
           await initializeMQTT();
