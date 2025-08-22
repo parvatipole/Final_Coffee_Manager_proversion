@@ -92,12 +92,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         tokenManager.setToken(response.accessToken);
 
         const userData: User = {
-          id: response.id.toString(),
+          id: response.userId.toString(),
           username: response.username,
           name: response.name,
           role: response.role as UserRole,
           city: undefined, // Backend doesn't provide city
-          officeName: response.authorities?.find(auth => auth.startsWith('OFFICE_'))?.replace('OFFICE_', '') || undefined,
+          officeName: response.officeName,
         };
 
         setUser(userData);
