@@ -22,10 +22,31 @@ export const tokenManager = {
 
   isTokenExpired: (token: string): boolean => {
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
+      // Handle both JWT and simple tokens
+      if (!token || typeof token !== 'string') {
+        return true;
+      }
+
+      // Simple token format (demo mode)
+      if (token.startsWith('simple_token_')) {
+        const timestamp = token.replace('simple_token_', '');
+        const tokenTime = parseInt(timestamp);
+        const currentTime = Date.now();
+        // Simple tokens expire after 24 hours
+        return (currentTime - tokenTime) > (24 * 60 * 60 * 1000);
+      }
+
+      // JWT token format
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        return true;
+      }
+
+      const payload = JSON.parse(atob(parts[1]));
       const currentTime = Date.now() / 1000;
-      return payload.exp < currentTime;
-    } catch {
+      return payload.exp && payload.exp < currentTime;
+    } catch (error) {
+      console.log("Token validation error:", error);
       return true;
     }
   },
