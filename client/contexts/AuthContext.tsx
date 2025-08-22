@@ -110,50 +110,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         return true;
       }
     } catch (error) {
-      console.log("Backend authentication failed, trying local storage...");
+      console.log("Backend authentication failed, using demo mode...");
 
-      try {
-        // Check registered users as fallback
-        const registeredUsers = JSON.parse(
-          localStorage.getItem("registeredUsers") || "[]",
-        );
-        const foundUser = registeredUsers.find(
-          (user: any) =>
-            user.username === username && user.password === password,
-        );
-
-        if (foundUser) {
-          const userData: User = {
-            id: foundUser.username,
-            username: foundUser.username,
-            name: foundUser.name,
-            role: foundUser.role as UserRole,
-            city: foundUser.city,
-            officeName: foundUser.officeName,
-          };
-
-          setUser(userData);
-          localStorage.setItem("coffee_auth_user", JSON.stringify(userData));
-
-          // Simple token for demo
-          localStorage.setItem(
-            "coffee_auth_token",
-            "simple_token_" + Date.now(),
-          );
-
-          // Initialize MQTT connection
-          await initializeMQTT();
-
-          setIsLoading(false);
-          return true;
-        }
-
-        // Final fallback to demo users
-        return performMockLogin(username, password);
-      } catch (fallbackError) {
-        // Ultimate fallback to demo mode
-        return performMockLogin(username, password);
-      }
+      // Immediately fallback to demo mode when backend is unavailable
+      return performMockLogin(username, password);
     }
 
     setIsLoading(false);
